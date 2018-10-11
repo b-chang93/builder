@@ -1,0 +1,38 @@
+{
+  "name": "workout-app",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha --exit",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "chai": "^4.1.2",
+    "chai-http": "^4.2.0",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "faker": "^4.1.0",
+    "jsonwebtoken": "^8.3.0",
+    "mongoose": "^5.2.14",
+    "morgan": "^1.9.0",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "password": "^0.1.1"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/b-chang93/workout-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/b-chang93/workout-app/issues"
+  },
+  "homepage": "https://github.com/b-chang93/workout-app#readme",
+  "description": ""
+}

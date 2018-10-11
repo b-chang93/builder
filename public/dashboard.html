@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Buildr</title>
+  <meta name="description" content="Dashboard Workout App">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
+  <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <!-- <header><h1>Buildr</h1></header> -->
+  <main id="root">
+    <div id="main-nav">
+      <nav class="left-nav">
+        <a>
+          <p style="margin:0; font-size:38px; color:white;">Buildr</p>
+        </a>
+      </nav>
+    </div>
+    <section id="workout-split-nav">
+      <table>
+        <tr>
+          <th class="reveal-split">Mon
+            <span class="tooltiptext" value="Monday"></span>
+          </th>
+          <th class="">Tu
+            <span class="tooltiptext" value="Tuesday"></span>
+          </th>
+          <th class="">Wed
+            <span class="tooltiptext" value="Wednesday"></span>
+          </th>
+          <th class="">Thu
+            <span class="tooltiptext" value="Thursday"></span>
+          </th>
+          <th class="">Fri
+            <span class="tooltiptext" value="Friday"></span>
+          </th>
+          <th class="">Sat
+            <span class="tooltiptext" value="Saturday"></span>
+          </th>
+          <th class="">Sun
+            <span class="tooltiptext" value="Sunday"></span>
+          </th>
+        </tr>
+      </table>
+    </section>
+
+    <section class="main-container">
+
+      <section class="current-user left-column">
+        <div class="feed-identity"></div>
+        <div class="search-users">
+          <button class="find-users" type="button">Explore Users</button>
+        </div>
+      </section>
+
+      <section class="posts-area">
+        <div class="share-a-post">
+          <input type="text" class="modal-title" value placeholder="Title">
+          <textarea class="modal-workout-content" placeholder="Got a good workout? Share!"></textarea>
+          <section class="modal-buttons">
+            <button id="share-workout">Build a Workout</button>
+            <button id="create-post">Post</button>
+            <!-- <button id="cancel-post">Cancel</button> -->
+          </section>
+        </div>
+        <div id="posts-container">
+          <ul class="main-index">
+          </ul>
+        </div>
+      </section>
+
+      <div id="right-column">
+        <div class="exercise-search-section">
+          <section>
+            <h3 class="search-exercise">Exercises <button class="enable-search-modal">Search</button></h3>
+          </section>
+        </div>
+
+        <div id="workout-info-container">
+          <div id="my-workouts-list">
+            <h2 style="text-align: center;">My Workouts</h2>
+            <ul class="workout-index">
+            </ul>
+          </div>
+          <div class='my-workout-info'>
+            <h2 class="workout-name">
+              </h2>
+            <section class='workout-details'>
+            </section>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    </section>
+
+  </main>
+
+  <div id="post-from-stream" class="modal">
+    <div class="stream-modal-content">
+      <span class="close">&times;</span>
+      <header class='post-from-stream-title'></header>
+      <section class='post-from-stream-content'></section>
+    </div>
+  </div>
+
+  <div id="create-a-workout-modal" class="modal">
+    <div class="workout-modal-content">
+      <span class="close">&times;</span>
+      <div class="flex-container">
+        <header class='create-workout-title'>
+          <h1 style="text-align: center;">Build & Share your workout!</h1>
+        </header>
+
+        <form class="create-workout-form">
+
+          <div class="your-workout-details">
+            <label for="workout-title">Name your Workout: </label>
+            <input type="text" class="workout-title" value name="title" placeholder="Title">
+            <label for="workout-difficulty">Difficulty: </label>
+            <input type="text" class="workout-difficulty" value name="difficulty" placeholder="Difficulty">
+          </div>
+
+          <div class="add-exercise">
+            <h3 style="margin-top: 20px; width: 70%; border-bottom: 1px solid black;">Add and Save Exercises!</h3>
+            <label for="exercise">Name: </label>
+            <input type="text" class="exercise" value name="name" placeholder="Bench Press">
+
+            <label for="sets">Sets: </label>
+            <input type="text" class="sets" value name="sets" placeholder="4">
+
+            <label for="reps">Reps: </label>
+            <input type="text" class="reps" value name="reps" placeholder="12">
+            <button class="save-exercise" type="button">Save</button>
+          </div>
+
+
+          <button class="create-new-workout" type="submit">Create</button>
+          <!-- <button type="button">Cancel</button> -->
+        </form>
+      </div>
+
+      <div class="workout-draft">
+        <h3>Workout Draft</h3>
+        <ul class="exercise-list">
+        </ul>
+      </div>
+      <!-- <section class='create-workout-content'></section> -->
+    </div>
+  </div>
+
+
+  <div id="exercise-search-area" class="modal">
+    <div class="exercise-search-modal">
+      <span class="close">&times;</span>
+      <div class="list-exercises">
+        <p>Search for different exercises here!</p>
+        <form class="search-for-exercise" action="exercises/bodypart/triceps brachii" method="GET">
+          <select class="exercise-search-query">
+            <option value="">all</option>
+            <option value="triceps brachii">triceps</option>
+            <option value="pectoralis major">pecs</option>
+            <option value="deltoid">deltoid</option>
+            <option value="trapezius">traps</option>
+            <option value="biceps brachii">biceps</option>
+            <option value="latissimus dorsi">lats</option>
+            <option value="abdominals">abs</option>
+            <option value="glutaeus maximus">butt</option>
+            <option value="obliquus">obliquus</option>
+            <option value="ischiocrural muscle">hamstrings</option>
+            <option value="quadriceps">quads</option>
+          </select>
+          <input type="submit" name="" value="Search">
+        </form>
+        <div class="content-container">
+        </div>
+      </div>
+      <div class="individual-exercise-details" style="display: none;">
+      </div>
+    </div>
+  </div>
+
+  <div id="explore-users" class="modal">
+    <div class="explore-user-modal">
+      <span class="close">&times;</span>
+      <section class="explore">
+        <!-- <section id="user-modal">
+          <img id="user-modal-my-avatar" src="https://media.tenor.com/images/d8bb62a1bb8af522ea8e26cca2e2d68c/tenor.gif" alt="user-avatar" />
+        </section>
+        <h2>Brandon</h2> -->
+      </section>
+    </div>
+  </div>
+
+  <div id="warning-message"></div>
+  </main>
+  <script src="/dashboard.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,11 @@
+language: node_js
+node_js: node
+services:
+- mongodb
+deploy:
+  provider: heroku
+  api_key:
+    secure: v8Ta/wtR6B49f0at0yhryubacfMgEvv4Stptrhr0H1+1D9MRaVqAygQagY3den2DW7Ebsxu01bRAzzqiDGdoT54sMOJNsvB71xjLW7LGF8dte1aS8meMX+RUv7rUUE8o3Iu2AoSfbnKi5wYNRE03A2VjMPs7a1A6USe9dnjr3m8HlnkPoGhlDssCjfn2ZscfYaeb56ejsrf90QVXXFTLQEsTf3UDp+ZXs1ckTJEPjkPf0QSVGne5lOh4aZcaqrAsLIHYOFwiiG8VDiOWRVrFbUouxyNY4Jtps2UoBeh9TqxrDV1/3x7y6TLsTr92//h6lFQDwYQgOs2XgqTX/NE5b44rBmZFxAGSp3EKAhDBHWwX2XY1999sBOch5ahtnVgxXSO5KzDnvFXkMPnVZHkdNTUGI5t27G8jTgTBFazdMIMa1A3XcpITzR2959ZN98m23MhTFcrgZf6hrKp6HgymZVLWjoa7jrKKCFGz2Ql6DPUkIWrmFXBWpzD1tboJukadVcYFl1xfBuZ2daihzRNco6UPyd2KXr/gBBX8rxIpPrrvDrcie1c+Nxp9DCXDJzh4JOoEO0gs2i8SLqy8FIiwcr5+qvZWXwlvBIbxdpjeeJPFL6H2R0pPT4j5ykbAQ2dbp/Luzm+ecUf4dTVS8+UwBcsr/L3oe9PWebJwYchQm3s=
+  app: limitless-coast-76731
+  on:
+    repo: b-chang93/workout-app
