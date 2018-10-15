@@ -13,9 +13,13 @@ const PostSchema = mongoose.Schema({
     required: true
   },
   likes: {type: Number, default: 0},
-  creator: { type: mongoose.Schema.Types.ObjectId, ref: 'Users', required: true },
-  date: {type: Date, default: Date.now}
+  creator: { type: mongoose.Schema.Types.ObjectId, ref: 'Users', required: true }
+
+  //use created at - replace the date method here
+  // date: {type: Date, default: Date.now}
 });
+
+PostSchema.set("timestamps", true);
 
 PostSchema.pre('find', function(next) {
   this.populate('creator');
@@ -43,7 +47,8 @@ PostSchema.methods.serialize = function() {
     content: this.content,
     likes: this.likes,
     creator: this.creator,
-    date: this.date
+    created: this.createdAt
+    // date: this.date
   };
 };
 

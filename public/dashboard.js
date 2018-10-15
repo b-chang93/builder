@@ -456,14 +456,14 @@ function closeModal() {
 }
 
 function renderNewPosts(post) {
-  let date = post.date.slice(0,10).replace(/-/g,'/');
+  // let date = post.date.slice(0,10).replace(/-/g,'/');
   $('.main-index').append(`
       <li class="feed-index-item">
         <section class="content">
           <section class="thumbnail-for-post">
             <img class="avatar-related-to-post" src="${avatar}" alt="user-avatar">
             <h1 class="post-title">${post.title}</h1>
-            <p class="date">${date}</p>
+            <p class="date">WIP</p>
           </section>
           <p class="post-text">${post.content}</p>
         </section>
@@ -471,14 +471,14 @@ function renderNewPosts(post) {
 }
 
 function renderPosts(post) {
-  let date = post.date.slice(0,10).replace(/-/g,'/');
+  // let date = post.date.slice(0,10).replace(/-/g,'/');
   return `
     <li class="feed-index-item">
       <section class="content">
         <section class="thumbnail-for-post">
           <img class="avatar-related-to-post" src="${post.creator.avatar}" alt="user-">
           <h1 class="post-title">${post.title}</h1>
-          <p class="date">${date}</p>
+          <p class="date">WIP</p>
         </section>
         <p class="post-text">${post.content}</p>
       </section>
@@ -486,7 +486,7 @@ function renderPosts(post) {
 }
 
 function handlePostCreation() {
-  let date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+  // let date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
   const targetTitle = $('.modal-title')
   const targetPostContent = $('.modal-workout-content')
   $('#create-post').attr("disabled", "true");
@@ -737,48 +737,52 @@ function renderUser(user) {
     </div`
 }
 
-function isEmpty(str) {
-  return (!str || 0 === str.length);
-}
 
 function createWorkout() {
   let newWorkout = {
     title: '',
     difficulty: '',
-    workout: [],
+    exercises: [],
     creator: currentUser
   };
 
-  let exercise;
-  let sets;
-  let reps;
 
-  $('.add-exercise').on('click', '.save-exercise', event => {
-    exercise = $(event.currentTarget).parent().find('.exercise')
-    sets = $(event.currentTarget).parent().find('.sets')
-    reps = $(event.currentTarget).parent().find('.reps')
+  let exercise, set, reps;
 
-    console.log('adding exercise...')
+  $('.set-info').on('click', '.save-set', event => {
 
-    if ( exercise.val() !== '' && sets.val() !== '' && reps.val() !== ''   ) {
-      newWorkout.workout.push({
-        name: exercise.val(),
-        sets: sets.val(),
-        reps: reps.val()
-      })
+    let singleExercise = {
+      name: '',
+      sets: []
     }
 
-    $('.exercise-list').empty();
-    newWorkout.workout.forEach(exercise => {
-      $('.exercise-list').append(`<li>${exercise.name} ${exercise.sets} sets ${exercise.reps} reps</li>`)
-    })
+    // get user input values for single set
+    weight = $(event.currentTarget).parent().find('.weight');
+    reps = $(event.currentTarget).parent().find('.reps');
+    exercise = $(event.currentTarget).parent().find('.exercise');
 
+    let singleSet = {
+      weight: weight.val(),
+      reps: reps.val()
+    }
 
+    let index = newWorkout.exercises.findIndex(e => e.name == exercise.val())
+    console.log(index)
 
-    console.log(newWorkout.workout)
+    if (index < 0) {
+      singleExercise.name = exercise.val();
+      singleExercise.sets.push(singleSet)
+      newWorkout.exercises.push(singleExercise)
+    } else {
+      newWorkout.exercises[index].sets.push(singleSet)
+    }
+
+   console.log(newWorkout)
+
+   //clearing inputs
 
     exercise.val('');
-    sets.val('');
+    weight.val('');
     reps.val('');
 
   })

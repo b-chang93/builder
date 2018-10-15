@@ -569,7 +569,8 @@ th {
 
 .add-exercise > label, .add-exercise > input {
   /* display: block; */
-  width: 65%;
+  /* width: 65%; */
+  width: 30%;
   height: auto;
   font-size: 14px;
   text-align: left;

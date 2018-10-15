@@ -8,7 +8,6 @@ const passport = require('passport');
 const jwtAuth = passport.authenticate('jwt', { session: false });
 
 router.get('/', jwtAuth, (req, res) => {
-  console.log(req.user.id)
   Workout
     .find()
     .then(workouts => {
@@ -32,7 +31,6 @@ router.get('/:id', (req, res) => {
     })
 });
 
-//setting up route to retrieve all workouts created by a specific user
 router.get('/user/:id', (req, res) => {
   Workout
     .find({"creator" : "5b9ea484fec0802340915546"})
@@ -46,7 +44,7 @@ router.get('/user/:id', (req, res) => {
 });
 
 router.post('/', jwtAuth, (req,res) => {
-  const requiredFields = ['title', 'difficulty', 'workout', 'creator'];
+  const requiredFields = ['title', 'difficulty', 'exercises', 'creator'];
   requiredFields.forEach(field => {
     if (!(field in req.body)) {
       const message = `Missing \`${field}\` in request body`;
@@ -73,7 +71,7 @@ router.post('/', jwtAuth, (req,res) => {
     .create({
       title: req.body.title,
       difficulty: req.body.difficulty,
-      workout: req.body.workout,
+      exercises: req.body.exercises,
       creator: req.user.id
     })
     .then(workout => res.status(201).json(workout.serialize()))
