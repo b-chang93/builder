@@ -250,6 +250,7 @@ th {
   color: #359aff;
   box-shadow: 2px 1px 5px 1px rgba(0,0,0,0.6);
   margin-left: 18%;
+  overflow: auto;
 }
 
 .workout-name {
@@ -567,10 +568,7 @@ th {
   margin: 5px 1px;
 }
 
-.add-exercise > label, .add-exercise > input {
-  /* display: block; */
-  /* width: 65%; */
-  width: 30%;
+.set-info > label, .set-info > input {
   height: auto;
   font-size: 14px;
   text-align: left;
@@ -579,15 +577,16 @@ th {
   border-radius: 3px;
   background: #fcfcfc;
   transition: opacity 0.4s;
-  /* border: 0; */
   background: transparent;
-  /* border-bottom: 1px solid #000000; */
   margin: 5px 1px;
 }
+.set-info > label {
+  width: 30%;
+}
 
-/* .add-exercise > label, .your-workout-details > label {
-  width: 100px;
-} */
+.set-info > input {
+  width: 60%;
+}
 
 .create-new-workout {
   width: 30%;
@@ -941,6 +940,23 @@ th {
     /* text-align: center; */
     font-size: 24px;
     margin-top: 30px;
+  }
+
+  .individual-workout-details > ul {
+    padding-left: 5px;
+  }
+
+  .exercise-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .single-exercise {
+    padding: 0;
+  }
+
+  .single-exercise > li {
+    margin-left: 40px;
   }
 
   /* .focused-exercise-image {

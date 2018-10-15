@@ -23,7 +23,6 @@ router.get('/username/:username', (req, res) => {
     .find({"username": `${req.params.username}`})
     .then(userPosts => {
       res.json(userPosts.map(post => post.serialize()));
-      // userPosts.map(post => console.log(post.posts))
     })
     .catch(err => {
       console.error(err)
@@ -87,37 +86,37 @@ router.post('/', (req,res) => {
     })
 });
 
-// router.delete('/:id', (req, res) => {
-//   Workout
-//     .findByIdAndRemove(req.params.id)
-//     .then(() => {
-//       res.status(204).json({message: 'Sucessfully deleted'});
-//     })
-//     .catch(err => {
-//       console.error(err);
-//       res.status(500).json({error: 'Something went horribly wrong'})
-//     })
-// });
-//
-// router.put('/:id', (req, res) => {
-//   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
-//     res.status(400).json({
-//       error: 'Request path id and request body id values must match'
-//     });
-//   }
-//
-//   const updated = {};
-//   const updateableFields = ['title', 'workout'];
-//   updateableFields.forEach(field => {
-//     if (field in req.body) {
-//       updated[field] = req.body[field];
-//     }
-//   });
-//
-//   Workout
-//     .findByIdAndUpdate(req.params.id, {$set: updated}, { new: true})
-//     .then(updatedWorkout => res.status(204).json(updatedWorkout.serialize()))
-//     .catch(err => res.status(500).json({message: `Something went horribly wrong`}));
-// });
+router.delete('/:id', (req, res) => {
+  Post
+    .findByIdAndRemove(req.params.id)
+    .then(() => {
+      res.status(204).json({message: 'Sucessfully deleted'});
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({error: 'Something went horribly wrong'})
+    })
+})
+
+router.put('/:id', (req, res) => {
+  // if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
+  //   res.status(400).json({
+  //     error: 'Request path id and request body id values must match'
+  //   });
+  // }
+
+  const updated = {};
+  const updateableFields = ['title', 'content'];
+  updateableFields.forEach(field => {
+    if (field in req.body) {
+      updated[field] = req.body[field];
+    }
+  });
+
+  Post
+    .findByIdAndUpdate(req.params.id, {$set: updated}, { new: true})
+    .then(updatedWorkout => res.status(204).json(updatedWorkout.serialize()))
+    .catch(err => res.status(500).json({message: `Something went horribly wrong`}));
+});
 
 module.exports = {router};

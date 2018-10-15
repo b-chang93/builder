@@ -31,18 +31,6 @@ router.get('/:id', (req, res) => {
     })
 });
 
-router.get('/user/:id', (req, res) => {
-  Workout
-    .find({"creator" : "5b9ea484fec0802340915546"})
-    .then(workouts => {
-      res.json(workouts.map(workout=> workout.serialize()));
-    })
-    .catch(err => {
-      console.error(err);
-      res.status(500).json({error: 'Something went horribly wrong.'})
-    })
-});
-
 router.post('/', jwtAuth, (req,res) => {
   const requiredFields = ['title', 'difficulty', 'exercises', 'creator'];
   requiredFields.forEach(field => {

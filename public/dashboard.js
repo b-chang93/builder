@@ -1,10 +1,7 @@
-let postTitle, workoutInfo, focusPostTitle, focusPostContent;
+let postTitle, workoutInfo, focusPostTitle, focusPostContent, avatar, currentUsername, subscribed;
 let currentUser = localStorage.getItem('userInfo');
 let loginToken = localStorage.getItem('token');
 let isNewUser = localStorage.getItem('isNewUser');
-let avatar;
-let currentUsername;
-let subscribed;
 
 function getToken() {
   if(!loginToken) {
@@ -333,7 +330,6 @@ function getWorkouts(token) {
   })
   .then(response => response.json()) // parses response to JSON
   .then(function(workouts) {
-    // console.log(workouts)
     showMyWorkouts(workouts)
     showWorkoutDetails(workouts)
   })
@@ -351,15 +347,31 @@ function renderWorkouts(workout) {
 }
 
 function showWorkoutDetails(data) {
+  // console.log(data[0].title)
   $('.workout-index').on('click', 'li', event => {
     $('.my-workout-info').toggle();
     for(let i = 0; i < data.length; i++) {
       if ($(event.currentTarget).text() === data[i].title) {
         $('.workout-name').html(data[i].title);
-        $('.workout-details').empty();
-        let workout = data[i].workout
-        for(let w = 0; w < workout.length; w++) {
-          $('.workout-details').append(`${workout[w]} <br>`);
+        $('.individual-workout-details').empty();
+        let workout = data[i].exercises
+
+        for(let e = 0; e < workout.length; e++) {
+          console.log(workout[e].name)
+          console.log(workout[e].sets.length)
+          $('.individual-workout-details').append(`<ul class="test">${workout[e].name}</ul>`)
+
+          for(let s = 0; s < workout[e].sets.length; s++) {
+            // console.log(workout[e].sets[s])
+            // $('.individual-workout-details > ul').empty();
+            console.log(event.currentTarget)
+            $('.individual-workout-details > ul').append(`<li>${workout[e].sets[s].weight}lb for ${workout[e].sets[s].reps} reps</li>`);
+            // $('.individual-workout-details').append(`${workout[e].name} - ${workout[e].sets[s].weight}lb for ${workout[e].sets[s].reps} <br>`);
+          }
+          console.log(workout[e].sets)
+          // workout[e].sets.forEach(s => s {
+          //   $('.individual-workout-details > ul').append(`<li>${workout[e].sets[s].weight}lb for ${workout[e].sets[s].reps}</li>`);
+          // })
         }
       }
     }
@@ -368,11 +380,8 @@ function showWorkoutDetails(data) {
 
 function openPostModal() {
   $('.main-index').on('click', 'li', event => {
-    console.log('clicked on a post in the stream')
     focusPostTitle = event.currentTarget.querySelector(".post-title").textContent;
     focusPostContent = event.currentTarget.querySelector(".post-text").textContent;
-    // $('#myModal').show();
-
     displayPostModal(focusPostTitle, focusPostContent);
   })
 }
@@ -396,55 +405,12 @@ function displayPostModal(title, content) {
   })
 }
 
-// function openMySplitModal() {
-//   $('#my-avatar').on('click', event => {
-//     console.log('clicked on avatar')
-//     $('.user-modal').show();
-//   })
-//
-//   $('.close').on('click', event => {
-//     $('.user-modal').hide();
-//   })
-//
-//   $(window).click(event => {
-//     if (event.target.id === "myModal") {
-//       $('.user-modal').hide();
-//     }
-//   })
-// }
-
-// function openMyUserModal() {
-//   $('.split-title').on('click', event => {
-//     console.log('clicked on split')
-//     $('.update-workout-modal').show();
-//   })
-//
-//   $('.close').on('click', event => {
-//     $('.update-workout-modal').hide();
-//   })
-//
-//   $(window).click(event => {
-//     if (event.target.id === "myModal") {
-//       $('.update-workout-modal').hide();
-//     }
-//   })
-// }
-
-
-function openWorkoutModal() {
+function handleWorkoutModal() {
   $('#share-workout').on('click', event =>{
     $('#create-a-workout-modal').show();
   })
-}
 
-function closeModal() {
-
-  // When the user clicks on <span> (x), close the modal
   $('.close').on('click', event => {
-    $('#create-a-workout-modal').hide();
-  })
-
-  $('#cancel-post').on('click', event => {
     $('#create-a-workout-modal').hide();
   })
 
@@ -454,6 +420,20 @@ function closeModal() {
     }
   })
 }
+
+// function closeModal() {
+//
+//   // When the user clicks on <span> (x), close the modal
+//   $('.close').on('click', event => {
+//     $('#create-a-workout-modal').hide();
+//   })
+//
+//   $(window).click(event => {
+//     if (event.target.id === "create-a-workout-modal") {
+//       $('#create-a-workout-modal').hide();
+//     }
+//   })
+// }
 
 function renderNewPosts(post) {
   // let date = post.date.slice(0,10).replace(/-/g,'/');
@@ -522,7 +502,6 @@ function searchExercises() {
     event.preventDefault();
     let targetSearch = $('.exercise-search-query')
     let search = targetSearch.val();
-    console.log(search)
     findExercises(search);
   })
 }
@@ -737,6 +716,17 @@ function renderUser(user) {
     </div`
 }
 
+function workoutDraft(workout) {
+  console.log(workout.exercises)
+
+  workout.exercises.forEach(exercise => {
+    exercise.forEach(set => {
+      console.log(set)
+      $('.exercise-list').append(`<li><ul class="single-exercise">${exercise.name}</ul></li>`)
+      $('.single-exercise').append(`<li>set: ${set.sets.weight}lb for ${set.sets.reps} reps</li>`)
+    })
+  })
+}
 
 function createWorkout() {
   let newWorkout = {
@@ -767,17 +757,22 @@ function createWorkout() {
     }
 
     let index = newWorkout.exercises.findIndex(e => e.name == exercise.val())
-    console.log(index)
 
     if (index < 0) {
-      singleExercise.name = exercise.val();
-      singleExercise.sets.push(singleSet)
-      newWorkout.exercises.push(singleExercise)
+      if (reps.val() === '') {
+        let msg = 'Cannot add set information without an input.'
+        displayError(msg)
+      } else {
+        singleExercise.name = exercise.val();
+        singleExercise.sets.push(singleSet)
+        newWorkout.exercises.push(singleExercise)
+      }
     } else {
       newWorkout.exercises[index].sets.push(singleSet)
     }
 
-   console.log(newWorkout)
+   // console.log(newWorkout)
+   workoutDraft(newWorkout)
 
    //clearing inputs
 
@@ -821,18 +816,49 @@ function postNewWorkout(data) {
   })
 }
 
+function preloadExercises() {
+  url = `/exercises`
+
+  return fetch(url, {
+      method: "GET", // *GET, POST, PUT, DELETE, etc.
+      mode: "cors", // no-cors, cors, *same-origin
+      headers: {
+          "Content-Type": "application/json; charset=utf-8",
+      }
+  })
+  .then(response => response.json()) // parses response to JSON
+  .then(function(exercises) {
+    autoComplete(exercises)
+  })
+}
+
+function autoComplete(exercises) {
+  let exerciseList = []
+
+  exercises.map(e => exerciseList.push(e.title))
+  $( "#automplete-1" ).autocomplete({
+     source: exerciseList,
+     change: function (event, ui) {
+                if(!ui.item){
+                    $("#automplete-1").val("");
+                }
+
+            }
+  });
+}
+
 function handleDashboard() {
   getToken().then(res => getWorkouts(res));
   displayUserProfile();
   displayMyPosts();
-  openWorkoutModal();
-  closeModal();
+  handleWorkoutModal();
+  // closeModal();
   handlePostCreation();
   openPostModal();
   displaySubscribedPosts();
+
   findMySchedule();
-  // openMySplitModal();
-  // openMyUserModal();
+
   searchExercises();
   revealSearchModal();
   getExerciseInfo();
@@ -843,6 +869,7 @@ function handleDashboard() {
   exploreUsers();
 
   createWorkout();
+  preloadExercises();
 }
 
 $(handleDashboard);

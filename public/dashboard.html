@@ -7,7 +7,10 @@
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
   <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script> -->
+  <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 </head>
 
 <body>
@@ -89,7 +92,7 @@
           <div class='my-workout-info'>
             <h2 class="workout-name">
               </h2>
-            <section class='workout-details'>
+            <section class='individual-workout-details'>
             </section>
           </div>
         </div>
@@ -129,11 +132,9 @@
 
           <div class="set-info">
             <h3 style="margin-top: 20px; width: 70%; border-bottom: 1px solid black;">Add and Save Exercises!</h3>
-            <label for="exercise">Name: </label>
-            <input type="text" class="exercise" value name="name" placeholder="Bench Press">
+            <label for="automplete-1">Name: </label>
+            <input type="text" id="automplete-1" class="exercise" value name="name" placeholder="Bench Press">
 
-            <!-- <label for="sets">Sets: </label>
-            <input type="text" class="sets" value name="sets" placeholder="4"> -->
             <label for="sets">Weight: </label>
             <input type="text" class="weight" value name="weight" placeholder="225">
 
