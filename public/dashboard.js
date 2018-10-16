@@ -437,13 +437,14 @@ function handleWorkoutModal() {
 
 function renderNewPosts(post) {
   // let date = post.date.slice(0,10).replace(/-/g,'/');
+  console.log(post)
   $('.main-index').append(`
       <li class="feed-index-item">
         <section class="content">
           <section class="thumbnail-for-post">
             <img class="avatar-related-to-post" src="${avatar}" alt="user-avatar">
             <h1 class="post-title">${post.title}</h1>
-            <p class="date">WIP</p>
+            <p class="date">${post.created}</p>
           </section>
           <p class="post-text">${post.content}</p>
         </section>
@@ -452,13 +453,14 @@ function renderNewPosts(post) {
 
 function renderPosts(post) {
   // let date = post.date.slice(0,10).replace(/-/g,'/');
+  // console.log(post)
   return `
     <li class="feed-index-item">
       <section class="content">
         <section class="thumbnail-for-post">
           <img class="avatar-related-to-post" src="${post.creator.avatar}" alt="user-">
           <h1 class="post-title">${post.title}</h1>
-          <p class="date">WIP</p>
+          <p class="date">${post.created}</p>
         </section>
         <p class="post-text">${post.content}</p>
       </section>
@@ -717,13 +719,11 @@ function renderUser(user) {
 }
 
 function workoutDraft(workout) {
-  console.log(workout.exercises)
-
-  workout.exercises.forEach(exercise => {
-    exercise.forEach(set => {
-      console.log(set)
-      $('.exercise-list').append(`<li><ul class="single-exercise">${exercise.name}</ul></li>`)
-      $('.single-exercise').append(`<li>set: ${set.sets.weight}lb for ${set.sets.reps} reps</li>`)
+  $('.exercise-list').empty();
+  workout.exercises.forEach((exercise, index) => {
+    $('.exercise-list').append(`<li><ul class="draft exercise-${index+1}">${exercise.name}</ul></li>`)
+    exercise.sets.forEach(set => {
+      $(`.exercise-${index+1}`).append(`<li>set: ${set.weight}lb for ${set.reps} reps</li>`)
     })
   })
 }
@@ -775,7 +775,6 @@ function createWorkout() {
    workoutDraft(newWorkout)
 
    //clearing inputs
-
     exercise.val('');
     weight.val('');
     reps.val('');
