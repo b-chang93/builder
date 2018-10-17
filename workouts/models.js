@@ -13,7 +13,7 @@ const exerciseSchema = mongoose.Schema({
 });
 
 const workoutSchema = mongoose.Schema({
-  title: {type: String, required: true},
+  title: {type: String},
   difficulty: {type: String},
   exercises: [exerciseSchema],
   creator: { type: mongoose.Schema.Types.ObjectId, ref: 'Users' }
