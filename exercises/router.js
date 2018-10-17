@@ -31,8 +31,6 @@ router.get('/bodypart/:muscle?', (req, res) => {
     .find()
     .then(exercises => {
       let result = exercises.filter(muscle => muscle.primary[0] === req.params.muscle)
-      console.log('LOGGING RESULTS')
-      console.log(result)
       res.json(result.map(muscle => muscle.serialize()))
     })
     .catch(err => {

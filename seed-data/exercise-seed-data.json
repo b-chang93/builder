@@ -1,4 +1,4 @@
-
+[
     {
         "id": "0001",
         "name": "static-neck-flexion-extension",
@@ -30,7 +30,7 @@
             "png/0001-relaxation.png",
             "png/0001-tension.png"
         ]
-    }
+    },
     {
         "id": "0002",
         "name": "static-neck-side-flexion",
@@ -62,7 +62,7 @@
             "png/0002-relaxation.png",
             "png/0002-tension.png"
         ]
-    }
+    },
     {
         "id": "0003",
         "name": "seated-shoulder-press-machine",
@@ -89,7 +89,7 @@
         "references": [],
         "svg": [],
         "png": []
-    }
+    },
     {
         "id": "0004",
         "name": "seated-military-press",
@@ -125,7 +125,7 @@
             "png/0004-relaxation.png",
             "png/0004-tension.png"
         ]
-    }
+    },
     {
         "id": "0005",
         "name": "shoulder-shrugs",
@@ -158,7 +158,7 @@
             "png/0005-relaxation.png",
             "png/0005-tension.png"
         ]
-    }
+    },
     {
         "id": "0006",
         "name": "arnold-press",
@@ -189,7 +189,7 @@
         "references": [],
         "svg": [],
         "png": []
-    }
+    },
     {
         "id": "0007",
         "name": "front-barbell-raises",
@@ -219,7 +219,7 @@
         "references": [],
         "svg": [],
         "png": []
-    }
+    },
     {
         "id": "0008",
         "name": "front-cable-raises",
@@ -257,7 +257,7 @@
             "png/0008-relaxation.png",
             "png/0008-tension.png"
         ]
-    }
+    },
     {
         "id": "0009",
         "name": "cable-shoulder-shrugs",
@@ -292,7 +292,7 @@
             "png/0009-relaxation.png",
             "png/0009-tension.png"
         ]
-    }
+    },
     {
         "id": "0010",
         "name": "front-raises",
@@ -323,7 +323,7 @@
         "references": [],
         "svg": [],
         "png": []
-    }
+    },
     {
         "id": "0011",
         "name": "barbell-shoulder-press",
@@ -352,7 +352,7 @@
         "references": [],
         "svg": [],
         "png": []
-    }
+    },
     {
         "id": "0012",
         "name": "dumbbell-shoulder-press",
@@ -381,7 +381,7 @@
         "references": [],
         "svg": [],
         "png": []
-    }
+    },
     {
         "id": "0013",
         "name": "smith-machine-upright-row",
@@ -417,7 +417,7 @@
             "png/0013-relaxation.png",
             "png/0013-tension.png"
         ]
-    }
+    },
     {
         "id": "0014",
         "name": "upright-barbell-rows",
@@ -454,7 +454,7 @@
             "png/0014-relaxation.png",
             "png/0014-tension.png"
         ]
-    }
+    },
     {
         "id": "0015",
         "name": "upright-cable-row",
@@ -491,7 +491,7 @@
             "png/0015-relaxation.png",
             "png/0015-tension.png"
         ]
-    }
+    },
     {
         "id": "0016",
         "name": "dumbbell-upright-rows",
@@ -530,7 +530,7 @@
             "png/0016-relaxation.png",
             "png/0016-tension.png"
         ]
-    }
+    },
     {
         "id": "0017",
         "name": "bent-over-lateral-cable-raises",
@@ -568,7 +568,7 @@
             "png/0017-relaxation.png",
             "png/0017-tension.png"
         ]
-    }
+    },
     {
         "id": "0018",
         "name": "lateral-dumbbell-raises",
@@ -604,7 +604,7 @@
             "png/0018-relaxation.png",
             "png/0018-tension.png"
         ]
-    }
+    },
     {
         "id": "0019",
         "name": "ball-wall-circles",
@@ -641,7 +641,7 @@
             "png/0019-relaxation.png",
             "png/0019-tension.png"
         ]
-    }
+    },
     {
         "id": "0020",
         "name": "back-flys-exercise-band",
@@ -678,7 +678,7 @@
             "png/0020-relaxation.png",
             "png/0020-tension.png"
         ]
-    }
+    },
     {
         "id": "0021",
         "name": "flat-bench-leg-raises",
@@ -713,7 +713,7 @@
             "png/0021-relaxation.png",
             "png/0021-tension.png"
         ]
-    }
+    },
     {
         "id": "0022",
         "name": "smith-machine-rear-deltoid-row",
@@ -752,7 +752,7 @@
             "png/0022-relaxation.png",
             "png/0022-tension.png"
         ]
-    }
+    },
     {
         "id": "0023",
         "name": "lying-rear-lateral-raise",
@@ -785,7 +785,7 @@
             "png/0023-relaxation.png",
             "png/0023-tension.png"
         ]
-    }
+    },
     {
         "id": "0024",
         "name": "rear-deltoid-row-dumbbell",
@@ -823,7 +823,7 @@
             "png/0024-relaxation.png",
             "png/0024-tension.png"
         ]
-    }
+    },
     {
         "id": "0025",
         "name": "seated-cable-rows",
@@ -859,7 +859,7 @@
             "png/0025-relaxation.png",
             "png/0025-tension.png"
         ]
-    }
+    },
     {
         "id": "0026",
         "name": "reverse-grips-bent-over-barbell-rows",
@@ -894,7 +894,7 @@
             "png/0026-relaxation.png",
             "png/0026-tension.png"
         ]
-    }
+    },
     {
         "id": "0027",
         "name": "stationary-abdominal-draw-in",
@@ -929,7 +929,7 @@
             "png/0027-relaxation.png",
             "png/0027-tension.png"
         ]
-    }
+    },
     {
         "id": "0028",
         "name": "rear-deltoid-row-barbell",
@@ -963,7 +963,7 @@
             "png/0028-relaxation.png",
             "png/0028-tension.png"
         ]
-    }
+    },
     {
         "id": "0029",
         "name": "t-bar-rows",
@@ -1000,7 +1000,7 @@
             "png/0029-relaxation.png",
             "png/0029-tension.png"
         ]
-    }
+    },
     {
         "id": "0030",
         "name": "barbell-shrugs",
@@ -1034,7 +1034,7 @@
             "png/0030-relaxation.png",
             "png/0030-tension.png"
         ]
-    }
+    },
     {
         "id": "0031",
         "name": "incline-shoulder-press-dumbbell",
@@ -1064,7 +1064,7 @@
             "png/0031-relaxation.png",
             "png/0031-tension.png"
         ]
-    }
+    },
     {
         "id": "0032",
         "name": "bent-over-rear-deltoid-raise-with-head-on-bench",
@@ -1097,7 +1097,7 @@
             "png/0032-relaxation.png",
             "png/0032-tension.png"
         ]
-    }
+    },
     {
         "id": "0033",
         "name": "front-dumbbell-raise",
@@ -1127,7 +1127,7 @@
             "png/0033-relaxation.png",
             "png/0033-tension.png"
         ]
-    }
+    },
     {
         "id": "0034",
         "name": "internal-cable-rotation",
@@ -1162,7 +1162,7 @@
             "png/0034-relaxation.png",
             "png/0034-tension.png"
         ]
-    }
+    },
     {
         "id": "0035",
         "name": "seated-rear-lateral-cable-raise",
@@ -1193,7 +1193,7 @@
             "png/0035-relaxation.png",
             "png/0035-tension.png"
         ]
-    }
+    },
     {
         "id": "0037",
         "name": "lying-one-arm-rear-lateral-raise",
@@ -1228,7 +1228,7 @@
             "png/0037-relaxation.png",
             "png/0037-tension.png"
         ]
-    }
+    },
     {
         "id": "0038",
         "name": "one-arm-dumbbell-shoulder-press",
@@ -1262,7 +1262,7 @@
             "png/0038-relaxation.png",
             "png/0038-tension.png"
         ]
-    }
+    },
     {
         "id": "0039",
         "name": "one-arm-upright-row",
@@ -1295,7 +1295,7 @@
             "png/0039-relaxation.png",
             "png/0039-tension.png"
         ]
-    }
+    },
     {
         "id": "0040",
         "name": "dumbbell-raise",
@@ -1322,7 +1322,7 @@
         "references": [],
         "svg": [],
         "png": []
-    }
+    },
     {
         "id": "0041",
         "name": "smith-machine-shoulder-shrugs",
@@ -1353,7 +1353,7 @@
             "png/0041-relaxation.png",
             "png/0041-tension.png"
         ]
-    }
+    },
     {
         "id": "0042",
         "name": "bench-press",
@@ -1391,7 +1391,7 @@
             "png/0042-relaxation.png",
             "png/0042-tension.png"
         ]
-    }
+    },
     {
         "id": "0043",
         "name": "incline-bench-press",
@@ -1428,7 +1428,7 @@
             "png/0043-relaxation.png",
             "png/0043-tension.png"
         ]
-    }
+    },
     {
         "id": "0044",
         "name": "incline-bench-press-with-bands",
@@ -1462,7 +1462,7 @@
             "png/0044-relaxation.png",
             "png/0044-tension.png"
         ]
-    }
+    },
     {
         "id": "0045",
         "name": "bent-arm-pullover",
@@ -1498,7 +1498,7 @@
             "png/0045-relaxation.png",
             "png/0045-tension.png"
         ]
-    }
+    },
     {
         "id": "0046",
         "name": "dumbbell-bent-arm-pullover",
@@ -1534,7 +1534,7 @@
             "png/0046-relaxation.png",
             "png/0046-tension.png"
         ]
-    }
+    },
     {
         "id": "0047",
         "name": "butterfly-machine",
@@ -1560,7 +1560,7 @@
         "references": [],
         "svg": [],
         "png": []
-    }
+    },
     {
         "id": "0048",
         "name": "cable-crossover",
@@ -1593,7 +1593,7 @@
             "png/0048-relaxation.png",
             "png/0048-tension.png"
         ]
-    }
+    },
     {
         "id": "0049",
         "name": "close-grip-barbell-bench-press",
@@ -1628,7 +1628,7 @@
             "png/0049-relaxation.png",
             "png/0049-tension.png"
         ]
-    }
+    },
     {
         "id": "0050",
         "name": "crossover-bands",
@@ -1665,7 +1665,7 @@
             "png/0050-relaxation.png",
             "png/0050-tension.png"
         ]
-    }
+    },
     {
         "id": "0051",
         "name": "decline-barbell-bench-press",
@@ -1701,7 +1701,7 @@
             "png/0051-relaxation.png",
             "png/0051-tension.png"
         ]
-    }
+    },
     {
         "id": "0052",
         "name": "decline-dumbbell-bench-press",
@@ -1735,7 +1735,7 @@
             "png/0052-relaxation.png",
             "png/0052-tension.png"
         ]
-    }
+    },
     {
         "id": "0053",
         "name": "decline-dumbbell-flys",
@@ -1769,7 +1769,7 @@
             "png/0053-relaxation.png",
             "png/0053-tension.png"
         ]
-    }
+    },
     {
         "id": "0054",
         "name": "chest-dips",
@@ -1806,7 +1806,7 @@
             "png/0054-relaxation.png",
             "png/0054-tension.png"
         ]
-    }
+    },
     {
         "id": "0055",
         "name": "bench-press-dumbbell",
@@ -1844,7 +1844,7 @@
             "png/0055-relaxation.png",
             "png/0055-tension.png"
         ]
-    }
+    },
     {
         "id": "0056",
         "name": "dumbbell-flys",
@@ -1881,7 +1881,7 @@
             "png/0056-relaxation.png",
             "png/0056-tension.png"
         ]
-    }
+    },
     {
         "id": "0057",
         "name": "flat-bench-cable-flys",
@@ -1917,7 +1917,7 @@
             "png/0057-relaxation.png",
             "png/0057-tension.png"
         ]
-    }
+    },
     {
         "id": "0058",
         "name": "barbell-front-raise-pullover",
@@ -1951,7 +1951,7 @@
             "png/0058-relaxation.png",
             "png/0058-tension.png"
         ]
-    }
+    },
     {
         "id": "0059",
         "name": "hammer-grip-incline-bench-press",
@@ -1986,7 +1986,7 @@
             "png/0059-relaxation.png",
             "png/0059-tension.png"
         ]
-    }
+    },
     {
         "id": "0060",
         "name": "incline-cable-flys",
@@ -2021,7 +2021,7 @@
             "png/0060-relaxation.png",
             "png/0060-tension.png"
         ]
-    }
+    },
     {
         "id": "0061",
         "name": "dumbbell-incline-bench-press",
@@ -2056,7 +2056,7 @@
             "png/0061-relaxation.png",
             "png/0061-tension.png"
         ]
-    }
+    },
     {
         "id": "0062",
         "name": "incline-dumbbell-flys",
@@ -2091,7 +2091,7 @@
             "png/0062-relaxation.png",
             "png/0062-tension.png"
         ]
-    }
+    },
     {
         "id": "0063",
         "name": "incline-flys-twist",
@@ -2127,7 +2127,7 @@
             "png/0063-relaxation.png",
             "png/0063-tension.png"
         ]
-    }
+    },
     {
         "id": "0064",
         "name": "wide-grip-decline-barbell-pullover",
@@ -2160,7 +2160,7 @@
             "png/0064-relaxation.png",
             "png/0064-tension.png"
         ]
-    }
+    },
     {
         "id": "0066",
         "name": "machine-bench-press",
@@ -2193,7 +2193,7 @@
             "png/0066-relaxation.png",
             "png/0066-tension.png"
         ]
-    }
+    },
     {
         "id": "0067",
         "name": "barbell-neck-press",
@@ -2230,7 +2230,7 @@
             "png/0067-relaxation.png",
             "png/0067-tension.png"
         ]
-    }
+    },
     {
         "id": "0068",
         "name": "one-arm-bench-press",
@@ -2269,7 +2269,7 @@
             "png/0068-relaxation.png",
             "png/0068-tension.png"
         ]
-    }
+    },
     {
         "id": "0069",
         "name": "bosu-ball-push-up",
@@ -2307,7 +2307,7 @@
             "png/0069-relaxation.png",
             "png/0069-tension.png"
         ]
-    }
+    },
     {
         "id": "0070",
         "name": "one-arm-barbell-floor-press",
@@ -2340,7 +2340,7 @@
             "png/0070-relaxation.png",
             "png/0070-tension.png"
         ]
-    }
+    },
     {
         "id": "0071",
         "name": "one-arm-flat-bench-flys",
@@ -2371,7 +2371,7 @@
             "png/0071-relaxation.png",
             "png/0071-tension.png"
         ]
-    }
+    },
     {
         "id": "0072",
         "name": "one-armed-biased-push-up",
@@ -2408,7 +2408,7 @@
             "png/0072-relaxation.png",
             "png/0072-tension.png"
         ]
-    }
+    },
     {
         "id": "0073",
         "name": "push-ups-close-and-wide-hand-versions",
@@ -2439,7 +2439,7 @@
         "references": [],
         "svg": [],
         "png": []
-    }
+    },
     {
         "id": "0075",
         "name": "push-up-feet-elevated",
@@ -2474,7 +2474,7 @@
             "png/0075-relaxation.png",
             "png/0075-tension.png"
         ]
-    }
+    },
     {
         "id": "0076",
         "name": "push-ups-with-feet-on-exercise-ball",
@@ -2508,7 +2508,7 @@
             "png/0076-relaxation.png",
             "png/0076-tension.png"
         ]
-    }
+    },
     {
         "id": "0077",
         "name": "push-ups",
@@ -2544,7 +2544,7 @@
             "png/0077-relaxation.png",
             "png/0077-tension.png"
         ]
-    }
+    },
     {
         "id": "0078",
         "name": "smith-machine-bench-press",
@@ -2581,7 +2581,7 @@
             "png/0078-relaxation.png",
             "png/0078-tension.png"
         ]
-    }
+    },
     {
         "id": "0079",
         "name": "straight-arm-dumbbell-pullover",
@@ -2617,7 +2617,7 @@
             "png/0079-relaxation.png",
             "png/0079-tension.png"
         ]
-    }
+    },
     {
         "id": "0080",
         "name": "incline-dumbbell-press",
@@ -2652,7 +2652,7 @@
             "png/0080-relaxation.png",
             "png/0080-tension.png"
         ]
-    }
+    },
     {
         "id": "0081",
         "name": "smith-machine-incline-bench-press",
@@ -2689,7 +2689,7 @@
             "png/0081-relaxation.png",
             "png/0081-tension.png"
         ]
-    }
+    },
     {
         "id": "0082",
         "name": "wide-grip-bench-press",
@@ -2727,7 +2727,7 @@
             "png/0082-relaxation.png",
             "png/0082-tension.png"
         ]
-    }
+    },
     {
         "id": "0083",
         "name": "wide-grip-decline-bench-press",
@@ -2763,7 +2763,7 @@
             "png/0083-relaxation.png",
             "png/0083-tension.png"
         ]
-    }
+    },
     {
         "id": "0084",
         "name": "incline-chest-press",
@@ -2789,7 +2789,7 @@
         "references": [],
         "svg": [],
         "png": []
-    }
+    },
     {
         "id": "0085",
         "name": "decline-chest-press",
@@ -2821,7 +2821,7 @@
             "png/0085-relaxation.png",
             "png/0085-tension.png"
         ]
-    }
+    },
     {
         "id": "0086",
         "name": "body-row",
@@ -2856,7 +2856,7 @@
             "png/0086-relaxation.png",
             "png/0086-tension.png"
         ]
-    }
+    },
     {
         "id": "0087",
         "name": "pull-ups",
@@ -2891,7 +2891,7 @@
             "png/0087-relaxation.png",
             "png/0087-tension.png"
         ]
-    }
+    },
     {
         "id": "0088",
         "name": "gironda-sternum-chins",
@@ -2922,7 +2922,7 @@
         "references": [],
         "svg": [],
         "png": []
-    }
+    },
     {
         "id": "0089",
         "name": "chin-ups",
@@ -2951,7 +2951,7 @@
         "references": [],
         "svg": [],
         "png": []
-    }
+    },
     {
         "id": "0090",
         "name": "narrow-parallel-grip-chin-ups",
@@ -2989,7 +2989,7 @@
             "png/0090-relaxation.png",
             "png/0090-tension.png"
         ]
-    }
+    },
     {
         "id": "0091",
         "name": "wide-grip-chin-up",
@@ -3026,7 +3026,7 @@
             "png/0091-relaxation.png",
             "png/0091-tension.png"
         ]
-    }
+    },
     {
         "id": "0092",
         "name": "straight-arm-push-down",
@@ -3058,7 +3058,7 @@
             "png/0092-relaxation.png",
             "png/0092-tension.png"
         ]
-    }
+    },
     {
         "id": "0093",
         "name": "underhand-pull-downs",
@@ -3090,7 +3090,7 @@
             "png/0093-relaxation.png",
             "png/0093-tension.png"
         ]
-    }
+    },
     {
         "id": "0094",
         "name": "upright-band-rows",
@@ -3124,7 +3124,7 @@
             "png/0094-relaxation.png",
             "png/0094-tension.png"
         ]
-    }
+    },
     {
         "id": "0095",
         "name": "underhand-pull-down",
@@ -3156,7 +3156,7 @@
             "png/0095-relaxation.png",
             "png/0095-tension.png"
         ]
-    }
+    },
     {
         "id": "0096",
         "name": "v-bar-pull-down",
@@ -3189,7 +3189,7 @@
             "png/0096-relaxation.png",
             "png/0096-tension.png"
         ]
-    }
+    },
     {
         "id": "0097",
         "name": "wide-grip-lat-pull-down",
@@ -3220,7 +3220,7 @@
         "references": [],
         "svg": [],
         "png": []
-    }
+    },
     {
         "id": "0098",
         "name": "pullover-stability-ball-weight",
@@ -3256,7 +3256,7 @@
             "png/0098-relaxation.png",
             "png/0098-tension.png"
         ]
-    }
+    },
     {
         "id": "0099",
         "name": "barbell-dead-lifts",
@@ -3295,7 +3295,7 @@
             "png/0099-relaxation.png",
             "png/0099-tension.png"
         ]
-    }
+    },
     {
         "id": "0100",
         "name": "smith-machine-dead-lifts",
@@ -3330,7 +3330,7 @@
             "png/0100-relaxation.png",
             "png/0100-tension.png"
         ]
-    }
+    },
     {
         "id": "0101",
         "name": "barbell-good-mornings",
@@ -3362,7 +3362,7 @@
             "png/0101-relaxation.png",
             "png/0101-tension.png"
         ]
-    }
+    },
     {
         "id": "0102",
         "name": "smith-machine-good-mornings",
@@ -3394,7 +3394,7 @@
             "png/0102-relaxation.png",
             "png/0102-tension.png"
         ]
-    }
+    },
     {
         "id": "0103",
         "name": "hyperextensions",
@@ -3427,7 +3427,7 @@
             "png/0103-relaxation.png",
             "png/0103-tension.png"
         ]
-    }
+    },
     {
         "id": "0104",
         "name": "back-extension-stability-ball",
@@ -3460,7 +3460,7 @@
             "png/0104-relaxation.png",
             "png/0104-tension.png"
         ]
-    }
+    },
     {
         "id": "0105",
         "name": "supermans",
@@ -3492,7 +3492,7 @@
             "png/0105-relaxation.png",
             "png/0105-tension.png"
         ]
-    }
+    },
     {
         "id": "0107",
         "name": "dumbbell-dead-lifts",
@@ -3531,7 +3531,7 @@
             "png/0107-relaxation.png",
             "png/0107-tension.png"
         ]
-    }
+    },
     {
         "id": "0109",
         "name": "bridging",
@@ -3561,7 +3561,7 @@
             "png/0109-relaxation.png",
             "png/0109-tension.png"
         ]
-    }
+    },
     {
         "id": "0111",
         "name": "body-leg-lifts",
@@ -3593,7 +3593,7 @@
             "png/0111-relaxation.png",
             "png/0111-tension.png"
         ]
-    }
+    },
     {
         "id": "0112",
         "name": "one-legged-cable-kickback",
@@ -3625,7 +3625,7 @@
             "png/0112-relaxation.png",
             "png/0112-tension.png"
         ]
-    }
+    },
     {
         "id": "0113",
         "name": "side-plank",
@@ -3655,7 +3655,7 @@
             "png/0113-relaxation.png",
             "png/0113-tension.png"
         ]
-    }
+    },
     {
         "id": "0114",
         "name": "barbell-lunges",
@@ -3694,7 +3694,7 @@
             "png/0114-relaxation.png",
             "png/0114-tension.png"
         ]
-    }
+    },
     {
         "id": "0115",
         "name": "dumbbell-lunges",
@@ -3733,7 +3733,7 @@
             "png/0115-relaxation.png",
             "png/0115-tension.png"
         ]
-    }
+    },
     {
         "id": "0116",
         "name": "flutter-kicks",
@@ -3766,7 +3766,7 @@
             "png/0116-relaxation.png",
             "png/0116-tension.png"
         ]
-    }
+    },
     {
         "id": "0117",
         "name": "lying-leg-curl-machine",
@@ -3796,7 +3796,7 @@
             "png/0117-relaxation.png",
             "png/0117-tension.png"
         ]
-    }
+    },
     {
         "id": "0118",
         "name": "romanian-dead-lift",
@@ -3833,7 +3833,7 @@
             "png/0118-relaxation.png",
             "png/0118-tension.png"
         ]
-    }
+    },
     {
         "id": "0119",
         "name": "seated-leg-curl",
@@ -3863,7 +3863,7 @@
             "png/0119-relaxation.png",
             "png/0119-tension.png"
         ]
-    }
+    },
     {
         "id": "0120",
         "name": "standing-leg-curls",
@@ -3893,7 +3893,7 @@
             "png/0120-relaxation.png",
             "png/0120-tension.png"
         ]
-    }
+    },
     {
         "id": "0121",
         "name": "walking-lunges",
@@ -3932,7 +3932,7 @@
             "png/0121-relaxation.png",
             "png/0121-tension.png"
         ]
-    }
+    },
     {
         "id": "0122",
         "name": "barbell-squat",
@@ -3966,7 +3966,7 @@
             "png/0122-relaxation.png",
             "png/0122-tension.png"
         ]
-    }
+    },
     {
         "id": "0123",
         "name": "hack-squat-machine",
@@ -4003,7 +4003,7 @@
             "png/0123-relaxation.png",
             "png/0123-tension.png"
         ]
-    }
+    },
     {
         "id": "0124",
         "name": "smith-machine-squats",
@@ -4041,7 +4041,7 @@
             "png/0124-relaxation.png",
             "png/0124-tension.png"
         ]
-    }
+    },
     {
         "id": "0125",
         "name": "hack-squat-with-barbell",
@@ -4075,7 +4075,7 @@
             "png/0125-relaxation.png",
             "png/0125-tension.png"
         ]
-    }
+    },
     {
         "id": "0126",
         "name": "smith-machine-hack-squat",
@@ -4112,7 +4112,7 @@
             "png/0126-relaxation.png",
             "png/0126-tension.png"
         ]
-    }
+    },
     {
         "id": "0127",
         "name": "leg-press",
@@ -4147,7 +4147,7 @@
             "png/0127-relaxation.png",
             "png/0127-tension.png"
         ]
-    }
+    },
     {
         "id": "0128",
         "name": "rear-lunges-with-barbell",
@@ -4185,7 +4185,7 @@
             "png/0128-relaxation.png",
             "png/0128-tension.png"
         ]
-    }
+    },
     {
         "id": "0129",
         "name": "rear-lunges-with-dumbbell",
@@ -4223,7 +4223,7 @@
             "png/0129-relaxation.png",
             "png/0129-tension.png"
         ]
-    }
+    },
     {
         "id": "0130",
         "name": "squats-using-dumbbells",
@@ -4260,7 +4260,7 @@
             "png/0130-relaxation.png",
             "png/0130-tension.png"
         ]
-    }
+    },
     {
         "id": "0131",
         "name": "side-squats-with-barbell",
@@ -4293,7 +4293,7 @@
             "png/0131-relaxation.png",
             "png/0131-tension.png"
         ]
-    }
+    },
     {
         "id": "0132",
         "name": "single-leg-squat-with-barbell",
@@ -4329,7 +4329,7 @@
             "png/0132-relaxation.png",
             "png/0132-tension.png"
         ]
-    }
+    },
     {
         "id": "0133",
         "name": "squat-to-bench-with-barbell",
@@ -4369,7 +4369,7 @@
             "png/0133-relaxation.png",
             "png/0133-tension.png"
         ]
-    }
+    },
     {
         "id": "0134",
         "name": "step-ups-with-barbell",
@@ -4405,7 +4405,7 @@
             "png/0134-relaxation.png",
             "png/0134-tension.png"
         ]
-    }
+    },
     {
         "id": "0135",
         "name": "hip-adduction",
@@ -4437,7 +4437,7 @@
             "png/0135-relaxation.png",
             "png/0135-tension.png"
         ]
-    }
+    },
     {
         "id": "0136",
         "name": "squat-to-bench-with-dumbbells",
@@ -4477,7 +4477,7 @@
             "png/0136-relaxation.png",
             "png/0136-tension.png"
         ]
-    }
+    },
     {
         "id": "0137",
         "name": "step-ups-with-dumbbells",
@@ -4513,7 +4513,7 @@
             "png/0137-relaxation.png",
             "png/0137-tension.png"
         ]
-    }
+    },
     {
         "id": "0138",
         "name": "front-squat-with-barbell",
@@ -4549,7 +4549,7 @@
             "png/0138-relaxation.png",
             "png/0138-tension.png"
         ]
-    }
+    },
     {
         "id": "0139",
         "name": "front-squat-to-bench-with-barbells",
@@ -4587,7 +4587,7 @@
             "png/0139-relaxation.png",
             "png/0139-tension.png"
         ]
-    }
+    },
     {
         "id": "0140",
         "name": "iron-cross-with-dumbbells",
@@ -4622,7 +4622,7 @@
             "png/0140-relaxation.png",
             "png/0140-tension.png"
         ]
-    }
+    },
     {
         "id": "0141",
         "name": "jefferson-squats-with-barbell",
@@ -4653,7 +4653,7 @@
             "png/0141-relaxation.png",
             "png/0141-tension.png"
         ]
-    }
+    },
     {
         "id": "0142",
         "name": "leg-extensions",
@@ -4684,7 +4684,7 @@
             "png/0142-relaxation.png",
             "png/0142-tension.png"
         ]
-    }
+    },
     {
         "id": "0143",
         "name": "narrow-stance-leg-press",
@@ -4720,7 +4720,7 @@
             "png/0143-relaxation.png",
             "png/0143-tension.png"
         ]
-    }
+    },
     {
         "id": "0144",
         "name": "lying-squat",
@@ -4754,7 +4754,7 @@
             "png/0144-relaxation.png",
             "png/0144-tension.png"
         ]
-    }
+    },
     {
         "id": "0145",
         "name": "narrow-stance-hack-squats",
@@ -4791,7 +4791,7 @@
             "png/0145-relaxation.png",
             "png/0145-tension.png"
         ]
-    }
+    },
     {
         "id": "0146",
         "name": "narrow-stance-squat-with-barbell",
@@ -4829,7 +4829,7 @@
             "png/0146-relaxation.png",
             "png/0146-tension.png"
         ]
-    }
+    },
     {
         "id": "0147",
         "name": "one-leg-squat-with-barbell",
@@ -4869,7 +4869,7 @@
             "png/0147-relaxation.png",
             "png/0147-tension.png"
         ]
-    }
+    },
     {
         "id": "0148",
         "name": "one-arm-snatch-with-barbell",
@@ -4910,7 +4910,7 @@
             "png/0148-relaxation.png",
             "png/0148-tension.png"
         ]
-    }
+    },
     {
         "id": "0150",
         "name": "one-arm-side-deadlift-with-barbell",
@@ -4948,7 +4948,7 @@
             "png/0150-relaxation.png",
             "png/0150-tension.png"
         ]
-    }
+    },
     {
         "id": "0151",
         "name": "overhead-squat-with-barbell",
@@ -4986,7 +4986,7 @@
             "png/0151-relaxation.png",
             "png/0151-tension.png"
         ]
-    }
+    },
     {
         "id": "0152",
         "name": "pile-squat-with-dumbbell",
@@ -5022,7 +5022,7 @@
             "png/0152-relaxation.png",
             "png/0152-tension.png"
         ]
-    }
+    },
     {
         "id": "0154",
         "name": "speed-squats-with-barbell",
@@ -5059,7 +5059,7 @@
             "png/0154-relaxation.png",
             "png/0154-tension.png"
         ]
-    }
+    },
     {
         "id": "0155",
         "name": "squats-with-exercise-bands",
@@ -5095,7 +5095,7 @@
             "png/0155-relaxation.png",
             "png/0155-tension.png"
         ]
-    }
+    },
     {
         "id": "0156",
         "name": "thigh-abductor",
@@ -5127,7 +5127,7 @@
             "png/0156-relaxation.png",
             "png/0156-tension.png"
         ]
-    }
+    },
     {
         "id": "0157",
         "name": "thigh-adductor",
@@ -5159,7 +5159,7 @@
             "png/0157-relaxation.png",
             "png/0157-tension.png"
         ]
-    }
+    },
     {
         "id": "0158",
         "name": "weighted-sissy-squat-with-weight-plate",
@@ -5190,7 +5190,7 @@
             "png/0158-relaxation.png",
             "png/0158-tension.png"
         ]
-    }
+    },
     {
         "id": "0160",
         "name": "wide-stance-squat-with-barbell",
@@ -5226,7 +5226,7 @@
             "png/0160-relaxation.png",
             "png/0160-tension.png"
         ]
-    }
+    },
     {
         "id": "0161",
         "name": "zecher-squats",
@@ -5264,7 +5264,7 @@
             "png/0161-relaxation.png",
             "png/0161-tension.png"
         ]
-    }
+    },
     {
         "id": "0162",
         "name": "bench-dips",
@@ -5299,7 +5299,7 @@
             "png/0162-relaxation.png",
             "png/0162-tension.png"
         ]
-    }
+    },
     {
         "id": "0163",
         "name": "incline-pushdown-with-cable",
@@ -5332,7 +5332,7 @@
             "png/0163-relaxation.png",
             "png/0163-tension.png"
         ]
-    }
+    },
     {
         "id": "0164",
         "name": "incline-triceps-extension-with-cable",
@@ -5364,7 +5364,7 @@
             "png/0164-relaxation.png",
             "png/0164-tension.png"
         ]
-    }
+    },
     {
         "id": "0165",
         "name": "lying-triceps-extension-with-cable",
@@ -5397,7 +5397,7 @@
             "png/0165-relaxation.png",
             "png/0165-tension.png"
         ]
-    }
+    },
     {
         "id": "0166",
         "name": "one-arm-tricep-extension-with-cable",
@@ -5429,7 +5429,7 @@
             "png/0166-relaxation.png",
             "png/0166-tension.png"
         ]
-    }
+    },
     {
         "id": "0168",
         "name": "decline-close-grip-bench-to-skull-crusher",
@@ -5463,7 +5463,7 @@
             "png/0168-relaxation.png",
             "png/0168-tension.png"
         ]
-    }
+    },
     {
         "id": "0169",
         "name": "decline-triceps-extension-with-dumbbell",
@@ -5492,7 +5492,7 @@
             "png/0169-relaxation.png",
             "png/0169-tension.png"
         ]
-    }
+    },
     {
         "id": "0170",
         "name": "decline-ez-bar-triceps-extension-with-barbell",
@@ -5521,7 +5521,7 @@
             "png/0170-relaxation.png",
             "png/0170-tension.png"
         ]
-    }
+    },
     {
         "id": "0171",
         "name": "tricep-dips",
@@ -5552,7 +5552,7 @@
             "png/0171-relaxation.png",
             "png/0171-tension.png"
         ]
-    }
+    },
     {
         "id": "0172",
         "name": "tricep-dips-using-body-weight",
@@ -5585,7 +5585,7 @@
             "png/0172-relaxation.png",
             "png/0172-tension.png"
         ]
-    }
+    },
     {
         "id": "0173",
         "name": "one-arm-triceps-extension-with-dumbbell",
@@ -5615,7 +5615,7 @@
             "png/0173-relaxation.png",
             "png/0173-tension.png"
         ]
-    }
+    },
     {
         "id": "0174",
         "name": "incline-triceps-extension-with-barbell",
@@ -5645,7 +5645,7 @@
             "png/0174-relaxation.png",
             "png/0174-tension.png"
         ]
-    }
+    },
     {
         "id": "0175",
         "name": "jm-press",
@@ -5679,7 +5679,7 @@
             "png/0175-relaxation.png",
             "png/0175-tension.png"
         ]
-    }
+    },
     {
         "id": "0176",
         "name": "kneeling-triceps-extension-with-cable",
@@ -5711,7 +5711,7 @@
             "png/0176-relaxation.png",
             "png/0176-tension.png"
         ]
-    }
+    },
     {
         "id": "0177",
         "name": "kneeling-triceps-extension-with-cable-2",
@@ -5742,7 +5742,7 @@
             "png/0177-relaxation.png",
             "png/0177-tension.png"
         ]
-    }
+    },
     {
         "id": "0178",
         "name": "low-triceps-extension-with-cable",
@@ -5773,7 +5773,7 @@
             "png/0178-relaxation.png",
             "png/0178-tension.png"
         ]
-    }
+    },
     {
         "id": "0179",
         "name": "lying-close-grip-triceps-extension-behind-the-head-with-barbell",
@@ -5804,7 +5804,7 @@
             "png/0179-relaxation.png",
             "png/0179-tension.png"
         ]
-    }
+    },
     {
         "id": "0180",
         "name": "lying-close-grip-triceps-press-to-chin-with-barbell",
@@ -5835,7 +5835,7 @@
             "png/0180-relaxation.png",
             "png/0180-tension.png"
         ]
-    }
+    },
     {
         "id": "0181",
         "name": "lying-triceps-extension-with-dumbbells",
@@ -5866,7 +5866,7 @@
             "png/0181-relaxation.png",
             "png/0181-tension.png"
         ]
-    }
+    },
     {
         "id": "0182",
         "name": "lying-triceps-extension-across-face-with-dumbbell",
@@ -5899,7 +5899,7 @@
             "png/0182-relaxation.png",
             "png/0182-tension.png"
         ]
-    }
+    },
     {
         "id": "0183",
         "name": "lying-triceps-press-with-barbell",
@@ -5933,7 +5933,7 @@
             "png/0183-relaxation.png",
             "png/0183-tension.png"
         ]
-    }
+    },
     {
         "id": "0184",
         "name": "lying-two-arm-triceps-extension-with-dumbbell",
@@ -5963,7 +5963,7 @@
             "png/0184-relaxation.png",
             "png/0184-tension.png"
         ]
-    }
+    },
     {
         "id": "0185",
         "name": "old-school-reverse-extensions",
@@ -5993,7 +5993,7 @@
             "png/0185-relaxation.png",
             "png/0185-tension.png"
         ]
-    }
+    },
     {
         "id": "0186",
         "name": "single-arm-triceps-extension-with-dumbbell",
@@ -6026,7 +6026,7 @@
             "png/0186-relaxation.png",
             "png/0186-tension.png"
         ]
-    }
+    },
     {
         "id": "0187",
         "name": "single-arm-supinated-triceps-extension-with-dumbbell",
@@ -6057,7 +6057,7 @@
             "png/0187-relaxation.png",
             "png/0187-tension.png"
         ]
-    }
+    },
     {
         "id": "0188",
         "name": "close-triceps-pushup",
@@ -6090,7 +6090,7 @@
             "png/0188-relaxation.png",
             "png/0188-tension.png"
         ]
-    }
+    },
     {
         "id": "0189",
         "name": "reverse-grip-triceps-pushdown",
@@ -6121,7 +6121,7 @@
             "png/0189-relaxation.png",
             "png/0189-tension.png"
         ]
-    }
+    },
     {
         "id": "0190",
         "name": "reverse-triceps-bench-press-with-barbell",
@@ -6153,7 +6153,7 @@
             "png/0190-relaxation.png",
             "png/0190-tension.png"
         ]
-    }
+    },
     {
         "id": "0191",
         "name": "seated-one-arm-triceps-extension-with-dumbbell",
@@ -6184,7 +6184,7 @@
             "png/0191-relaxation.png",
             "png/0191-tension.png"
         ]
-    }
+    },
     {
         "id": "0192",
         "name": "seated-two-arm-triceps-extension-with-dumbbell",
@@ -6215,7 +6215,7 @@
             "png/0192-relaxation.png",
             "png/0192-tension.png"
         ]
-    }
+    },
     {
         "id": "0193",
         "name": "seated-overhead-triceps-extension-with-barbell",
@@ -6245,7 +6245,7 @@
             "png/0193-relaxation.png",
             "png/0193-tension.png"
         ]
-    }
+    },
     {
         "id": "0194",
         "name": "seated-triceps-press-with-dumbbell",
@@ -6276,7 +6276,7 @@
             "png/0194-relaxation.png",
             "png/0194-tension.png"
         ]
-    }
+    },
     {
         "id": "0195",
         "name": "smith-machine-close-grip-bench-press",
@@ -6307,7 +6307,7 @@
             "png/0195-relaxation.png",
             "png/0195-tension.png"
         ]
-    }
+    },
     {
         "id": "0196",
         "name": "bent-over-one-arm-triceps-extension-with-dumbbell",
@@ -6337,7 +6337,7 @@
             "png/0196-relaxation.png",
             "png/0196-tension.png"
         ]
-    }
+    },
     {
         "id": "0197",
         "name": "bent-over-two-arm-triceps-extension-with-dumbbell",
@@ -6367,7 +6367,7 @@
             "png/0197-relaxation.png",
             "png/0197-tension.png"
         ]
-    }
+    },
     {
         "id": "0198",
         "name": "standing-triceps-extension-2",
@@ -6399,7 +6399,7 @@
             "png/0198-relaxation.png",
             "png/0198-tension.png"
         ]
-    }
+    },
     {
         "id": "0199",
         "name": "one-arm-low-pulley-triceps-extension-with-cable",
@@ -6431,7 +6431,7 @@
             "png/0199-relaxation.png",
             "png/0199-tension.png"
         ]
-    }
+    },
     {
         "id": "0200",
         "name": "standing-one-arm-triceps-extension-with-dumbbell",
@@ -6457,7 +6457,7 @@
         "references": [],
         "svg": [],
         "png": []
-    }
+    },
     {
         "id": "0201",
         "name": "standing-overhead-triceps-extension-with-barbell",
@@ -6488,7 +6488,7 @@
             "png/0201-relaxation.png",
             "png/0201-tension.png"
         ]
-    }
+    },
     {
         "id": "0202",
         "name": "standing-triceps-extension-with-towel",
@@ -6520,7 +6520,7 @@
             "png/0202-relaxation.png",
             "png/0202-tension.png"
         ]
-    }
+    },
     {
         "id": "0203",
         "name": "tate-press-with-dumbbell",
@@ -6550,7 +6550,7 @@
             "png/0203-relaxation.png",
             "png/0203-tension.png"
         ]
-    }
+    },
     {
         "id": "0204",
         "name": "triceps-kickback-with-dumbbell",
@@ -6582,7 +6582,7 @@
             "png/0204-relaxation.png",
             "png/0204-tension.png"
         ]
-    }
+    },
     {
         "id": "0205",
         "name": "triceps-pushdown-with-cable",
@@ -6614,7 +6614,7 @@
             "png/0205-relaxation.png",
             "png/0205-tension.png"
         ]
-    }
+    },
     {
         "id": "0206",
         "name": "triceps-pushdown-with-rope-and-cable",
@@ -6646,7 +6646,7 @@
             "png/0206-relaxation.png",
             "png/0206-tension.png"
         ]
-    }
+    },
     {
         "id": "0207",
         "name": "triceps-pushdown-with-v-bar-and-cable",
@@ -6681,7 +6681,7 @@
             "png/0207-relaxation.png",
             "png/0207-tension.png"
         ]
-    }
+    },
     {
         "id": "0208",
         "name": "weighted-ball-side-bend",
@@ -6714,7 +6714,7 @@
             "png/0208-relaxation.png",
             "png/0208-tension.png"
         ]
-    }
+    },
     {
         "id": "0209",
         "name": "incline-triceps-extensions-with-dumbbell",
@@ -6746,7 +6746,7 @@
             "png/0209-relaxation.png",
             "png/0209-tension.png"
         ]
-    }
+    },
     {
         "id": "0210",
         "name": "triceps-extensions-using-machine",
@@ -6775,7 +6775,7 @@
             "png/0210-relaxation.png",
             "png/0210-tension.png"
         ]
-    }
+    },
     {
         "id": "0211",
         "name": "biceps-curls-with-barbell",
@@ -6810,7 +6810,7 @@
             "png/0211-relaxation.png",
             "png/0211-tension.png"
         ]
-    }
+    },
     {
         "id": "0212",
         "name": "standing-biceps-curl-with-cable",
@@ -6845,7 +6845,7 @@
             "png/0212-relaxation.png",
             "png/0212-tension.png"
         ]
-    }
+    },
     {
         "id": "0213",
         "name": "alternating-hammer-curl-with-dumbbell",
@@ -6880,7 +6880,7 @@
             "png/0213-relaxation.png",
             "png/0213-tension.png"
         ]
-    }
+    },
     {
         "id": "0214",
         "name": "alternating-incline-curl-with-dumbbell",
@@ -6911,7 +6911,7 @@
             "png/0214-relaxation.png",
             "png/0214-tension.png"
         ]
-    }
+    },
     {
         "id": "0215",
         "name": "lying-incline-curl-with-barbell",
@@ -6944,7 +6944,7 @@
             "png/0215-relaxation.png",
             "png/0215-tension.png"
         ]
-    }
+    },
     {
         "id": "0216",
         "name": "hammer-curls-with-rope-and-cable",
@@ -6973,7 +6973,7 @@
             "png/0216-relaxation.png",
             "png/0216-tension.png"
         ]
-    }
+    },
     {
         "id": "0217",
         "name": "preacher-curl-with-cable",
@@ -7007,7 +7007,7 @@
             "png/0217-relaxation.png",
             "png/0217-tension.png"
         ]
-    }
+    },
     {
         "id": "0218",
         "name": "close-grip-ez-bar-curl-with-barbell",
@@ -7041,7 +7041,7 @@
             "png/0218-relaxation.png",
             "png/0218-tension.png"
         ]
-    }
+    },
     {
         "id": "0219",
         "name": "close-grip-standing-biceps-curls-with-barbell",
@@ -7075,7 +7075,7 @@
             "png/0219-relaxation.png",
             "png/0219-tension.png"
         ]
-    }
+    },
     {
         "id": "0220",
         "name": "concentration-curls-with-dumbbell",
@@ -7109,7 +7109,7 @@
             "png/0220-relaxation.png",
             "png/0220-tension.png"
         ]
-    }
+    },
     {
         "id": "0221",
         "name": "cross-body-hammer-curl-with-dumbbell",
@@ -7141,7 +7141,7 @@
             "png/0221-relaxation.png",
             "png/0221-tension.png"
         ]
-    }
+    },
     {
         "id": "0222",
         "name": "drag-curl-with-barbell",
@@ -7175,7 +7175,7 @@
             "png/0222-relaxation.png",
             "png/0222-tension.png"
         ]
-    }
+    },
     {
         "id": "0223",
         "name": "alternating-biceps-curl-with-dumbbell",
@@ -7210,7 +7210,7 @@
             "png/0223-relaxation.png",
             "png/0223-tension.png"
         ]
-    }
+    },
     {
         "id": "0224",
         "name": "biceps-curl-with-dumbbell",
@@ -7244,7 +7244,7 @@
             "png/0224-relaxation.png",
             "png/0224-tension.png"
         ]
-    }
+    },
     {
         "id": "0225",
         "name": "prone-incline-biceps-curl-with-dumbbell",
@@ -7277,7 +7277,7 @@
             "png/0225-relaxation.png",
             "png/0225-tension.png"
         ]
-    }
+    },
     {
         "id": "0226",
         "name": "ez-bar-curl-with-barbell",
@@ -7310,7 +7310,7 @@
             "png/0226-relaxation.png",
             "png/0226-tension.png"
         ]
-    }
+    },
     {
         "id": "0227",
         "name": "biceps-hammer-curl-with-dumbbell",
@@ -7343,7 +7343,7 @@
             "png/0227-relaxation.png",
             "png/0227-tension.png"
         ]
-    }
+    },
     {
         "id": "0228",
         "name": "flexor-incline-curls-with-dumbbell",
@@ -7373,7 +7373,7 @@
             "png/0228-relaxation.png",
             "png/0228-tension.png"
         ]
-    }
+    },
     {
         "id": "0229",
         "name": "high-cable-curls",
@@ -7407,7 +7407,7 @@
             "png/0229-relaxation.png",
             "png/0229-tension.png"
         ]
-    }
+    },
     {
         "id": "0230",
         "name": "incline-inner-biceps-curl-with-dumbbell",
@@ -7434,7 +7434,7 @@
         "references": [],
         "svg": [],
         "png": []
-    }
+    },
     {
         "id": "0231",
         "name": "incline-inner-biceps-curl-with-dumbbell-2",
@@ -7467,7 +7467,7 @@
             "png/0231-relaxation.png",
             "png/0231-tension.png"
         ]
-    }
+    },
     {
         "id": "0232",
         "name": "lying-bicep-cable-curl",
@@ -7500,7 +7500,7 @@
             "png/0232-relaxation.png",
             "png/0232-tension.png"
         ]
-    }
+    },
     {
         "id": "0233",
         "name": "lying-close-grip-biceps-curls-with-cable",
@@ -7531,7 +7531,7 @@
             "png/0233-relaxation.png",
             "png/0233-tension.png"
         ]
-    }
+    },
     {
         "id": "0234",
         "name": "lying-high-bench-biceps-curl-with-barbell",
@@ -7562,7 +7562,7 @@
             "png/0234-relaxation.png",
             "png/0234-tension.png"
         ]
-    }
+    },
     {
         "id": "0235",
         "name": "lying-supine-biceps-curl-with-dumbbell",
@@ -7595,7 +7595,7 @@
             "png/0235-relaxation.png",
             "png/0235-tension.png"
         ]
-    }
+    },
     {
         "id": "0236",
         "name": "preacher-curl-with-machine",
@@ -7626,7 +7626,7 @@
             "png/0236-relaxation.png",
             "png/0236-tension.png"
         ]
-    }
+    },
     {
         "id": "0237",
         "name": "one-arm-preacher-curl-with-dumbbell",
@@ -7662,7 +7662,7 @@
             "png/0237-relaxation.png",
             "png/0237-tension.png"
         ]
-    }
+    },
     {
         "id": "0238",
         "name": "overhead-curl-with-cable",
@@ -7695,7 +7695,7 @@
             "png/0238-relaxation.png",
             "png/0238-tension.png"
         ]
-    }
+    },
     {
         "id": "0239",
         "name": "preacher-curl-with-barbell",
@@ -7730,7 +7730,7 @@
             "png/0239-relaxation.png",
             "png/0239-tension.png"
         ]
-    }
+    },
     {
         "id": "0240",
         "name": "preacher-hammer-curl-with-dumbbell",
@@ -7761,7 +7761,7 @@
             "png/0240-relaxation.png",
             "png/0240-tension.png"
         ]
-    }
+    },
     {
         "id": "0241",
         "name": "reverse-plate-curls-with-weight",
@@ -7793,7 +7793,7 @@
             "png/0241-relaxation.png",
             "png/0241-tension.png"
         ]
-    }
+    },
     {
         "id": "0242",
         "name": "seated-close-grip-concentration-curls-with-barbell",
@@ -7826,7 +7826,7 @@
             "png/0242-relaxation.png",
             "png/0242-tension.png"
         ]
-    }
+    },
     {
         "id": "0243",
         "name": "seated-biceps-curl-with-dumbbell",
@@ -7859,7 +7859,7 @@
             "png/0243-relaxation.png",
             "png/0243-tension.png"
         ]
-    }
+    },
     {
         "id": "0244",
         "name": "seated-inner-biceps-curl-with-dumbbell",
@@ -7891,7 +7891,7 @@
             "png/0244-relaxation.png",
             "png/0244-tension.png"
         ]
-    }
+    },
     {
         "id": "0245",
         "name": "spider-curl-with-barbell",
@@ -7924,7 +7924,7 @@
             "png/0245-relaxation.png",
             "png/0245-tension.png"
         ]
-    }
+    },
     {
         "id": "0246",
         "name": "standing-inner-biceps-curl-with-dumbbell",
@@ -7957,7 +7957,7 @@
             "png/0246-relaxation.png",
             "png/0246-tension.png"
         ]
-    }
+    },
     {
         "id": "0247",
         "name": "standing-one-arm-biceps-curl-with-cable",
@@ -7992,7 +7992,7 @@
             "png/0247-relaxation.png",
             "png/0247-tension.png"
         ]
-    }
+    },
     {
         "id": "0248",
         "name": "standing-one-arm-curl-over-incline-bench-with-dumbbell",
@@ -8028,7 +8028,7 @@
             "png/0248-relaxation.png",
             "png/0248-tension.png"
         ]
-    }
+    },
     {
         "id": "0249",
         "name": "two-arm-preacher-curl-with-dumbbell",
@@ -8063,7 +8063,7 @@
             "png/0249-relaxation.png",
             "png/0249-tension.png"
         ]
-    }
+    },
     {
         "id": "0250",
         "name": "wide-grip-standing-biceps-curl-with-barbell",
@@ -8098,7 +8098,7 @@
             "png/0250-relaxation.png",
             "png/0250-tension.png"
         ]
-    }
+    },
     {
         "id": "0251",
         "name": "zottman-curl-with-dumbbells",
@@ -8131,7 +8131,7 @@
             "png/0251-relaxation.png",
             "png/0251-tension.png"
         ]
-    }
+    },
     {
         "id": "0252",
         "name": "zottman-preacher-curl-with-dumbbells",
@@ -8164,7 +8164,7 @@
             "png/0252-relaxation.png",
             "png/0252-tension.png"
         ]
-    }
+    },
     {
         "id": "0253",
         "name": "biceps-curl-with-machine",
@@ -8196,7 +8196,7 @@
             "png/0253-relaxation.png",
             "png/0253-tension.png"
         ]
-    }
+    },
     {
         "id": "0254",
         "name": "one-arm-biceps-curl-with-olympic-bar-or-barbell",
@@ -8230,7 +8230,7 @@
             "png/0254-relaxation.png",
             "png/0254-tension.png"
         ]
-    }
+    },
     {
         "id": "0255",
         "name": "biceps-curl-seated-on-stability-ball-with-dumbbell",
@@ -8263,7 +8263,7 @@
             "png/0255-relaxation.png",
             "png/0255-tension.png"
         ]
-    }
+    },
     {
         "id": "0256",
         "name": "biceps-curl-squat-with-dumbbell",
@@ -8298,7 +8298,7 @@
             "png/0256-relaxation.png",
             "png/0256-tension.png"
         ]
-    }
+    },
     {
         "id": "0257",
         "name": "biceps-curl-reverse-with-dumbbells",
@@ -8330,7 +8330,7 @@
             "png/0257-relaxation.png",
             "png/0257-tension.png"
         ]
-    }
+    },
     {
         "id": "0258",
         "name": "one-arm-bicep-concentration-on-stability-ball-with-dumbbell",
@@ -8364,7 +8364,7 @@
             "png/0258-relaxation.png",
             "png/0258-tension.png"
         ]
-    }
+    },
     {
         "id": "0259",
         "name": "biceps-curl-with-deadlift-with-barbell",
@@ -8403,7 +8403,7 @@
             "png/0259-relaxation.png",
             "png/0259-tension.png"
         ]
-    }
+    },
     {
         "id": "0260",
         "name": "biceps-curl-with-overhead-extension-using-dumbbells-on-stability-ball",
@@ -8440,7 +8440,7 @@
             "png/0260-relaxation.png",
             "png/0260-tension.png"
         ]
-    }
+    },
     {
         "id": "0261",
         "name": "quick-alternating-biceps-curls-with-band",
@@ -8473,7 +8473,7 @@
             "png/0261-relaxation.png",
             "png/0261-tension.png"
         ]
-    }
+    },
     {
         "id": "0262",
         "name": "biceps-curl-lunge-with-bowling-motion",
@@ -8511,7 +8511,7 @@
             "png/0262-relaxation.png",
             "png/0262-tension.png"
         ]
-    }
+    },
     {
         "id": "0263",
         "name": "biceps-curl-on-stability-ball-with-leg-raised",
@@ -8550,7 +8550,7 @@
             "png/0263-relaxation.png",
             "png/0263-tension.png"
         ]
-    }
+    },
     {
         "id": "0264",
         "name": "lateral-lunge-with-biceps-curl-with-dumbbell",
@@ -8591,7 +8591,7 @@
             "png/0264-relaxation.png",
             "png/0264-tension.png"
         ]
-    }
+    },
     {
         "id": "0265",
         "name": "forward-lunge-with-biceps-curl-using-dumbbell",
@@ -8632,7 +8632,7 @@
             "png/0265-relaxation.png",
             "png/0265-tension.png"
         ]
-    }
+    },
     {
         "id": "0266",
         "name": "step-up-single-leg-balance-with-biceps-curl-using-dumbbells",
@@ -8673,7 +8673,7 @@
             "png/0266-relaxation.png",
             "png/0266-tension.png"
         ]
-    }
+    },
     {
         "id": "0267",
         "name": "medicine-ball-biceps-curl-on-stability-ball",
@@ -8707,7 +8707,7 @@
             "png/0267-relaxation.png",
             "png/0267-tension.png"
         ]
-    }
+    },
     {
         "id": "0268",
         "name": "stork-stance-biceps-curl-with-dumbbells",
@@ -8745,7 +8745,7 @@
             "png/0268-relaxation.png",
             "png/0268-tension.png"
         ]
-    }
+    },
     {
         "id": "0269",
         "name": "biceps-curl-v-sit-on-dome-with-dumbbells",
@@ -8782,7 +8782,7 @@
             "png/0269-relaxation.png",
             "png/0269-tension.png"
         ]
-    }
+    },
     {
         "id": "0270",
         "name": "ankle-circles",
@@ -8812,7 +8812,7 @@
             "png/0270-relaxation.png",
             "png/0270-tension.png"
         ]
-    }
+    },
     {
         "id": "0271",
         "name": "balance-board",
@@ -8839,7 +8839,7 @@
         "references": [],
         "svg": [],
         "png": []
-    }
+    },
     {
         "id": "0272",
         "name": "seated-calf-raise-with-barbell",
@@ -8869,7 +8869,7 @@
             "png/0272-relaxation.png",
             "png/0272-tension.png"
         ]
-    }
+    },
     {
         "id": "0273",
         "name": "calves-press-on-leg-machine",
@@ -8902,7 +8902,7 @@
             "png/0273-relaxation.png",
             "png/0273-tension.png"
         ]
-    }
+    },
     {
         "id": "0274",
         "name": "calf-raises-with-band",
@@ -8934,7 +8934,7 @@
             "png/0274-relaxation.png",
             "png/0274-tension.png"
         ]
-    }
+    },
     {
         "id": "0275",
         "name": "donkey-calf-raises",
@@ -8967,7 +8967,7 @@
             "png/0275-relaxation.png",
             "png/0275-tension.png"
         ]
-    }
+    },
     {
         "id": "0276",
         "name": "seated-one-leg-calf-raise-with-dumbbell",
@@ -8999,7 +8999,7 @@
             "png/0276-relaxation.png",
             "png/0276-tension.png"
         ]
-    }
+    },
     {
         "id": "0277",
         "name": "knee-circles",
@@ -9031,7 +9031,7 @@
             "png/0277-relaxation.png",
             "png/0277-tension.png"
         ]
-    }
+    },
     {
         "id": "0278",
         "name": "rocking-standing-calf-raise-with-barbell",
@@ -9063,7 +9063,7 @@
             "png/0278-relaxation.png",
             "png/0278-tension.png"
         ]
-    }
+    },
     {
         "id": "0279",
         "name": "seated-calf-raise-using-machine",
@@ -9096,7 +9096,7 @@
             "png/0279-relaxation.png",
             "png/0279-tension.png"
         ]
-    }
+    },
     {
         "id": "0280",
         "name": "smith-machine-reverse-calf-raises",
@@ -9128,7 +9128,7 @@
             "png/0280-relaxation.png",
             "png/0280-tension.png"
         ]
-    }
+    },
     {
         "id": "0281",
         "name": "standing-barbell-calf-raise",
@@ -9159,7 +9159,7 @@
             "png/0281-relaxation.png",
             "png/0281-tension.png"
         ]
-    }
+    },
     {
         "id": "0282",
         "name": "standing-calf-raises-using-machine",
@@ -9190,7 +9190,7 @@
             "png/0282-relaxation.png",
             "png/0282-tension.png"
         ]
-    }
+    },
     {
         "id": "0283",
         "name": "standing-calf-raise-with-dumbbell",
@@ -9216,7 +9216,7 @@
         "references": [],
         "svg": [],
         "png": []
-    }
+    },
     {
         "id": "0284",
         "name": "air-bike",
@@ -9250,7 +9250,7 @@
             "png/0284-relaxation.png",
             "png/0284-tension.png"
         ]
-    }
+    },
     {
         "id": "0285",
         "name": "ab-rollout-with-barbell",
@@ -9285,7 +9285,7 @@
             "png/0285-relaxation.png",
             "png/0285-tension.png"
         ]
-    }
+    },
     {
         "id": "0286",
         "name": "ab-rollout-on-knees-with-barbell",
@@ -9320,7 +9320,7 @@
             "png/0286-relaxation.png",
             "png/0286-tension.png"
         ]
-    }
+    },
     {
         "id": "0287",
         "name": "bent-knee-hip-raise",
@@ -9350,7 +9350,7 @@
             "png/0287-relaxation.png",
             "png/0287-tension.png"
         ]
-    }
+    },
     {
         "id": "0288",
         "name": "seated-ab-crunch-with-cable",
@@ -9382,7 +9382,7 @@
             "png/0288-relaxation.png",
             "png/0288-tension.png"
         ]
-    }
+    },
     {
         "id": "0289",
         "name": "cross-body-crunch",
@@ -9413,7 +9413,7 @@
             "png/0289-relaxation.png",
             "png/0289-tension.png"
         ]
-    }
+    },
     {
         "id": "0290",
         "name": "crunches-with-legs-on-stability-ball",
@@ -9444,7 +9444,7 @@
             "png/0290-relaxation.png",
             "png/0290-tension.png"
         ]
-    }
+    },
     {
         "id": "0291",
         "name": "crunches",
@@ -9476,7 +9476,7 @@
             "png/0291-relaxation.png",
             "png/0291-tension.png"
         ]
-    }
+    },
     {
         "id": "0292",
         "name": "decline-crunch",
@@ -9508,7 +9508,7 @@
             "png/0292-relaxation.png",
             "png/0292-tension.png"
         ]
-    }
+    },
     {
         "id": "0293",
         "name": "decline-oblique-crunch",
@@ -9541,7 +9541,7 @@
             "png/0293-relaxation.png",
             "png/0293-tension.png"
         ]
-    }
+    },
     {
         "id": "0294",
         "name": "side-bend-with-dumbbell",
@@ -9572,7 +9572,7 @@
             "png/0294-relaxation.png",
             "png/0294-tension.png"
         ]
-    }
+    },
     {
         "id": "0295",
         "name": "stability-ball-abdominal-crunch",
@@ -9605,7 +9605,7 @@
             "png/0295-relaxation.png",
             "png/0295-tension.png"
         ]
-    }
+    },
     {
         "id": "0296",
         "name": "exercise-ball-pull-in",
@@ -9636,7 +9636,7 @@
             "png/0296-relaxation.png",
             "png/0296-tension.png"
         ]
-    }
+    },
     {
         "id": "0298",
         "name": "bent-over-row-with-barbell",
@@ -9665,7 +9665,7 @@
         "references": [],
         "svg": [],
         "png": []
-    }
+    },
     {
         "id": "0300",
         "name": "cuban-dumbbell-press",
@@ -9700,7 +9700,7 @@
             "png/cuban-dumbbell-press-2.png",
             "png/cuban-dumbbell-press-3.png"
         ]
-    }
+    },
     {
         "id": "0302",
         "name": "smith-machine-incline-bench-press",
@@ -9729,3 +9729,4 @@
         "svg": [],
         "png": []
     }
+]

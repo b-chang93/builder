@@ -3,15 +3,15 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const exerciseSchema = mongoose.Schema({
-  id: {type: String, required: true},
-  name: {type: String, required: true},
-  title: {type: String, required: true},
-  primer: {type: String, required: true},
-  type: {type: String, required: true},
-  primary: [{type: String, required: true}],
+  id: String,
+  name: String,
+  title: String,
+  primer: String,
+  type: String,
+  primary: [String],
   secondary: [String],
-  equipment: [{type: String, required: true}],
-  steps: [{type: String, required: true}],
+  equipment: [String],
+  steps: [String],
   tips: [String],
   references: [String],
   svg: [String],
