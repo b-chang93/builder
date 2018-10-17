@@ -346,8 +346,17 @@ function renderWorkouts(workout) {
   }
 }
 
+function workoutDraft(workout) {
+  $('.exercise-list').empty();
+  workout.exercises.forEach((exercise, index) => {
+    $('.exercise-list').append(`<li><ul class="draft exercise-${index+1}">${exercise.name}</ul></li>`)
+    exercise.sets.forEach(set => {
+      $(`.exercise-${index+1}`).append(`<li>set: ${set.weight}lb for ${set.reps} reps</li>`)
+    })
+  })
+}
+
 function showWorkoutDetails(data) {
-  // console.log(data[0].title)
   $('.workout-index').on('click', 'li', event => {
     $('.my-workout-info').toggle();
     for(let i = 0; i < data.length; i++) {
@@ -356,23 +365,12 @@ function showWorkoutDetails(data) {
         $('.individual-workout-details').empty();
         let workout = data[i].exercises
 
-        for(let e = 0; e < workout.length; e++) {
-          console.log(workout[e].name)
-          console.log(workout[e].sets.length)
-          $('.individual-workout-details').append(`<ul class="test">${workout[e].name}</ul>`)
-
-          for(let s = 0; s < workout[e].sets.length; s++) {
-            // console.log(workout[e].sets[s])
-            // $('.individual-workout-details > ul').empty();
-            console.log(event.currentTarget)
-            $('.individual-workout-details > ul').append(`<li>${workout[e].sets[s].weight}lb for ${workout[e].sets[s].reps} reps</li>`);
-            // $('.individual-workout-details').append(`${workout[e].name} - ${workout[e].sets[s].weight}lb for ${workout[e].sets[s].reps} <br>`);
-          }
-          console.log(workout[e].sets)
-          // workout[e].sets.forEach(s => s {
-          //   $('.individual-workout-details > ul').append(`<li>${workout[e].sets[s].weight}lb for ${workout[e].sets[s].reps}</li>`);
-          // })
-        }
+        workout.forEach((exercise, index) => {
+          $(`.individual-workout-details`).append(`<ul class="exercise-name-${index}">${exercise.name}</ul>`)
+          exercise.sets.forEach(set => {
+            $(`.exercise-name-${index}`).append(`<li>${set.weight}lb for ${set.reps}</li>`);
+          })
+        })
       }
     }
   })
