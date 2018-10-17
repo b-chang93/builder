@@ -7,7 +7,10 @@
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
   <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script> -->
+  <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 </head>
 
 <body>
@@ -89,7 +92,7 @@
           <div class='my-workout-info'>
             <h2 class="workout-name">
               </h2>
-            <section class='workout-details'>
+            <section class='individual-workout-details'>
             </section>
           </div>
         </div>
@@ -113,44 +116,57 @@
   <div id="create-a-workout-modal" class="modal">
     <div class="workout-modal-content">
       <span class="close">&times;</span>
-      <div class="flex-container">
-        <header class='create-workout-title'>
-          <h1 style="text-align: center;">Build & Share your workout!</h1>
-        </header>
+      <header class='create-workout-title'>
+        <h1 style="text-align: center;">Build & Share your workout!</h1>
+      </header>
 
-        <form class="create-workout-form">
+      <form class="create-workout-form">
 
-          <div class="your-workout-details">
+        <div class="workout-details-container">
+          <section class="your-workout-details">
+            <h3 style="margin: 0; width: 70%; border-bottom: 1px solid black;">Name it!</h3>
             <label for="workout-title">Name your Workout: </label>
             <input type="text" class="workout-title" value name="title" placeholder="Title">
             <label for="workout-difficulty">Difficulty: </label>
             <input type="text" class="workout-difficulty" value name="difficulty" placeholder="Difficulty">
-          </div>
+          </section>
 
-          <div class="add-exercise">
-            <h3 style="margin-top: 20px; width: 70%; border-bottom: 1px solid black;">Add and Save Exercises!</h3>
-            <label for="exercise">Name: </label>
-            <input type="text" class="exercise" value name="name" placeholder="Bench Press">
+          <section class="set-info">
+            <h3 style="width: 70%; border-bottom: 1px solid black;">Add and Save Exercises!</h3>
+            <label for="automplete-1">Name: </label>
+            <input type="text" id="automplete-1" class="exercise" value name="name" placeholder="Bench Press">
 
-            <label for="sets">Sets: </label>
-            <input type="text" class="sets" value name="sets" placeholder="4">
+            <label for="sets">Weight: </label>
+            <input type="text" class="weight" value name="weight" placeholder="225">
 
             <label for="reps">Reps: </label>
             <input type="text" class="reps" value name="reps" placeholder="12">
-            <button class="save-exercise" type="button">Save</button>
-          </div>
-
-
+            <button class="save-set" type="button">Save</button>
+          </section>
+        </div>
+        <div class="workout-draft">
+          <h3>Workout Draft</h3>
+          <ul class="exercise-list">
+          </ul>
           <button class="create-new-workout" type="submit">Create</button>
-          <!-- <button type="button">Cancel</button> -->
-        </form>
-      </div>
+        </div>
 
-      <div class="workout-draft">
+        <!-- <div class="workout-draft">
+            <h3>Workout Draft</h3>
+            <ul class="exercise-list">
+            </ul>
+            <button class="create-new-workout" type="submit">Create</button>
+          </div> -->
+
+        <!-- <button class="create-new-workout" type="submit">Create</button> -->
+        <!-- <button type="button">Cancel</button> -->
+      </form>
+
+      <!-- <div class="workout-draft">
         <h3>Workout Draft</h3>
         <ul class="exercise-list">
         </ul>
-      </div>
+      </div> -->
       <!-- <section class='create-workout-content'></section> -->
     </div>
   </div>

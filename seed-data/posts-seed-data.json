@@ -1,1 +1,1 @@
-{"_id":{"$oid":"5ba6ee0febd4660e95a687f9"},"likes":0,"creator":{"$oid":"5b9ea478fec0802340915545"},"title":"Sample Post","content":"Post your workout or anything you want to share here!","date":{"$date":"2018-09-23T01:36:15.885Z"},"__v":0}
+{ "_id" : ObjectId("5bc525e2579c6370fe138af0"), "likes" : 0, "creator" : ObjectId("5b9ea478fec0802340915545"), "title" : "Sample Post", "content" : "Post your workout or anything you want to share here!", "createdAt" : ISODate("2018-10-15T23:42:26.264Z"), "updatedAt" : ISODate("2018-10-15T23:42:26.264Z"), "__v" : 0 }

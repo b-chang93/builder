@@ -250,6 +250,7 @@ th {
   color: #359aff;
   box-shadow: 2px 1px 5px 1px rgba(0,0,0,0.6);
   margin-left: 18%;
+  overflow: auto;
 }
 
 .workout-name {
@@ -535,15 +536,28 @@ th {
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
+  overflow: hidden;
+  /* position: fixed; */
 }
 
 .create-workout-form {
   height: 100%;
-  width: 30%;
+  /* width: 30%; */
+    width: 75%;
+}
+
+.workout-details-container {
+  float: left;
+  width: 40%;
 }
 
 .your-workout-details {
-  width: 100%;
+  /* width: 100%; */
+  width: 95%;
+  box-shadow: 2px 1px 5px 1px rgba(0,0,0,0.6);
+  height: 150px;
+  border-radius: 10px;
+  padding: 5px;
 }
 
 .add-exercise {
@@ -567,9 +581,14 @@ th {
   margin: 5px 1px;
 }
 
-.add-exercise > label, .add-exercise > input {
-  /* display: block; */
-  width: 65%;
+.set-info {
+  width: 95%;
+  box-shadow: 2px 1px 5px 1px rgba(0,0,0,0.6);
+  border-radius: 10px;
+  padding-left: 5px;
+}
+
+.set-info > label, .set-info > input {
   height: auto;
   font-size: 14px;
   text-align: left;
@@ -578,25 +597,29 @@ th {
   border-radius: 3px;
   background: #fcfcfc;
   transition: opacity 0.4s;
-  /* border: 0; */
   background: transparent;
-  /* border-bottom: 1px solid #000000; */
   margin: 5px 1px;
 }
-
-/* .add-exercise > label, .your-workout-details > label {
-  width: 100px;
-} */
-
-.create-new-workout {
+.set-info > label {
   width: 30%;
 }
 
+.set-info > input {
+  width: 60%;
+}
+
+.create-new-workout {
+  width: 15%;
+  position: absolute;
+  right: 5%;
+  bottom: 5%;
+}
+
 .workout-draft {
-  width: 33%;
-  height: 70%;
-  margin-left: 31%;
-  margin-top: -31%;
+  width: 50%;
+  height: 60%;
+  /* margin-left: 35%;
+  margin-top: -35%; */
   overflow: auto;
   /* box-shadow: 2px 1px 5px 1px rgba(0,0,0,0.6); */
   box-shadow:
@@ -612,6 +635,8 @@ th {
     0 20px 1px -9px rgba(0,0,0,0.7);
     /* Padding for demo purposes */
     padding: 30px;
+    position: relative;
+    margin-left: 45%;
 }
 
 /* .user-modal-content {
@@ -940,6 +965,23 @@ th {
     /* text-align: center; */
     font-size: 24px;
     margin-top: 30px;
+  }
+
+  .individual-workout-details > ul {
+    padding-left: 5px;
+  }
+
+  .exercise-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .draft {
+    padding: 0;
+  }
+
+  .draft > li {
+    margin-left: 40px;
   }
 
   /* .focused-exercise-image {

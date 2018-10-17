@@ -9,7 +9,7 @@ const {DATABASE_URL, PORT} = require('./config');
 
 const { router: exerciseRouter } = require('./exercises');
 const { router: workoutRouter } = require('./workouts');
-const { router: postsRouter } = require('./user-posts');
+const { router: postsRouter } = require('./posts');
 const { router: usersRouter } = require('./users');
 const { router: workoutSplitRouter } = require('./workout-split')
 const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
