@@ -419,22 +419,8 @@ function handleWorkoutModal() {
   })
 }
 
-// function closeModal() {
-//
-//   // When the user clicks on <span> (x), close the modal
-//   $('.close').on('click', event => {
-//     $('#create-a-workout-modal').hide();
-//   })
-//
-//   $(window).click(event => {
-//     if (event.target.id === "create-a-workout-modal") {
-//       $('#create-a-workout-modal').hide();
-//     }
-//   })
-// }
-
 function renderNewPosts(post) {
-  // let date = post.date.slice(0,10).replace(/-/g,'/');
+  let date = post.created.slice(0,10).replace(/-/g,'/');
   console.log(post)
   $('.main-index').append(`
       <li class="feed-index-item">
@@ -442,7 +428,7 @@ function renderNewPosts(post) {
           <section class="thumbnail-for-post">
             <img class="avatar-related-to-post" src="${avatar}" alt="user-avatar">
             <h1 class="post-title">${post.title}</h1>
-            <p class="date">${post.created}</p>
+            <p class="date">${date}</p>
           </section>
           <p class="post-text">${post.content}</p>
         </section>
@@ -450,15 +436,14 @@ function renderNewPosts(post) {
 }
 
 function renderPosts(post) {
-  // let date = post.date.slice(0,10).replace(/-/g,'/');
-  // console.log(post)
+  let date = post.created.slice(0,10).replace(/-/g,'/');
   return `
     <li class="feed-index-item">
       <section class="content">
         <section class="thumbnail-for-post">
           <img class="avatar-related-to-post" src="${post.creator.avatar}" alt="user-">
           <h1 class="post-title">${post.title}</h1>
-          <p class="date">${post.created}</p>
+          <p class="date">${date}</p>
         </section>
         <p class="post-text">${post.content}</p>
       </section>
@@ -466,7 +451,6 @@ function renderPosts(post) {
 }
 
 function handlePostCreation() {
-  // let date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
   const targetTitle = $('.modal-title')
   const targetPostContent = $('.modal-workout-content')
   $('#create-post').attr("disabled", "true");
@@ -769,7 +753,6 @@ function createWorkout() {
       newWorkout.exercises[index].sets.push(singleSet)
     }
 
-   // console.log(newWorkout)
    workoutDraft(newWorkout)
 
    //clearing inputs
@@ -849,7 +832,6 @@ function handleDashboard() {
   displayUserProfile();
   displayMyPosts();
   handleWorkoutModal();
-  // closeModal();
   handlePostCreation();
   openPostModal();
   displaySubscribedPosts();
