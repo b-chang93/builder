@@ -67,10 +67,7 @@ workoutSchema.methods.serialize = function() {
     title: this.title,
     difficulty: this.difficulty,
     exercises: this.exercises,
-    creator: {
-      id: this.creator.id,
-      name: this.fullName
-    }
+    creator: this.creator
   }
 }
 let Workout = mongoose.model('Workouts', workoutSchema);

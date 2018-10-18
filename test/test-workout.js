@@ -21,26 +21,26 @@ const exerciseData = require('../seed-data/exercise-seed-data.json');
 
 chai.use(chaiHttp);
 
-function generateSets() {
-  console.log('Generating sets...');
-  let exerciseList = [];
-
-  for(let i=1; i <=4; i++) {
-
-    let set = {
-      weight: faker.random.number({
-          'min': 1,
-          'max': 200
-      }),
-      reps: faker.random.number({
-          'min': 1,
-          'max': 20
-      })
-    }
-
-    exerciseList.push(set)
-  }
-}
+// function generateSets() {
+//   console.log('Generating sets...');
+//   let exerciseList = [];
+//
+//   for(let i=1; i <=4; i++) {
+//
+//     let set = {
+//       weight: faker.random.number({
+//           'min': 1,
+//           'max': 200
+//       }),
+//       reps: faker.random.number({
+//           'min': 1,
+//           'max': 20
+//       })
+//     }
+//
+//     exerciseList.push(set)
+//   }
+// }
 
 // function seedWorkoutData(userid) {
 //   console.log('Seeding exercises into db...');
@@ -103,32 +103,54 @@ function generateSets() {
 //   return Workout.insertMany((workoutData));
 // };
 
+// function seedWorkoutData(userid) {
+//   console.log('Seeding exercises into db...');
+//   const seedData = [];
+//
+//     seedData.push({
+//       // id: faker.random.number,
+//       title: 'Workout Plan',
+//       difficulty: 'Easy',
+//       exercises:[
+//         {
+//           name: 'Bench Press',
+//           sets: [
+//             {
+//               weight: 100,
+//               reps: 15
+//             }
+//           ]
+//         }
+//       ],
+//       creator: userid
+//     })
+//   return Workout.insertMany(seedData);
+// };
+
 function seedWorkoutData(userid) {
   console.log('Seeding exercises into db...');
-  console.log(userid)
   const seedData = [];
-
+]2
+  for(let i = 1; i <= g; i++) {
     seedData.push({
-      id: faker.random.number,
-      title: 'Workout Plan',
-      difficulty: 'Easy',
+      // id: faker.random.number,
+      title: faker.lorem.words(),
+      difficulty: faker.lorem.word(),
       exercises:[
         {
           name: 'Bench Press',
           sets: [
             {
-              weight: 100,
-              reps: 15
+              weight: faker.random.number(),
+              reps: faker.random.number()
             }
           ]
         }
       ],
-      creator: {
-        id: userid,
-        firstName: 'Brandon',
-        lastName: 'Chang'
-      }
+      creator: userid
     })
+  }
+  // console.log(seedData)
   return Workout.insertMany(seedData);
 };
 
@@ -140,9 +162,9 @@ function tearDownDb() {
 
 describe('API resource', function() {
 
-  const username = 'exampleUser';
-  const password = 'examplePass';
-  const firstName = 'Example';
+  const username = 'testUser1';
+  const password = 'testPass1';
+  const firstName = 'Test';
   const lastName = 'User';
   let token;
 
@@ -164,23 +186,19 @@ describe('API resource', function() {
       })
     )
     .then(user => {
-      console.log(user._id)
       token = jwt.sign({user}, process.env.JWT_SECRET, {
             algorithm: 'HS256',
             subject: user.username
           });
-      // console.log(token)
       seedWorkoutData(user._id);
-      // seedWorkoutData();
-      // Workout.find()
-      // .then(workouts => {
-      //   // console.log(workouts)
-      // })
     })
   });
 
   afterEach(function () {
-    return User.remove({});
+    // return Workout.remove({})
+    // .then(() => User.remove({}))
+    // User.remove({});
+    tearDownDb();
   });
 
   // before(function() {
@@ -209,126 +227,117 @@ describe('API resource', function() {
 
   describe('GET endpoint', function() {
 
-    it('should return all workouts in db', function() {
-      // return jwt.sign({user}, config.JWT_SECRET, {
-      //   subject: user.username,
-      //   expiresIn: config.JWT_EXPIRY,
-      //   algorithm: 'HS256'
-      // });
-      //
-      // const token = jwt.sign(
-      //     {
-      //       user: {
-      //         username,
-      //         firstName,
-      //         lastName
-      //       }
-      //     },
-      //     JWT_SECRET,
-      //     {
-      //       algorithm: 'HS256',
-      //       subject: username,
-      //       expiresIn: '7d'
-      //     }
-      //   );
-      // const token = jwt.sign(
-      //     {
-      //       user: {
-      //         username,
-      //         firstName,
-      //         lastName
-      //       }
-      //     },
-      //     {secretOrKey: JWT_SECRET},
-      //     {
-      //       algorithm: 'HS256',
-      //       subject: username,
-      //       expiresIn: '7d'
-      //     }
-      //   );
+    // it('should return all workouts in db', function() {
+    //
+    //   let resWorkout;
+    //   return chai.request(app)
+    //     .get('/workouts')
+    //     .set('authorization', `Bearer ${token}`)
+    //     .then(res => {
+    //       // console.log(res.body)
+    //       expect(res).to.have.status(200);
+    //       expect(res).to.be.a.json;
+    //       expect(res.body).to.be.a('array');
+    //       expect(res.body).to.have.lengthOf.at.least(1);
+    //
+    //       const expectedKeys = ['id', 'title', 'difficulty', 'exercises', 'creator'];
+    //       res.body.forEach(key => {
+    //         expect(key).to.be.a('object');
+    //         expect(key).to.include.keys(expectedKeys);
+    //       });
+    //       // resWorkout = res.body[0];
+    //       // console.log(resWorkout)
+    //       // return Workout.findById(resWorkout.id);
+    //     })
+    //     // .then(workout => {
+    //     //   expect(resWorkout.id).to.equal(workout.id);
+    //     //   expect(resWorkout.title).to.equal(workout.title);
+    //     //   expect(resWorkout.difficulty).to.equal(workout.difficulty);
+    //     //   expect(workout.exercises).to.be.a('array');
+    //     //   expect(resWorkout.exercises).to.equal(workout.exercises);
+    //     // })
+    // });
 
-      let resExercise;
-      return chai.request(app)
-        .get('/workouts')
-        .set('authorization', `Bearer ${token}`)
-        .then(res => {
-          console.log(res.body)
-          expect(res).to.have.status(200);
-          expect(res).to.be.a.json;
-          expect(res.body).to.be.a('array');
-          expect(res.body).to.have.lengthOf.at.least(1);
+    it('should return a single exercise when using id', function() {
+      let workoutInfo;
+      return Workout
+        .find()
+        .then(_workoutInfo => {
+          console.log(_workoutInfo)
+          workoutInfo = _workoutInfo;
+          console.log(workoutInfo)
 
-          const expectedKeys = ['id', 'name', 'description', 'muscleGroup', 'equipment'];
-          res.body.forEach(key => {
-            expect(key).to.be.a('object');
-            expect(key).to.include.keys(expectedKeys);
-          });
-          resExercise = res.body[0];
-          return Exercise.findById(resExercise.id);
+          // return chai.request(app)
+          //   .get(`/workouts/${workoutInfo}`)
+          //   .set('authorization', `Bearer ${token}`)
+          //   .then(res => {
+          //     expect(res).to.have.status(200);
+          //     expect(res).to.be.a.json;
+          //     expect(res.body).to.be.a('object');
+          //     expect(res.body.id).to.equal(exercise.id);
+          //     expect(res.body.name).to.equal(exercise.name);
+          //     expect(res.body.description).to.equal(exercise.description);
+          //   })
         })
-        .then(exercise => {
-          expect(resExercise.id).to.equal(exercise.id);
-          expect(resExercise.name).to.equal(exercise.name);
-          expect(resExercise.description).to.equal(exercise.description);
-          expect(resExercise.muscleGroup.main).to.equal(exercise.muscleGroup.main);
-          expect(resExercise.muscleGroup.secondary).to.deep.equal(exercise.muscleGroup.secondary);
-          expect(resExercise.equipment).to.deep.equal(exercise.equipment);
-        })
-    });
+
+    })
+
   });
+
 });
 
-  //   it('should return a single exercise when using id', function() {
-  //     let exercise;
-  //     return Exercise
-  //       .findOne()
-  //       .then(_exercise => {
-  //         exercise = _exercise;
-  //
-  //         return chai.request(app)
-  //           .get(`/exercises/${exercise.id}`)
-  //           .then(res => {
-  //             expect(res).to.have.status(200);
-  //             expect(res).to.be.a.json;
-  //             expect(res.body).to.be.a('object');
-  //             expect(res.body.id).to.equal(exercise.id);
-  //             expect(res.body.name).to.equal(exercise.name);
-  //             expect(res.body.description).to.equal(exercise.description);
-  //           })
-  //       })
-  //
-  //   })
-  //
   // });
   //
   // describe('POST endpoint', function() {
   //
-  //   it('should add a new exercise', function() {
-  //     const newExercise = {
-  //       name: 'New Exercise',
-  //       description: 'Description for a new exercise',
-  //       muscleGroup: {
-  //         main: 'main muscle',
-  //         secondary: ['secondary muscle', 'secondary muscle-1']
-  //       },
-  //       equipment: ['equipment-1', 'equipment-1']
-  //     };
+  //   it('should add a new workout', function() {
+  //     // const newExercise = {
+  //     //   title: 'New Workout Plan',
+  //     //   difficulty: 'Hard',
+  //     //   exercises:[
+  //     //     {
+  //     //       name: 'Bench Press',
+  //     //       sets: [
+  //     //         {
+  //     //           weight: 100,
+  //     //           reps: 15
+  //     //     },
+  //     //     {
+  //     //       name: 'Incline Press',
+  //     //       sets: [
+  //     //         {
+  //     //           weight: 100,
+  //     //           reps: 15
+  //     //     },
+  //     //     {
+  //     //       name: 'Decline Press',
+  //     //       sets: [
+  //     //         {
+  //     //           weight: 100,
+  //     //           reps: 15
+  //     //         }
+  //     //       ]
+  //     //     }
+  //     //   ],
+  //     //   creator: userid
+  //     // }
+  //     const newExercise = {}
   //
   //     return chai.request(app)
-  //       .post('/exercises')
+  //       .post('/workouts')
   //       .send(newExercise)
   //       .then(function(res) {
   //         expect(res).to.have.status(201);
-  //         expect(res).to.be.a.json;
-  //         expect(res.body).to.be.a('object');
-  //         const expectedKeys = ['id', 'name', 'description', 'muscleGroup', 'equipment'];
-  //         expect(res.body).to.include.keys(expectedKeys);
-  //         expect(res.body.id).to.not.be.null;
-  //         expect(res.body.name).to.equal(newExercise.name);
-  //         expect(res.body.description).to.equal(newExercise.description);
-  //         expect(res.body.muscleGroup.main).to.equal(newExercise.muscleGroup.main);
-  //         expect(res.body.muscleGroup.secondary).to.deep.equal(newExercise.muscleGroup.secondary);
-  //         expect(res.body.equipment).to.deep.equal(newExercise.equipment);
+  //         // expect(res).to.be.a.json;
+  //         // expect(res.body).to.be.a('object');
+  //         // const expectedKeys = ['id', 'name', 'description', 'muscleGroup', 'equipment'];
+  //         // expect(res.body).to.include.keys(expectedKeys);
+  //         // expect(res.body.id).to.not.be.null;
+  //         // expect(res.body.name).to.equal(newExercise.name);
+  //         // expect(res.body.description).to.equal(newExercise.description);
+  //         // expect(res.body.muscleGroup.main).to.equal(newExercise.muscleGroup.main);
+  //         // expect(res.body.muscleGroup.secondary).to.deep.equal(newExercise.muscleGroup.secondary);
+  //         // expect(res.body.equipment).to.deep.equal(newExercise.equipment);
   //       })
   //   });
   // });

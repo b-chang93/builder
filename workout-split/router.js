@@ -9,7 +9,6 @@ router.get('/', (req, res) => {
     .find()
     .then(schedule => {
       console.log('SCANNING WORKOUTSPLIT DB...')
-      console.log(schedule[0].name)
       console.log('FINISHED SCANNING WORKOUTSPLIT DB...')
       // res.json(schedule.map(split => split.serialize()));
       res.json(schedule)

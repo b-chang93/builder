@@ -295,11 +295,11 @@ function displayMySplit(data) {
 
   })
 }
-
-function displayExercises(data) {
-  const exercises = data.map((data, index) => renderExercise(data, index));
-  $('#my-workouts-list').html(exercises);
-}
+//
+// function showMyWorkout(data) {
+//   const exercises = data.map((data, index) => renderExercise(data, index));
+//   $('#my-workouts-list').html(exercises);
+// }
 
 function renderExercise(exercise) {
   return `<img src="${exercise.svg[0]}"/>`
@@ -341,7 +341,7 @@ function showMyWorkouts(workouts) {
 }
 
 function renderWorkouts(workout) {
-  if (workout.creator.id === currentUser) {
+  if (workout.creator._id === currentUser) {
     return `<li>${workout.title}</li>`
   }
 }
