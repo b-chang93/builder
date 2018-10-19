@@ -263,37 +263,44 @@ function findMySchedule() {
   })
 }
 
-// function displayMySplit(data) {
-//
-//   const userSchedules = data.filter(routine => routine.creator === currentUser)
-//
-//   let schedule = userSchedules[0]
-//   let daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-//
-//   $('.split-title').text(schedule.name);
-//   for(let i = 0; i < daysOfWeek.length; i++) {
-//     // console.log(daysOfWeek[i])
-//     let day = $(`.reveal-split > span[value="${daysOfWeek[i]}"]`)
-//     day.text(schedule[daysOfWeek[i]])
-//   }
-// }
 function displayMySplit(data) {
+ var d = new Date();
+ var n = d.getDay();
+ console.log(n)
 
-  const userSchedules = data.filter(routine => routine.creator === currentUser)
+ const map = {
+     1: 'Monday',
+     2: 'Tuesday',
+     3: 'Wednesday',
+     4: 'Thursday',
+     5: 'Friday',
+     6: 'Saturday',
+     7: 'Sunday'
+ }
+ // if(n in map) {
+ //   $(`.reveal-split > span[value="${map[n]}"]`).parent().css(“background”, “black”)
+ // }
 
-  let schedule = userSchedules[0]
-  let daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+ $(`.reveal-split > span[value="${map[n]}"]`).parent().css("background", "#003366")
 
-  // $('.split-title').text(schedule.name);
-  for(let i = 0; i < daysOfWeek.length; i++) {
-    // console.log(daysOfWeek[i])
-    let day = $(`.reveal-split > span[value="${daysOfWeek[i]}"]`)
-    day.text(schedule[daysOfWeek[i]])
-  }
+ const userSchedules = data.filter(routine => routine.creator === currentUser)
 
-  $('.reveal-split').on('click', event => {
+ let schedule = userSchedules[0]
+ // console.log(schedule)
+ let daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
-  })
+ // $('.split-title').text(schedule.name);
+ for(let i = 0; i < daysOfWeek.length; i++) {
+   // console.log(daysOfWeek[i])
+   let day = $(`.reveal-split > span[value="${daysOfWeek[i]}"]`)
+   day.text(schedule[daysOfWeek[i]])
+ }
+
+ $('.reveal-split').on('click', event => {
+   console.log($(event.currentTarget))
+   let split = $(event.currentTarget).find('span').text()
+   console.log(split)
+ })
 }
 //
 // function showMyWorkout(data) {
@@ -325,7 +332,7 @@ function getWorkouts(token) {
       mode: "cors", // no-cors, cors, *same-origin
       headers: {
           "Content-Type": "application/json; charset=utf-8",
-          "Authorization": "Bearer " + token
+          "Authorization": "Bearer " + loginToken
       }
   })
   .then(response => response.json()) // parses response to JSON
