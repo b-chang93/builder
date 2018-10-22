@@ -65,16 +65,12 @@ router.post('/', (req,res) => {
     })
     .then(post => {
       console.log('successfully created a post...')
-      console.log(post)
       postId = post._id;
-
-      console.log(req.user.id)
 
       return User
         .findById(req.user.id)
         .then(userPost => {
           console.log('found user and now retrieving its object...')
-          console.log(userPost)
           userPost.posts.push(postId);
           return userPost.save().then(u => res.status(201).json(post.serialize()));
         })

@@ -76,6 +76,39 @@ router.post('/', (req,res) => {
     })
 });
 
+// //more like a post than a put. doesnt really update the split but adds another split instead
+// router.get('/workout-split/update/:id', (req, res) => {
+//   const updatedFollower = {};
+//   const updateableField = ['name', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+//   updateableField.forEach(field => {
+//     if (field in req.body) {
+//       updatedFollower[field] = req.body[field];
+//     }
+//   });
+//   console.log(req.user.id)
+//
+//     // User.findOneAndUpdate(
+//     //     { "_id": req.user.id, "workoutSplit": req.params.id },
+//     //     {
+//     //         "$set": {
+//     //             "workoutSplit.$": req.body
+//     //         }
+//     //     },
+//     //     function(err,doc) {
+//     //
+//     //     }
+//     // );
+//     // User.findOne({_id:req.user.id, "Items._id": req.params.id},{"Items.$": 1}, (err, result) => { ... }
+//
+//     // User.find({ "_id": req.user.id}, {"workoutSplit.$": req.params.id})
+//     User.find({ "_id": req.user.id}, {"workoutSplit": req.params.id})
+//     // User.find({ "_id": req.user.id})
+//     // PersonModel.find({ favouriteFoods: { "$in" : ["sushi"]} }, ...);
+//     .then(sched => {
+//       console.log(sched)
+//     })
+// })
+
 router.delete('/:id', (req, res) => {
   WorkoutSplit
     .findByIdAndRemove(req.params.id)
