@@ -30,7 +30,6 @@ router.get('/username/:username', (req, res) => {
     });
 });
 
-//retrieve posts if following another user
 router.get('/:id', (req, res) => {
   console.log('checking if current user is following another user...')
   Post
@@ -66,15 +65,18 @@ router.post('/', (req,res) => {
     })
     .then(post => {
       console.log('successfully created a post...')
+      console.log(post)
       postId = post._id;
+
+      console.log(req.user.id)
 
       return User
         .findById(req.user.id)
         .then(userPost => {
           console.log('found user and now retrieving its object...')
+          console.log(userPost)
           userPost.posts.push(postId);
           return userPost.save().then(u => res.status(201).json(post.serialize()));
-          console.log(userPost.posts);
         })
         .catch(err => {
           console.error(err);
