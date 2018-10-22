@@ -3,10 +3,12 @@
 // const chai = require('chai');
 // const chaiHttp = require('chai-http');
 // const mongoose = require('mongoose');
+// const jwt = require('jsonwebtoken');
 //
 // const { app, runServer, closeServer } = require('../server');
 // const { User } = require('../users');
 // const { TEST_BUILDR_DATABASE } = require('../config');
+// const {JWT_SECRET} = require('../config');
 // const userData = require('../seed-data/users-seed-data.json');
 //
 // const expect = chai.expect;
@@ -16,8 +18,23 @@
 // function seedUserData() {
 //   console.log('Seeding exercises into db...');
 //
-//   return User.insertMany(userData);
+//   return User.insertMany(userData)
+//   .then(([users]) => {
+//     user = users[0]
+//     token = jwt.sign({ user }, JWT_SECRET, { subject: user.username});
+//   })
 // };
+//
+//   // beforeEach(function() {
+//   //   return Promise.all([
+//   //     User.insertMany(userData),
+//   //     Workout.insertMany(workoutData),
+//   //   ])
+//   //   .then(([users])=> {
+//   //     user = users[0];
+//   //     token = jwt.sign({ user }, JWT_SECRET, { subject: user.username});
+//   //   });
+//   // });
 //
 // function tearDownDb() {
 //   console.log('Deleting database...');
@@ -25,7 +42,7 @@
 // };
 //
 //
-// describe('/api/user', function () {
+// describe('API resource /api/user', function () {
 //   const username = 'exampleUser';
 //   const password = 'examplePass';
 //   const firstName = 'Example';
@@ -37,8 +54,11 @@
 //   const avatar = '';
 //   const followers = [];
 //   const following = [];
-//   // let id = '';
+//   // // let id = '';
 //   const posts = [];
+//   let user = {};
+//   let userTwo = {};
+//   let token;
 //
 //
 //   before(function () {
@@ -49,14 +69,90 @@
 //     return closeServer();
 //   });
 //
+//   // beforeEach(function() {
+//   //   return seedUserData();
+//   // })
 //   beforeEach(function() {
-//     return seedUserData();
-//   })
+//     return Promise.all([
+//       User.insertMany(userData)
+//     ])
+//     .then(([users])=> {
+//       user = users[0];
+//       userTwo = users[1];
+//       token = jwt.sign({ user }, JWT_SECRET, { subject: user.username});
+//     });
+//   });
 //
 //   afterEach(function () {
 //     // return User.remove({});
 //     return tearDownDb();
 //   });
+//   describe('/api/users', function () {
+//     describe('GET', function () {
+//       it('Should return all users in db', function () {
+//         return chai.request(app)
+//           .get(`/api/users/`)
+//           .then(res => {
+//           console.log(res.body)
+//           expect(res).to.have.status(200);
+//           expect(res.body).to.be.an('array');
+//           expect(res.body.length).to.be.at.least(1);
+//           const expectedUserKeys = ['id', 'username', 'firstName', 'lastName', 'avatar', 'posts', 'followers', 'following'];
+//           expect(res.body[0]).to.include.keys(expectedUserKeys)
+//         });
+//       });
+//
+//       it('Should return a single user when using id', function () {
+//         console.log(user._id)
+//         return chai.request(app)
+//           .get(`/api/users/${user._id}`)
+//           .then(res => {
+//           console.log(res.body)
+//           expect(res).to.have.status(200);
+//           expect(res.body).to.be.an('object');
+//           expect(res.body._id).to.include(user._id);
+//         });
+//       });
+//     });
+//
+//     describe('DELETE', function () {
+//       it('Should return all users in db', function () {
+//         return chai.request(app)
+//           .delete(`/api/users/${user._id}`)
+//           .then(res => {
+//           expect(res).to.have.status(204);
+//           expect(res.body).to.be.empty;
+//           return User.findById(user._id);
+//           })
+//           .then((item) => {
+//           expect(item).to.be.null;
+//           });
+//         });
+//       });
+//     });
+//
+//     // @WIP still needs to be fixed
+//     // describe('PUT and DELETE /subscribe', function () {
+//     //   it('should add a user id to user following field', function () {
+//     //
+//     //     return User
+//     //       // .findOne()
+//     //       .find(user._id)
+//     //       .then(user => {
+//     //         console.log('FOUND A USER')
+//     //         console.log(userTwo._id)
+//     //         console.log(user)
+//     //         return chai
+//     //           .request(app)
+//     //           .put(`/api/users/subscribe/${userTwo._id}`)
+//     //           .set("Authorization", `Bearer ${token}`)
+//     //           .then(res => {
+//     //             console.log(res.body)
+//     //             expect(res).to.have.status(204);
+//     //           })
+//     //       })
+//     //   });
+//     // });
 //
 //   describe('/api/users/signup', function () {
 //     describe('POST', function () {
@@ -367,23 +463,5 @@
 //       });
 //     });
 //
-//     describe('GET', function () {
-//       it('Should return an empty array initially', function () {
-//         return chai.request(app).get('/api/users').then(res => {
-//           expect(res).to.have.status(200);
-//           expect(res.body).to.be.an('array');
-//           expect(res.body).to.have.length(0);
-//         });
-//       });
-//
-//       it('Should return a single user when using id', function () {
-//         return chai.request(app).get('/api/users').then(res => {
-//           console.log(res.body)
-//           expect(res).to.have.status(200);
-//           expect(res.body).to.be.an('array');
-//           expect(res.body).to.have.length(0);
-//         });
-//       });
-//     });
 //   });
 // });
