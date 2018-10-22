@@ -1,3 +1,26 @@
-{"name" : "Strength Gains", "Monday" : "Legs", "Tuesday" : "Rest", "Wednesday" : "Chest", "Thursday" : "Back", "Friday" : "Shoulder", "Saturday" : "Lower Body", "Sunday" : "Upper Body" }
-
-{"name" : "Summer Cut", "Monday" : "Rest", "Tuesday" : "Legs/Shoulders", "Wednesday" : "Chest/Abs", "Thursday" : "Cardio", "Friday" : "Back/Bi", "Saturday" : "Full Body", "Sunday" : "Cardio" }
+[
+  {
+    "_id" : "5bb2fc4442fa168d6ead315e",
+    "name" : "Summer Shred",
+    "Monday" : "Cardio",
+    "Tuesday" : "Legs/Abs",
+    "Wednesday" : "Chest/Tri/Cardio",
+    "Thursday" : "Back/Bi/Abs",
+    "Friday" : "Shoulders/Cardio",
+    "Saturday" : "Rest",
+    "Sunday" : "Rest",
+    "creator" : "5bcd92233d34570fb081be6c"
+  },
+  {
+    "_id" : "5bb2fc6742fa168d6ead315f",
+    "name" : "Lean Gains",
+    "Monday" : "Legs",
+    "Tuesday" : "Rest",
+    "Wednesday" : "Chest",
+    "Thursday" : "Back",
+    "Friday" : "Shoulders & Arms",
+    "Saturday" : "Lower Body",
+    "Sunday" : "Upper Body",
+    "creator" : "5bcd92233d34570fb081be6c"
+  }
+]

@@ -1,1 +1,9 @@
-{ "_id" : ObjectId("5bc525e2579c6370fe138af0"), "likes" : 0, "creator" : ObjectId("5b9ea478fec0802340915545"), "title" : "Sample Post", "content" : "Post your workout or anything you want to share here!", "createdAt" : ISODate("2018-10-15T23:42:26.264Z"), "updatedAt" : ISODate("2018-10-15T23:42:26.264Z"), "__v" : 0 }
+{
+  "_id":"5bcd7f1c957fd0092912a991",
+  "likes":0,
+  "creator":"5bcd92233d34570fb081be6c",
+  "title":"Post a workout or share something!",
+  "content":"Write all your want to share in the body of the post.",
+  "createdAt":"2018-10-22T07:41:16.227Z",
+  "updatedAt":"2018-10-22T07:41:16.227Z"
+}
