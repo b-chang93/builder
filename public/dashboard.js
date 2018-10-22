@@ -170,9 +170,6 @@ function unsubscribeFromUser() {
     })
     .then(response => response.json())
     .then(function(user) {
-
-      console.log(user.id)
-
       let data = {
         "followers": currentUser
       }
@@ -189,7 +186,6 @@ function unsubscribeFromUser() {
         body: JSON.stringify(data)
       })
       .then(function(follower) {
-        console.log(follower)
         subscribed = false;
       })
     })
@@ -266,7 +262,7 @@ function findMySchedule() {
 function displayMySplit(data) {
  var d = new Date();
  var n = d.getDay();
- console.log(n)
+ // console.log(n)
 
  const map = {
      1: 'Monday',
@@ -284,14 +280,10 @@ function displayMySplit(data) {
  $(`.reveal-split > span[value="${map[n]}"]`).parent().css("background", "#003366")
 
  const userSchedules = data.filter(routine => routine.creator === currentUser)
-
  let schedule = userSchedules[0]
- // console.log(schedule)
  let daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
- // $('.split-title').text(schedule.name);
  for(let i = 0; i < daysOfWeek.length; i++) {
-   // console.log(daysOfWeek[i])
    let day = $(`.reveal-split > span[value="${daysOfWeek[i]}"]`)
    day.text(schedule[daysOfWeek[i]])
  }
@@ -302,11 +294,6 @@ function displayMySplit(data) {
    console.log(split)
  })
 }
-//
-// function showMyWorkout(data) {
-//   const exercises = data.map((data, index) => renderExercise(data, index));
-//   $('#my-workouts-list').html(exercises);
-// }
 
 function renderExercise(exercise) {
   return `<img src="${exercise.svg[0]}"/>`
@@ -428,7 +415,6 @@ function handleWorkoutModal() {
 
 function renderNewPosts(post) {
   let date = post.created.slice(0,10).replace(/-/g,'/');
-  console.log(post)
   $('.main-index').append(`
       <li class="feed-index-item">
         <section class="content">
@@ -675,7 +661,6 @@ function findUsers() {
 
 function exploreUsers() {
   $('.find-users').on('click', event => {
-    console.log('clicked')
     url = "/api/users"
 
     return fetch(url, {
@@ -687,14 +672,12 @@ function exploreUsers() {
     })
     .then(response => response.json()) // parses response to JSON
     .then(function(users) {
-      console.log(users)
       renderUsers(users)
     })
   })
 }
 
 function renderUsers(users) {
-  console.log(users)
   const result = users.map(user => renderUser(user));
   $('.explore').html(result)
 }
@@ -779,7 +762,6 @@ function createWorkout() {
     newWorkout.difficulty = difficulty;
 
     console.log('creating workout...')
-    console.log(newWorkout)
     postNewWorkout(newWorkout)
 
   })

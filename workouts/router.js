@@ -3,6 +3,7 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 const {Workout} = require('./models');
+const mongoose = require('mongoose')
 
 const passport = require('passport');
 const jwtAuth = passport.authenticate('jwt', { session: false });
@@ -31,13 +32,16 @@ router.get('/:id', (req, res) => {
     })
 });
 
-router.post('/', jwtAuth, (req,res) => {
+router.post('/', jwtAuth, (req, res, next) => {
   const requiredFields = ['title', 'difficulty', 'exercises', 'creator'];
   requiredFields.forEach(field => {
     if (!(field in req.body)) {
       const message = `Missing \`${field}\` in request body`;
       console.error(message);
-      return res.status(400).send(message);
+      return res.status(400).json(message);
+      // const err = new Error(`Missing \`${field}\` in request body`);
+      // err.status = 400;
+      // return next(err);
     }
   });
 
@@ -82,14 +86,20 @@ router.delete('/:id', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-  if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
-    res.status(400).json({
-      error: 'Request path id and request body id values must match'
-    });
+  // if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
+  //   res.status(400).json({
+  //     error: 'Request path id and request body id values must match'
+  //   });
+  // }
+  const id = req.params.id;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    const message = `The 'id' is not valid`;
+    console.error(message);
+    return res.status(400).json(message);
   }
 
   const updated = {};
-  const updateableFields = ['title', 'workout'];
+  const updateableFields = ['title', 'difficulty', 'exercises'];
   updateableFields.forEach(field => {
     if (field in req.body) {
       updated[field] = req.body[field];
@@ -98,7 +108,7 @@ router.put('/:id', (req, res) => {
 
   Workout
     .findByIdAndUpdate(req.params.id, {$set: updated}, { new: true})
-    .then(updatedWorkout => res.status(204).json(updatedWorkout.serialize()))
+    .then(updatedWorkout => res.json(updatedWorkout.serialize()))
     .catch(err => res.status(500).json({message: `Something went horribly wrong`}));
 });
 
