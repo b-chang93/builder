@@ -39,25 +39,27 @@ router.post('/', jwtAuth, (req, res, next) => {
       const message = `Missing \`${field}\` in request body`;
       console.error(message);
       return res.status(400).json(message);
-      // const err = new Error(`Missing \`${field}\` in request body`);
-      // err.status = 400;
-      // return next(err);
     }
   });
 
-  // const nameRequired = ['firstName', 'lastName'];
-  // nameRequired.forEach(field => {
-  //   if(!(field in req.body.creator)) {
-  //     const message = `Missing \`${field}\` in request body`;
-  //     console.error(message);
-  //     return res.status(400).send(message);
-  //   }
-  // })
-  // if (req.body.length < 1) {
-  //   const message = `There must be at least one field in request body`;
-  //   console.error(message);
-  //   return res.status(400).send(message);
-  // }
+  if(req.body.constructor === Object && Object.keys(req.body).length === 0) {
+    console.log('Object missing');
+  }
+
+  let workout = {
+    title: req.body.title,
+    difficulty: req.body.difficulty,
+    exercises: req.body.exercises,
+    creator: req.user.id
+  }
+
+  for (var key in workout) {
+    if(workout[key] == ''  || workout[key] == null) {
+      const message = `Missing input for \`${key}\` in request body. Please add an input.`;
+      console.error(message);
+      return res.status(400).json(message);
+    }
+  }
 
   Workout
     .create({
@@ -86,11 +88,6 @@ router.delete('/:id', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-  // if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
-  //   res.status(400).json({
-  //     error: 'Request path id and request body id values must match'
-  //   });
-  // }
   const id = req.params.id;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     const message = `The 'id' is not valid`;
