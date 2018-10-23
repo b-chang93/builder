@@ -43,5 +43,5 @@ exerciseSchema.methods.serialize = function() {
   };
 };
 
-const Exercise = mongoose.model('Exercises', exerciseSchema);
-module.exports = {Exercise};
+const Exercise = mongoose.model('Exercise', exerciseSchema);
+module.exports = Exercise;

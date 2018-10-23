@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
-const {Workout} = require('./models');
+const Workout = require('./models');
 const mongoose = require('mongoose')
 
 const passport = require('passport');

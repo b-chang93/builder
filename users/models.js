@@ -19,8 +19,8 @@ const UserSchema = mongoose.Schema({
   avatar: String,
   currentSplit: { type: mongoose.Schema.Types.ObjectId, ref: 'WorkoutSplit'},
   posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post'}],
-  followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Users'}],
-  following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Users'}]
+  followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+  following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
 });
 
 UserSchema.methods.serialize = function() {
@@ -45,6 +45,6 @@ UserSchema.statics.hashPassword = function(password) {
   return bcrypt.hash(password, 10);
 };
 
-const User = mongoose.model('Users', UserSchema);
+const User = mongoose.model('User', UserSchema);
 
-module.exports = {User};
+module.exports = User;

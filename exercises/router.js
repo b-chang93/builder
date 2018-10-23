@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
-const {Exercise} = require('./models');
+const Exercise = require('./models');
 
 router.get('/', (req,res) => {
   Exercise

@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
-const {Post} = require('./models');
-const {User} = require('../users/models');
+const User = require('../users/models');
+const Post = require('./models');
 
 router.get('/', (req, res) => {
   console.log('making get request....')
