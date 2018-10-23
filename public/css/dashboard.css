@@ -79,15 +79,67 @@ th {
 }
 
 .current-user {
-  width: 100%;
+  float: left;
+  /* width: 50%; */
+    width: 100%;
   height: 40%;
 }
 
 #right-column {
-  position: absolute;
+  /* position: absolute;
   top: 0;
   left: 60%;
-  width: 30%;
+  width: 30%; */
+  float: left;
+  /* width: 50%; */
+  width: 100%;
+  /* margin-top: 15px; */
+  margin-top: 50px;
+}
+
+#workout-info-container {
+  /* width: 70%; */
+  width: 100%;
+}
+
+#my-workouts-list {
+  width: 100%;
+  /* height: 200px; */
+  height: 120px;
+  cursor: pointer;
+  color: #359aff;
+  margin: 5px 0;
+  box-shadow: 0 1.5px 5px 0px rgba(0,0,0,0.5);
+}
+
+#my-workouts-list > h2 {
+  margin: 0;
+}
+
+.posts-area {
+  clear: both;
+}
+
+.my-workout-info {
+  display: none;
+  width: 100%;
+  /* height: 300px; */
+  height: 200px;
+  cursor: pointer;
+  color: #359aff;
+  box-shadow: 2px 1px 5px 1px rgba(0,0,0,0.6);
+  margin-top: 10px;
+  overflow: auto;
+}
+
+.workout-name {
+  font-size: 18px;
+}
+
+.workout-details {
+  font-size: 14px;
+  line-height: 20px;
+  padding: 0 10px 10px;
 }
 
 .line {
@@ -95,6 +147,7 @@ th {
 }
 
 .feed-identity {
+  /* width: 100%; */
   width: 100%;
   height: 100%;
   justify-content: center;
@@ -103,12 +156,68 @@ th {
   padding-bottom: 10px;
 }
 
+.search-users {
+  width: 50%;
+  height: 40px;
+  margin-top: 2px;
+  background: rgb(0, 51, 102);
+}
+
+.find-users {
+  color: white;
+}
+
 .exercise-search-section {
-  width: 100%;
-  height: 40%;
+  float: right;
+  background: rgb(0, 51, 102);
+  /* margin-top: 12px; */
+  margin-top: -38px;
+  /* width: 100%; */
+  width: 50%;
+  /* height: 50%; */
+  height: 40px;
+  /* height: 40%; */
   align-items: center;
-  margin-left: 15%;
-  box-shadow: 0 1.5px 5px 0px rgba(0,0,0,0.5);
+  /* margin-left: 15%; */
+  /* box-shadow: 0 1.5px 5px 0px rgba(0,0,0,0.5); */
+}
+
+.individual-exercise-details {
+  overflow: auto;
+}
+
+.user-card {
+  width: 30%;
+  height: 100px;
+  box-shadow: 2px 1px 5px 1px rgba(0,0,0,0.6);
+  margin: 10px;
+  float: left;
+  position: relative;
+}
+
+.explore-usernames {
+  position: absolute;
+  top: 70%;
+}
+
+.explore-user-modal {
+  display: flex;
+  flex-direction: column;
+  background-color: #fefefe;
+  margin-top: 10%;
+  /* margin-left: 20%; */
+  /* margin-left: 10px; */
+  padding: 20px;
+  width 80%;
+  height: 70%;
+  cursor: pointer;
+  color: #359aff;
+  box-shadow: 2px 1px 5px 1px rgba(0,0,0,0.6);
+  overflow: auto;
+}
+
+.enable-search-modal {
+  color: white;
 }
 
 .focused-exercise-image {
@@ -119,7 +228,8 @@ th {
 }
 
 #user-thumbnail {
-  width: 100%;
+  /* width: 100%; */
+  width: 50%;
   height: 60%;
   margin: auto;
   padding-top: 10px;
@@ -216,6 +326,31 @@ th {
   box-shadow: 2px 1px 5px 1px rgba(0,0,0,0.6);
   margin: 5px 0px;
 }
+
+.stream-modal-content {
+  display: flex;
+  flex-direction: column;
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  height: 50%;
+  list-style-type: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #359aff;
+  box-shadow: 2px 1px 5px 1px rgba(0,0,0,0.6);
+}
+
+.post-from-stream-content  {
+  margin-top: 20px;
+}
+
+.post-from-stream-title {
+
+}
+
 .thumbnail-for-post {
   display: flex;
   width: 95%;
@@ -233,40 +368,6 @@ th {
   font-size: 8px;
 }
 
-#workout-info-container {
-  width: 70%;
-}
-
-#my-workouts-list {
-  width: 100%;
-  height: 200px;
-  cursor: pointer;
-  color: #359aff;
-  margin-top: 10px;
-  box-shadow: 0 1.5px 5px 0px rgba(0,0,0,0.5);
-}
-
-.my-workout-info {
-  display: none;
-  width: 100%;
-  height: 300px;
-  cursor: pointer;
-  color: #359aff;
-  box-shadow: 2px 1px 5px 1px rgba(0,0,0,0.6);
-  margin-top: 10px;
-  overflow: auto;
-}
-
-.workout-name {
-  font-size: 18px;
-}
-
-.workout-details {
-  font-size: 14px;
-  line-height: 20px;
-  padding: 0 10px 10px;
-}
-
 /* .split-title {
   width: 70%;
   border-radius: 5%;
@@ -280,10 +381,12 @@ th {
 .post-title {
   width: 70%;
   height: 50px;
-  font-size: 18px;
+  /* font-size: 18px; */
+  font-size: 12px;
 }
 .post-text {
   padding: 10px;
+  font-size: 12px;
 }
 .content {
   width: 100%;
@@ -660,7 +763,7 @@ th {
   margin: 0;
 }
 
-.stream-modal-content {
+/* .stream-modal-content {
   display: flex;
   flex-direction: column;
   background-color: #fefefe;
@@ -674,11 +777,12 @@ th {
   cursor: pointer;
   color: #359aff;
   box-shadow: 2px 1px 5px 1px rgba(0,0,0,0.6);
-}
+} */
 
-.post-from-stream-title {
+/* .post-from-stream-title {
   position: fixed;
-}
+} */
+
 .exercise-search-modal {
   display: flex;
   flex-direction: column;
@@ -857,7 +961,7 @@ th {
     width: 20%;
     position: fixed;
     float: right;
-    top: 5%;
+    top: 6%;
     left: 75%;
   }
 
