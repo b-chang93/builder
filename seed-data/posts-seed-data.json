@@ -1,9 +1,20 @@
-{
-  "_id":"5bcd7f1c957fd0092912a991",
-  "likes":0,
-  "creator":"5bcd92233d34570fb081be6c",
-  "title":"Post a workout or share something!",
-  "content":"Write all your want to share in the body of the post.",
-  "createdAt":"2018-10-22T07:41:16.227Z",
-  "updatedAt":"2018-10-22T07:41:16.227Z"
-}
+[
+  {
+    "_id" : "5bce680cbb797912f84e8103",
+    "likes" : 0,
+    "creator" : "5bce67ef3d34570fb081dcae",
+    "title" : "Sample Post",
+    "content" : "Share a workout or post about anything!",
+    "createdAt" : "2018-10-23T00:15:08.212Z",
+    "updatedAt" : "2018-10-23T00:15:08.212Z"
+  },
+  {
+    "_id" : "5bce6a3caa582113cdfbc3a7",
+    "likes" : 0,
+    "creator" : "5bce67ef3d34570fb081dcae",
+    "title" : "Create your workouts ahead of time or during your workout.",
+    "content" : "Looking for a new exercise or to switch it up? Check out the exercises section to for over 200 exercises with descriptions!",
+    "createdAt" : "2018-10-23T00:24:28.391Z",
+    "updatedAt" : "2018-10-23T00:24:28.391Z"
+  }
+]

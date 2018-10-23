@@ -7,11 +7,7 @@
     "avatar": "https://media.tenor.com/images/d8bb62a1bb8af522ea8e26cca2e2d68c/tenor.gif",
     "followers":[],
     "following":[],
-    "posts":[
-      {
-        "_id": "5bcd923a68d89b0ab59f7257"
-      }
-    ],
+    "posts":[],
     "workoutSplit":[
       {"_id":"5ba84b98b98d4123cb8af909",
         "name":"Strength Gains",
