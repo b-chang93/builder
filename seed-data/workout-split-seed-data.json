@@ -1,6 +1,6 @@
 [
   {
-    "_id" : "5bce679d3d34570fb081dc7a",
+    "_id" : {"$oid":"5bce679d3d34570fb081dc7a"},
     "name" : "Summer Shred",
     "Monday" : "Cardio",
     "Tuesday" : "Legs/Abs",
@@ -9,10 +9,10 @@
     "Friday" : "Shoulders/Cardio",
     "Saturday" : "Rest",
     "Sunday" : "Rest",
-    "creator" : "5bce67ef3d34570fb081dcae"
+    "creator" : "5bcf5e1bdf664b728b57431a"
   },
   {
-    "_id" : "5bce679d3d34570fb081dc7a",
+    "_id" : {"$oid":"5bce679d3d34570fb081dc7b"},
     "name" : "Lean Gains",
     "Monday" : "Legs",
     "Tuesday" : "Rest",
@@ -21,6 +21,6 @@
     "Friday" : "Shoulders & Arms",
     "Saturday" : "Lower Body",
     "Sunday" : "Upper Body",
-    "creator" : "5bce67ef3d34570fb081dcae"
+    "creator" : "5bcf5e1bdf664b728b57431a"
   }
 ]

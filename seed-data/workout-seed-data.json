@@ -1,6 +1,6 @@
 [
   {
-    "_id":"5bc4de6f7e72a8692a462221",
+    "_id": {"$oid":"5bc4de6f7e72a8692a462226"},
     "title":"Chest Workout",
     "difficulty":"Easy",
     "exercises":[
@@ -97,6 +97,6 @@
           ]
       }
     ],
-    "creator":"5bce67ef3d34570fb081dcae"
+    "creator":"5bcf5e1bdf664b728b57431a"
   }
 ]
