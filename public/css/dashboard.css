@@ -6,8 +6,10 @@ body, html {
   margin: 0;
   padding: 0;
   height: 100%;
-  /* width: 100%;
-  overflow-x: hidden; */
+}
+
+body {
+  background: #f1f1f1
 }
 
 .navbar {
@@ -24,7 +26,6 @@ body, html {
 
 /* Links inside the navbar */
 .navbar a {
-    /* float: left; */
     display: block;
     color: #f2f2f2;
     text-align: center;
@@ -66,22 +67,9 @@ th {
   background: #359aff;
 }
 
-/* #main-nav {
-  display: flex;
-  justify-content: space-between;
-  position: fixed;
-  top: 0px;
-  align-items: center;
-  width: 100%;
-  height: 5%;
-  z-index: 100;
-  background-color: #359aff;
-} */
-
-
 #workout-split-nav {
   width: 100%;
-  margin-top: 9%;
+  margin-top: 38px;
 }
 
 .show-split {
@@ -97,8 +85,6 @@ th {
 .main-container {
   width: 100%;
   height: 500px;
-  box-sizing: content-box;
-  position: relative;
 }
 
 #my-workouts {
@@ -118,33 +104,26 @@ th {
 }
 
 .current-user {
-  float: left;
   width: 100%;
   height: 45%;
 }
 
-#right-column {
-  /* position: absolute;
-  top: 0;
-  left: 60%;
-  width: 30%; */
-  float: left;
-  /* width: 50%; */
-  width: 100%;
-  /* margin-top: 15px; */
-  margin-top: 10px;
+.flex-wrapper {
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 #workout-info-container {
   width: 100%;
+  margin-top: 15px;
 }
 
 #my-workouts-list {
   width: 100%;
   height: 120px;
   cursor: pointer;
+  background: white;
   color: #359aff;
-  margin: 5px 0;
   box-shadow: 0 1.5px 5px 0px rgba(0,0,0,0.5);
 }
 
@@ -152,18 +131,17 @@ th {
   margin: 0;
 }
 
-.posts-area {
-  clear: both;
-}
-
 .my-workout-info {
+  /* display: none;
+  position: fixed;
+  margin-top: 130px;
+  width: 232px; */
   display: none;
-  width: 100%;
   height: 200px;
   cursor: pointer;
+  background: white;
   color: #359aff;
   box-shadow: 2px 1px 5px 1px rgba(0,0,0,0.6);
-  margin-top: 10px;
   overflow: auto;
 }
 
@@ -182,11 +160,11 @@ th {
 }
 
 .feed-identity {
-  /* width: 100%; */
   width: 100%;
   height: 100%;
   justify-content: center;
   align-items: center;
+  background: white;
   box-shadow: 0 1.5px 5px 0px rgba(0,0,0,0.5);
   padding-bottom: 10px;
 }
@@ -205,9 +183,8 @@ th {
 
 .find-users {
   color: white;
+  cursor: pointer;
 }
-
-
 
 .individual-exercise-details {
   overflow: auto;
@@ -232,8 +209,6 @@ th {
   flex-direction: column;
   background-color: #fefefe;
   margin-top: 10%;
-  /* margin-left: 20%; */
-  /* margin-left: 10px; */
   padding: 20px;
   width 80%;
   height: 70%;
@@ -244,7 +219,9 @@ th {
 }
 
 .enable-search-modal {
+  margin-left: 5px;
   color: white;
+  cursor: pointer;
 }
 
 .focused-exercise-image {
@@ -255,7 +232,6 @@ th {
 }
 
 #user-thumbnail {
-  /* width: 100%; */
   width: 50%;
   height: 60%;
   margin: auto;
@@ -336,6 +312,7 @@ th {
 .share-a-post {
   box-shadow: 2px 1px 5px 1px rgba(0,0,0,0.6);
   margin-top: 15px;
+  background: white;
 }
 
 .main-index {
@@ -344,7 +321,9 @@ th {
   display: flex;
   flex-direction: column-reverse;
   margin: auto;
+  background: white;
 }
+
 .feed-index-item {
   width: 100%;
   list-style-type: none;
@@ -352,6 +331,7 @@ th {
   color: #359aff;
   box-shadow: 2px 1px 5px 1px rgba(0,0,0,0.6);
   margin: 5px 0px;
+  overflow: auto;
 }
 
 .stream-modal-content {
@@ -372,10 +352,6 @@ th {
 
 .post-from-stream-content  {
   margin-top: 20px;
-}
-
-.post-from-stream-title {
-
 }
 
 .thumbnail-for-post {
@@ -408,13 +384,14 @@ th {
 .post-title {
   width: 70%;
   height: 50px;
-  /* font-size: 18px; */
   font-size: 12px;
 }
 .post-text {
   padding: 10px;
   font-size: 12px;
+  width: 60%;
 }
+
 .content {
   width: 100%;
 }
@@ -827,19 +804,15 @@ th {
   cursor: pointer;
 }
 
-/* @media only screen and (min-width: 600px) {
-  .search-users {
-    display: block;
-  }
-
-  .exercise-search-section {
-    display: block;
-  }
-} */
-
 @media only screen and (min-width: 800px) {
+  body {
+    width: 99%;
+  }
+
   .navbar {
-    width: 90%;
+    /* width: 90%; */
+    width: 99%;
+    max-width: 1200px;
     height: 55px;
   }
 
@@ -857,17 +830,6 @@ th {
     width: 80%;
   }
 
-  #posts-container {
-    position: relative;
-  }
-
-  #right-column {
-    position: absolute;
-    float: right;
-    top: 6%;
-    left: 65%;
-  }
-
   .exercise-search-section {
     height: 30%;
   }
@@ -875,25 +837,26 @@ th {
 
 @media only screen and (min-width: 850px){
   body {
-    width: 90%;
+    /* width: 90%; */
+    width: 99%;
     margin: auto;
+  }
+
+  .flex-wrapper {
+    flex-direction: unset !important;
   }
 
   .right-nav {
     display: none;
   }
 
-  /* #main-nav {
-    width: 90%;
-    height: 50px;
-  } */
-  /* #navbar {
-    width: 90%;
-    height: 50px;
-  } */
-
   #workout-split-nav {
-    margin-top: 6%;
+    /* margin-top: 6%; */
+    margin-top: 7%;
+  }
+
+  .flex-container {
+    display: flex;
   }
 
   table {
@@ -939,7 +902,7 @@ th {
 
   .main-container {
     display: flex;
-    width: 78%;
+    width: 100%;
   }
 
   #day-of-week {
@@ -952,18 +915,19 @@ th {
 
   .left-column {
     height: 100%;
-    width: 25%;
+    /* width: 45%; */
+    width: 20%;
   }
 
   .posts-area {
-    width: 77%;
+    width: 100%;
+    margin-left: 5px;
   }
 
   .share-a-post {
     height: 53%;
     width: 100%;
-    float: left;
-    margin-left: 20px;
+    margin-left: 10px;
     margin-top: 10px;
     box-shadow: 0 1.5px 5px 1px rgba(0,0,0,0.5);
   }
@@ -983,11 +947,34 @@ th {
     margin: 10px 0;
   }
 
+  .exercise-search-section {
+    width: 20%;
+    max-width: 235px;
+    /* margin: 0;
+    margin-top: 6px; */
+    margin-left: 5px;
+  }
+
+  .enable-search-modal {
+    position: fixed;
+    /* width: 235px; */
+    /* width: 175px; */
+    width: inherit;
+    max-width: 235px;
+    height: 70px;
+    /* margin: 0; */
+    background: rgb(0, 51, 102);
+  }
+
+  .find-users {
+    width: 100%;
+    height: 100%;
+    background: rgb(0, 51, 102);
+  }
 
   #posts-container {
-    position: relative;
-    float: left;
     width: 100%;
+    margin-left: 10px;
   }
 
   #right-column {
@@ -1000,10 +987,6 @@ th {
 
   .main-index {
     width: 100%;
-    padding: 0;
-    margin-top: 5px;
-    float: left;
-    margin-left: 20px;
     margin-top: 10px;
   }
 
@@ -1011,12 +994,6 @@ th {
     width: 100%;
     height: 250px;
     overflow: visible;
-  }
-
-  .exercise-search-section {
-    width: 100%;
-    margin: 0;
-    margin-top: 6px;
   }
 
   .search-exercise {
@@ -1040,11 +1017,6 @@ th {
 
   .modal-workout-content {
     padding: 15px;
-  }
-
-  #my-workouts-list {
-    width: 100%;
-    margin-left: 18%;
   }
 
   .search-users {
@@ -1082,7 +1054,7 @@ th {
   }
 
   .exercise-search-modal {
-    margin-left: 5%;
+    margin-left: 8%;
     width: 70%;
     height: 90%;
   }
@@ -1134,15 +1106,44 @@ th {
   }
 
   #workout-info-container {
-    width: 100%;
+    width: 35%;
+    margin-top: 10px;
   }
 
   #my-workouts-list {
-    margin: 0;
+    position: fixed;
+    /* width: 230px; */
+    /* width: 23.5%; */
+    width: 19%;
+    max-width: 230px;
+    margin-left: 20px;
   }
 
   #my-workouts-list > h2 {
     margin: 10px;
+  }
+
+  .my-workout-info {
+    position: fixed;
+    width: 230px;
+    margin-left: 20px;
+    margin-top: 130px;
+  }
+}
+
+@media only screen and (min-width: 850px) and (max-width: 950px){
+  .left-column {
+    width: 30%;
+  }
+
+  .posts-area {
+    width: 92%;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  #workout-split-nav {
+    margin-top: 7%;
   }
 }
 
@@ -1152,13 +1153,9 @@ th {
   }
 
   .navbar {
-    height: 70px;
+    /* height: 70px; */
+    height: 80px;
   }
-
-  /* #main-nav {
-    width: 1200px;
-    height: 70px;
-  } */
 
   #navbar {
     width: 1200px;
@@ -1173,16 +1170,5 @@ th {
 
   .exercise-search-section {
     margin: 0;
-  }
-}
-
-@media only screen and (min-width: 1300px) {
-  #right-column {
-    /* width: 290px;
-    top: 72px;
-    left: 72.5%; */
-    width: 305px;
-    top: 72px;
-    left: 77%;
   }
 }
