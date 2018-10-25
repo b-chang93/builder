@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
-const {Post} = require('./models');
-const {User} = require('../users/models');
+const User = require('../users/models');
+const Post = require('./models');
 
 router.get('/', (req, res) => {
   console.log('making get request....')
@@ -30,7 +30,6 @@ router.get('/username/:username', (req, res) => {
     });
 });
 
-//retrieve posts if following another user
 router.get('/:id', (req, res) => {
   console.log('checking if current user is following another user...')
   Post
@@ -74,7 +73,6 @@ router.post('/', (req,res) => {
           console.log('found user and now retrieving its object...')
           userPost.posts.push(postId);
           return userPost.save().then(u => res.status(201).json(post.serialize()));
-          console.log(userPost.posts);
         })
         .catch(err => {
           console.error(err);
@@ -119,4 +117,4 @@ router.put('/:id', (req, res) => {
     .catch(err => res.status(500).json({message: `Something went horribly wrong`}));
 });
 
-module.exports = {router};
+module.exports = router;

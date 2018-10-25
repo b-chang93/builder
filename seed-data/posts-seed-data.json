@@ -1,1 +1,20 @@
-{ "_id" : ObjectId("5bc525e2579c6370fe138af0"), "likes" : 0, "creator" : ObjectId("5b9ea478fec0802340915545"), "title" : "Sample Post", "content" : "Post your workout or anything you want to share here!", "createdAt" : ISODate("2018-10-15T23:42:26.264Z"), "updatedAt" : ISODate("2018-10-15T23:42:26.264Z"), "__v" : 0 }
+[
+  {
+    "_id" : "5bce680cbb797912f84e8103",
+    "likes" : 0,
+    "creator" : "5bcf5e1bdf664b728b57431a",
+    "title" : "Sample Post",
+    "content" : "Share a workout or post about anything!",
+    "createdAt" : "2018-10-23T00:15:08.212Z",
+    "updatedAt" : "2018-10-23T00:15:08.212Z"
+  },
+  {
+    "_id" : "5bce6a3caa582113cdfbc3a7",
+    "likes" : 0,
+    "creator" : "5bcf5e1bdf664b728b57431a",
+    "title" : "Create your workouts ahead of time or during your workout.",
+    "content" : "Looking for a new exercise or to switch it up? Check out the exercises section to for over 200 exercises with descriptions!",
+    "createdAt" : "2018-10-23T00:24:28.391Z",
+    "updatedAt" : "2018-10-23T00:24:28.391Z"
+  }
+]

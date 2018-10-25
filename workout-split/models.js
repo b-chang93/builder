@@ -11,7 +11,7 @@ const workoutSplitSchema = mongoose.Schema({
   Friday: {type: String, required: true},
   Saturday: {type: String, required: true},
   Sunday: {type: String, required: true},
-  creator: { type: mongoose.Schema.Types.ObjectId, ref: 'Users'}
+  creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User'}
   // workout: { type: mongoose.Schema.Types.ObjectId, ref: 'Workout'},
   // day: String,
   // description: String
@@ -42,4 +42,4 @@ workoutSplitSchema.methods.serialize = function() {
 
 
 let WorkoutSplit = mongoose.model('Workoutsplit', workoutSplitSchema);
-module.exports = {WorkoutSplit};
+module.exports = WorkoutSplit;

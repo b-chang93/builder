@@ -13,10 +13,10 @@ const exerciseSchema = mongoose.Schema({
 });
 
 const workoutSchema = mongoose.Schema({
-  title: {type: String, required: true},
+  title: {type: String},
   difficulty: {type: String},
   exercises: [exerciseSchema],
-  creator: { type: mongoose.Schema.Types.ObjectId, ref: 'Users' }
+  creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 });
 
 workoutSchema.pre('find', function(next) {
@@ -67,11 +67,8 @@ workoutSchema.methods.serialize = function() {
     title: this.title,
     difficulty: this.difficulty,
     exercises: this.exercises,
-    creator: {
-      id: this.creator.id,
-      name: this.fullName
-    }
+    creator: this.creator
   }
 }
-let Workout = mongoose.model('Workouts', workoutSchema);
-module.exports = {Workout};
+let Workout = mongoose.model('Workout', workoutSchema);
+module.exports = Workout;

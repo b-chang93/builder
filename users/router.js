@@ -2,7 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const {User} = require('./models');
+const User = require('./models');
 
 const router = express.Router();
 
@@ -42,86 +42,6 @@ router.get('/subscribedTo/:id', (req, res) => {
       res.status(500).json({ message: "Internal server error"})
     })
 });
-
-//more like a post than a put. doesnt really update the split but adds another split instead
-router.get('/workout-split/update/:id', (req, res) => {
-  const updatedFollower = {};
-  const updateableField = ['name', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  updateableField.forEach(field => {
-    if (field in req.body) {
-      updatedFollower[field] = req.body[field];
-    }
-  });
-  console.log(req.user.id)
-
-    // User.findOneAndUpdate(
-    //     { "_id": req.user.id, "workoutSplit": req.params.id },
-    //     {
-    //         "$set": {
-    //             "workoutSplit.$": req.body
-    //         }
-    //     },
-    //     function(err,doc) {
-    //
-    //     }
-    // );
-    // User.findOne({_id:req.user.id, "Items._id": req.params.id},{"Items.$": 1}, (err, result) => { ... }
-
-    // User.find({ "_id": req.user.id}, {"workoutSplit.$": req.params.id})
-    User.find({ "_id": req.user.id}, {"workoutSplit": req.params.id})
-    // User.find({ "_id": req.user.id})
-    // PersonModel.find({ favouriteFoods: { "$in" : ["sushi"]} }, ...);
-    .then(sched => {
-      console.log(sched)
-    })
-})
-
-// return User
-//   .findById(req.user.id)
-//   .then(userSchedule => {
-//     let workoutSplit = userSchedule.workoutSplit;
-//     console.log('LOGGING.....')
-//     let result;
-//     for(let i = 0; i < workoutSplit.length; i++) {
-//       if(workoutSplit[i].id === req.params.id) {
-//         result = workoutSplit[i]
-//
-//
-//       }
-//     }
-//     console.log(result);
-// })
-// return User
-//   .findByIdAndUpdate(req.user.id, {$set: req.body}, { new: true})
-//   .then(userSchedule => {
-//     // console.log(userSchedule)
-//     // console.log(req.body)
-//     // console.log('Checking if the user has any information about workout schedule...')
-//     userSchedule.workoutSplit.push(req.body)
-//     userSchedule.save().then(schedule => res.status(201).json(schedule.serialize()));
-//   })
-
-// router.put('/workout-split/', (req, res) => {
-//   const updatedFollower = {};
-//   const updateableField = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-//   updateableField.forEach(field => {
-//     if (field in req.body) {
-//       updatedFollower[field] = req.body[field];
-//     }
-//   });
-//
-//   // console.log(req.user.id)
-//
-//   return User
-//     .findByIdAndUpdate(req.user.id, {$set: req.body}, { new: true})
-//     .then(userSchedule => {
-//       // console.log(userSchedule)
-//       // console.log(req.body)
-//       // console.log('Checking if the user has any information about workout schedule...')
-//       userSchedule.workoutSplit.push(req.body)
-//       userSchedule.save().then(schedule => res.status(201).json(schedule.serialize()));
-//     })
-// })
 
 router.put('/subscribe/:id', jwtAuth, (req, res) => {
   const updatedFollower = {};
@@ -230,13 +150,6 @@ router.post('/signup', jsonParser, (req, res) => {
     });
   }
 
-  // If the username and password aren't trimmed we give an error.  Users might
-  // expect that these will work without trimming (i.e. they want the password
-  // "foobar ", including the space at the end).  We need to reject such values
-  // explicitly so the users know what's happening, rather than silently
-  // trimming them and expecting the user to understand.
-  // We'll silently trim the other fields, because they aren't credentials used
-  // to log in, so it's less of a problem.
   const explicityTrimmedFields = ['username', 'password'];
   const nonTrimmedField = explicityTrimmedFields.find(
     field => req.body[field].trim() !== req.body[field]
@@ -316,6 +229,8 @@ router.post('/signup', jsonParser, (req, res) => {
       });
     })
     .then(user => {
+      //WIP
+      //Post.create
       return res.status(201).json(user.serialize());
     })
     .catch(err => {
@@ -340,4 +255,4 @@ router.delete('/:id', (req, res) => {
     })
 });
 
-module.exports = {router};
+module.exports = router;

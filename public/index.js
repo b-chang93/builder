@@ -19,7 +19,7 @@ function userLogIn(username, password) {
       body: JSON.stringify(data)
   })
   .then(handleErrors)
-  .catch(error => displayError(`${error} - Username or password is incorrect.`))
+  .catch(error => displayError(`Username or password is incorrect.`))
   .then(response => response.json())
   .then(function(token) {
     localStorage.setItem('token', token.authToken);

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
-const {Exercise} = require('./models');
+const Exercise = require('./models');
 
 router.get('/', (req,res) => {
   Exercise
@@ -31,8 +31,6 @@ router.get('/bodypart/:muscle?', (req, res) => {
     .find()
     .then(exercises => {
       let result = exercises.filter(muscle => muscle.primary[0] === req.params.muscle)
-      console.log('LOGGING RESULTS')
-      console.log(result)
       res.json(result.map(muscle => muscle.serialize()))
     })
     .catch(err => {
@@ -40,4 +38,4 @@ router.get('/bodypart/:muscle?', (req, res) => {
       res.status(500).json({error: 'Something went horribly wrong.'})
     });
 });
-module.exports = {router};
+module.exports = router;
