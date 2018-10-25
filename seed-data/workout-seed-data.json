@@ -1,6 +1,6 @@
 [
   {
-    "_id": {"$oid":"5bc4de6f7e72a8692a462226"},
+    "_id": "5bc4de6f7e72a8692a462226",
     "title":"Chest Workout",
     "difficulty":"Easy",
     "exercises":[

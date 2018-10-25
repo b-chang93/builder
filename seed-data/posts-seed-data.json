@@ -1,6 +1,6 @@
 [
   {
-    "_id" : {"$oid":"5bce680cbb797912f84e8103"},
+    "_id" : "5bce680cbb797912f84e8103",
     "likes" : 0,
     "creator" : "5bcf5e1bdf664b728b57431a",
     "title" : "Sample Post",
@@ -9,7 +9,7 @@
     "updatedAt" : "2018-10-23T00:15:08.212Z"
   },
   {
-    "_id" : {"$oid":"5bce6a3caa582113cdfbc3a7"},
+    "_id" : "5bce6a3caa582113cdfbc3a7",
     "likes" : 0,
     "creator" : "5bcf5e1bdf664b728b57431a",
     "title" : "Create your workouts ahead of time or during your workout.",

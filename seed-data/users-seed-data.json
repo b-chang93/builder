@@ -1,6 +1,6 @@
 [
   {
-    "_id": {"$oid":"5bcf5e1bdf664b728b57431a"},
+    "_id": "5bcf5e1bdf664b728b57431a",
     "firstName":"brandon",
     "lastName":"chang",
     "username":"brandon.chang",
@@ -11,7 +11,7 @@
     "posts":[
     ],
     "workoutSplit":[
-        {"_id" : {"$oid":"5bce679d3d34570fb081dc7a"},
+        {"_id" : "5bce679d3d34570fb081dc7a",
         "name":"Strength Gains",
         "Monday":"Legs",
         "Tuesday":"Rest",
@@ -23,7 +23,7 @@
         ]
   },
   {
-    "_id": {"$oid":"5bcf5e1bdf664b728b57431b"},
+    "_id": "5bcf5e1bdf664b728b57431b",
     "firstName":"sean",
     "lastName":"chang",
     "username":"sean.chang",
@@ -31,7 +31,7 @@
     "avatar": "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX5964486.jpg"
   },
   {
-    "_id": {"$oid":"5bcf5e1bdf664b728b574318"},
+    "_id": "5bcf5e1bdf664b728b574318",
     "firstName":"jimmmy",
     "lastName":"chang",
     "username":"jimmy.chang",
@@ -39,7 +39,7 @@
     "avatar": "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX5964486.jpg"
   },
   {
-    "_id": {"$oid":"5bcf5e1bdf664b728b574319"},
+    "_id": "5bcf5e1bdf664b728b574319",
     "firstName":"albert",
     "lastName":"shin",
     "username":"albert.shin",
@@ -47,7 +47,7 @@
     "avatar": "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX5964486.jpg"
   },
   {
-    "_id": {"$oid":"5bcf5e1bdf664b728b574317"},
+    "_id": "5bcf5e1bdf664b728b574317",
     "firstName":"joe",
     "lastName":"shmoe",
     "username":"joe.shmoe",
