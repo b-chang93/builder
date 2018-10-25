@@ -229,6 +229,8 @@ router.post('/signup', jsonParser, (req, res) => {
       });
     })
     .then(user => {
+      //WIP
+      //Post.create
       return res.status(201).json(user.serialize());
     })
     .catch(err => {
@@ -253,4 +255,4 @@ router.delete('/:id', (req, res) => {
     })
 });
 
-module.exports = {router};
+module.exports = router;

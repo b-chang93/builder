@@ -38,4 +38,4 @@ router.get('/bodypart/:muscle?', (req, res) => {
       res.status(500).json({error: 'Something went horribly wrong.'})
     });
 });
-module.exports = {router};
+module.exports = router;

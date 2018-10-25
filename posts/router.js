@@ -117,4 +117,4 @@ router.put('/:id', (req, res) => {
     .catch(err => res.status(500).json({message: `Something went horribly wrong`}));
 });
 
-module.exports = {router};
+module.exports = router;
