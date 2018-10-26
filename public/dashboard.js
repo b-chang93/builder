@@ -1,7 +1,8 @@
 let postTitle, workoutInfo, focusPostTitle, focusPostContent, avatar, currentUsername, subscribed;
-let currentUser = localStorage.getItem('userInfo');
+let currentUser = localStorage.getItem('userId');
 let loginToken = localStorage.getItem('token');
 let isNewUser = localStorage.getItem('isNewUser');
+let userLoggedIn = localStorage.getItem('loggedIn');
 
 function getToken() {
   if(!loginToken) {
@@ -49,9 +50,46 @@ function createPost(title, content, callback) {
   })
 }
 
+function handlePostCreation() {
+  const targetTitle = $('.modal-title')
+  const targetPostContent = $('.modal-workout-content')
+  $('#create-post').attr("disabled", "true");
+
+  targetTitle.blur(function() {
+    targetPostContent.blur(function() {
+      if(targetTitle.val() != "" && targetPostContent.val() != "") {
+        $('#create-post').removeAttr("disabled");
+      } else {
+        $('#create-post').attr("disabled", "true");
+      }
+    })
+  })
+
+  $('#create-post').on('click', event => {
+
+    postTitle = targetTitle.val();
+    postContent = targetPostContent.val();
+
+    //clear inputs
+    targetTitle.val('');
+    targetPostContent.val('');
+
+    createPost(postTitle, postContent, renderPosts);
+
+    //close modal after creating a post
+    $('#myModal').hide();
+  })
+}
+
 function displayUserProfile() {
   currentUsername = window.location.href.split('/').pop()
   url = `/api/users/username/${currentUsername}`
+  console.log(currentUsername == '')
+  if(currentUsername === "" || currentUsername === undefined) {
+    window.location.replace(`/dashboard/username/${userLoggedIn}`);
+  } else {
+    url = `/api/users/username/${currentUsername}`.replace(/\/$/, "")
+  }
 
   return fetch(url, {
     method: "GET",
@@ -61,43 +99,95 @@ function displayUserProfile() {
         "Authorization": "Bearer " + loginToken
     }
   })
-  .then(response => response.json())
-  .then(function(userObject) {
 
-    avatar = userObject.avatar;
+  .then(function(response) {
+    if(response.status === 200) {
+      return response.json();
+    } else {
+      window.location.replace(`/dashboard/username/${userLoggedIn}`);
+    }
+  })
+  .then(function(user) {
+    console.log(user)
+    avatar = user.avatar;
 
     $('.feed-identity').html(
       `<section id="user-thumbnail">
         <img id="my-avatar" src="${avatar}" alt="workout-bear" />
-        <p class="name">${userObject.firstName} ${userObject.lastName}</p>
+        <p class="name">${user.firstName} ${user.lastName}</p>
         <button id="subscribe">follow</button>
       </section>`
     )
-
 
     if (subscribed === true) {
       $("#subscribe").attr('id', "unsubscribe").html('unsubscribe')
     }
 
+    let posts = user.posts;
+
+    fetchPosts(posts);
   })
 }
 
-function displayMyPosts() {
-  let url = '/api/posts/';
+function fetchPosts(posts) {
 
-  return fetch(url, {
-      method: "GET",
-      mode: "cors",
-      headers: {
-          "Content-Type": "application/json; charset=utf-8",
-          "Authorization": "Bearer " + loginToken
-      }
+  let post = posts.map(post => {
+    let url = `/api/posts/${post}`;
+
+    return fetch(url, {
+        method: "GET",
+        mode: "cors",
+        headers: {
+            "Content-Type": "application/json; charset=utf-8",
+            "Authorization": "Bearer " + loginToken
+        }
+    })
+    .then(response => response.json())
+    .then(function(singlePost) {
+      displayPosts(singlePost);
+    })
   })
-  .then(response => response.json())
-  .then(function(postsList) {
-    const result = postsList.filter( post => post.creator.username === currentUsername)
-    displayPosts(result);
-  })
+}
+
+function displayPosts(data) {;
+  const results = renderPosts(data);
+  $('.main-index').append(results);
+}
+
+function displaySubscribedUserPosts(data) {
+  const results = data.map((post, index) => renderPosts(post, avatar, index));
+
+  $('.main-index').html(results);
+}
+
+function renderNewPosts(post) {
+  let date = post.created.slice(0,10).replace(/-/g,'/');
+  $('.main-index').append(`
+      <li class="feed-index-item">
+        <section class="content">
+          <section class="thumbnail-for-post">
+            <img class="avatar-related-to-post" src="${avatar}" alt="user-avatar">
+            <h1 class="post-title">${post.title}</h1>
+            <p class="date">${date}</p>
+          </section>
+          <p class="post-text">${post.content}</p>
+        </section>
+      </li>`)
+}
+
+function renderPosts(post) {
+  let date = post.created.slice(0,10).replace(/-/g,'/');
+  return `
+    <li class="feed-index-item">
+      <section class="content">
+        <section class="thumbnail-for-post">
+          <img class="avatar-related-to-post" src="${post.creator.avatar}" alt="user-">
+          <h1 class="post-title">${post.title}</h1>
+          <p class="date">${date}</p>
+        </section>
+        <p class="post-text">${post.content}</p>
+      </section>
+    </li>`
 }
 
 function displayError(msg) {
@@ -132,7 +222,6 @@ function subscribeToUser() {
         displayError(msg)
         $("#subscribe").attr('disabled', true);
       } else {
-        console.log(user.id)
         subscribeUrl = `/api/users/subscribe/${user.id}`
 
         return fetch(subscribeUrl, {
@@ -145,10 +234,8 @@ function subscribeToUser() {
           body: JSON.stringify(data)
         })
         .then(function(follower) {
-          console.log(follower)
           $("#subscribe").attr('id', "unsubscribe").html('unsubscribe')
           subscribed = true;
-          console.log(subscribed)
         })
       }
     })
@@ -206,6 +293,7 @@ function displaySubscribedPosts() {
   })
   .then(response => response.json())
   .then(list => {
+    console.log(list)
     list.following.map(follower => {
       url = `/api/users/subscribedTo/${follower}`;
 
@@ -260,9 +348,9 @@ function findMySchedule() {
 }
 
 function displayMySplit(data) {
+  console.log(data)
  var d = new Date();
  var n = d.getDay();
- // console.log(n)
 
  const map = {
      1: 'Monday',
@@ -273,9 +361,6 @@ function displayMySplit(data) {
      6: 'Saturday',
      7: 'Sunday'
  }
- // if(n in map) {
- //   $(`.reveal-split > span[value="${map[n]}"]`).parent().css(“background”, “black”)
- // }
 
  $(`.reveal-split > span[value="${map[n]}"]`).parent().css("background", "#003366")
 
@@ -283,9 +368,13 @@ function displayMySplit(data) {
  let schedule = userSchedules[0]
  let daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
- for(let i = 0; i < daysOfWeek.length; i++) {
-   let day = $(`.reveal-split > span[value="${daysOfWeek[i]}"]`)
-   day.text(schedule[daysOfWeek[i]])
+ if(userSchedules.length < 1) {
+   return;
+ } else {
+   for(let i = 0; i < daysOfWeek.length; i++) {
+     let day = $(`.reveal-split > span[value="${daysOfWeek[i]}"]`)
+     day.text(schedule[daysOfWeek[i]])
+   }
  }
 
  $('.reveal-split').on('click', event => {
@@ -297,18 +386,6 @@ function displayMySplit(data) {
 
 function renderExercise(exercise) {
   return `<img src="${exercise.svg[0]}"/>`
-}
-
-function displayPosts(data) {
-  const results = data.map((post, index) => renderPosts(post, avatar, index));
-
-  $('.main-index').append(results);
-}
-
-function displaySubscribedUserPosts(data) {
-  const results = data.map((post, index) => renderPosts(post, avatar, index));
-
-  $('.main-index').html(results);
 }
 
 function getWorkouts(token) {
@@ -410,67 +487,6 @@ function handleWorkoutModal() {
     if (event.target.id === "create-a-workout-modal") {
       $('#create-a-workout-modal').hide();
     }
-  })
-}
-
-function renderNewPosts(post) {
-  let date = post.created.slice(0,10).replace(/-/g,'/');
-  $('.main-index').append(`
-      <li class="feed-index-item">
-        <section class="content">
-          <section class="thumbnail-for-post">
-            <img class="avatar-related-to-post" src="${avatar}" alt="user-avatar">
-            <h1 class="post-title">${post.title}</h1>
-            <p class="date">${date}</p>
-          </section>
-          <p class="post-text">${post.content}</p>
-        </section>
-      </li>`)
-}
-
-function renderPosts(post) {
-  let date = post.created.slice(0,10).replace(/-/g,'/');
-  return `
-    <li class="feed-index-item">
-      <section class="content">
-        <section class="thumbnail-for-post">
-          <img class="avatar-related-to-post" src="${post.creator.avatar}" alt="user-">
-          <h1 class="post-title">${post.title}</h1>
-          <p class="date">${date}</p>
-        </section>
-        <p class="post-text">${post.content}</p>
-      </section>
-    </li>`
-}
-
-function handlePostCreation() {
-  const targetTitle = $('.modal-title')
-  const targetPostContent = $('.modal-workout-content')
-  $('#create-post').attr("disabled", "true");
-
-  targetTitle.blur(function() {
-    targetPostContent.blur(function() {
-      if(targetTitle.val() != "" && targetPostContent.val() != "") {
-        $('#create-post').removeAttr("disabled");
-      } else {
-        $('#create-post').attr("disabled", "true");
-      }
-    })
-  })
-
-  $('#create-post').on('click', event => {
-
-    postTitle = targetTitle.val();
-    postContent = targetPostContent.val();
-
-    //clear inputs
-    targetTitle.val('');
-    targetPostContent.val('');
-
-    createPost(postTitle, postContent, renderPosts);
-
-    //close modal after creating a post
-    $('#myModal').hide();
   })
 }
 
@@ -819,7 +835,6 @@ function autoComplete(exercises) {
 function handleDashboard() {
   getToken().then(res => getWorkouts(res));
   displayUserProfile();
-  displayMyPosts();
   handleWorkoutModal();
   handlePostCreation();
   openPostModal();

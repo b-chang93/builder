@@ -1,4 +1,5 @@
 let token;
+
 function userLogIn(username, password) {
 
   let data = {
@@ -38,8 +39,10 @@ function userLogIn(username, password) {
       console.log('logging user object info...')
       console.log(userObject)
       console.log(`User id: ${userObject.id}`)
-      localStorage.setItem('userInfo', userObject.id);
+      localStorage.setItem('userId', userObject.id);
       localStorage.setItem('isNewUser', false);
+      localStorage.setItem('loggedIn', data.username);
+      console.log(data.username)
       window.location.replace(`/dashboard/username/${data.username}`);
     })
   })
@@ -66,7 +69,6 @@ function signUpUser(fname, lname, username, password) {
       },
       body: JSON.stringify(data)
   })
-  //successfully created a user, now we login
   .then(response => response.json())
   .then(userObject => {
     console.log(userObject)
@@ -74,8 +76,9 @@ function signUpUser(fname, lname, username, password) {
       return displayError(userObject.message)
     }
     userLogIn(data.username, data.password);
-    localStorage.setItem('userInfo', userObject.id);
-    localStorage.setItem('isNewUser', true); //setting a boolean to be sent over
+    localStorage.setItem('userId', userObject.id);
+    localStorage.setItem('isNewUser', true);
+    localStorage.setItem('loggedIn', data.username);
     window.location.replace(`/dashboard/username/${data.username}`);
   })
 };
