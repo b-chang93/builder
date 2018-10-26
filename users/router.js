@@ -126,6 +126,8 @@ router.delete('/unsubscribe/:id', jwtAuth, (req, res) => {
 router.post('/signup', jsonParser, (req, res) => {
   const requiredFields = ['username', 'password', 'firstName', 'lastName'];
   const missingField = requiredFields.find(field => !(field in req.body));
+  const defaultAvatar = "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX5964486.jpg";
+  const defaultPost = "5bce680cbb797912f84e8103";
 
   if (missingField) {
     return res.status(422).json({
@@ -225,12 +227,12 @@ router.post('/signup', jsonParser, (req, res) => {
         username,
         password: hash,
         firstName,
-        lastName
+        lastName,
+        avatar: defaultAvatar,
+        posts:[defaultPost]
       });
     })
     .then(user => {
-      //WIP
-      //Post.create
       return res.status(201).json(user.serialize());
     })
     .catch(err => {
