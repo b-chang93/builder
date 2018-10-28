@@ -12,7 +12,7 @@ function getToken() {
     url = "/api/auth/refresh";
 
     return fetch(url, {
-        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        method: "POST",
         mode: "cors", // no-cors, cors, *same-origin
         headers: {
             "Content-Type": "application/json; charset=utf-8",
@@ -31,12 +31,12 @@ function createPost(title, content, callback) {
   let url = '/api/posts/';
 
   let data = {
-    "title": title,
+     "title": title,
     "content": content
   }
 
   return fetch(url, {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
+      method: "POST",
       mode: "cors", // no-cors, cors, *same-origin
       headers: {
           "Content-Type": "application/json; charset=utf-8",
@@ -81,10 +81,32 @@ function handlePostCreation() {
   })
 }
 
+function deletePosts() {
+  $('.main-index').on('click', '.delete', event => {
+    // console.log('clicked on a post')
+    let target = $(event.currentTarget).parent('.feed-index-item').attr('data-id');
+    $(event.currentTarget).parent('.feed-index-item').remove();
+    // console.log(target)
+    // console.log(currentUser)
+    // console.log(currentUser === currentUsername)
+
+    url = `/api/posts/${target}`
+
+    return fetch(url, {
+        method: "DELETE",
+        mode: "cors",
+        headers: {
+            "Content-Type": "application/json; charset=utf-8",
+            "Authorization": "Bearer " + loginToken
+        }
+    })
+    .then(response => response.json())
+  })
+}
+
 function displayUserProfile() {
   currentUsername = window.location.href.split('/').pop()
   url = `/api/users/username/${currentUsername}`
-  console.log(currentUsername == '')
   if(currentUsername === "" || currentUsername === undefined) {
     window.location.replace(`/dashboard/username/${userLoggedIn}`);
   } else {
@@ -108,7 +130,6 @@ function displayUserProfile() {
     }
   })
   .then(function(user) {
-    console.log(user)
     avatar = user.avatar;
 
     $('.feed-identity').html(
@@ -132,7 +153,7 @@ function displayUserProfile() {
 function fetchPosts(posts) {
 
   let post = posts.map(post => {
-    let url = `/api/posts/${post}`;
+  let url = `/api/posts/${post}`;
 
     return fetch(url, {
         method: "GET",
@@ -144,26 +165,52 @@ function fetchPosts(posts) {
     })
     .then(response => response.json())
     .then(function(singlePost) {
-      displayPosts(singlePost);
+      let sub = false;
+      // displayPosts(singlePost);
+      displayPosts(singlePost, sub);
     })
   })
 }
 
-function displayPosts(data) {;
-  const results = renderPosts(data);
+function displayPosts(data, sub) {
+  console.log(data)
+  console.log(sub)
+  const results = renderPosts(data, sub);
   $('.main-index').append(results);
 }
 
-function displaySubscribedUserPosts(data) {
-  const results = data.map((post, index) => renderPosts(post, avatar, index));
+// function displaySubscribedUserPosts(data) {
+//   const results = data.map((post) => renderPosts(post));
+//
+//   $('.main-index').html(results);
+// }
 
-  $('.main-index').html(results);
+function deletePostHelper() {
+  url = `/api/posts/${target}`
+
+  return fetch(url, {
+    method: "GET",
+    mode: "cors",
+    headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        "Authorization": "Bearer " + loginToken
+    }
+  })
+  .then(response => response.json())
+  .then(post => {
+    console.log(post)
+    console.log(post.creator._id)
+    console.log(post.creator._id === currentUser)
+    if(!(post.creator._id === currentUser)) {
+      $('.delete').remove();
+    }
+  })
 }
 
 function renderNewPosts(post) {
   let date = post.created.slice(0,10).replace(/-/g,'/');
   $('.main-index').append(`
-      <li class="feed-index-item">
+      <li class="feed-index-item" data-id="${post.id}">
         <section class="content">
           <section class="thumbnail-for-post">
             <img class="avatar-related-to-post" src="${avatar}" alt="user-avatar">
@@ -172,22 +219,53 @@ function renderNewPosts(post) {
           </section>
           <p class="post-text">${post.content}</p>
         </section>
+        <button class="delete">Delete</button>
       </li>`)
 }
 
-function renderPosts(post) {
+function renderPosts(post, sub) {
+  console.log(sub)
   let date = post.created.slice(0,10).replace(/-/g,'/');
-  return `
-    <li class="feed-index-item">
-      <section class="content">
-        <section class="thumbnail-for-post">
-          <img class="avatar-related-to-post" src="${post.creator.avatar}" alt="user-">
-          <h1 class="post-title">${post.title}</h1>
-          <p class="date">${date}</p>
+
+  if(sub) {
+    return `
+      <li class="feed-index-item" data-id="${post.id}">
+        <section class="content">
+          <section class="thumbnail-for-post">
+            <img class="avatar-related-to-post" src="${post.creator.avatar}" alt="user-avatar">
+            <h1 class="post-title">${post.title}</h1>
+            <p class="date">${date}</p>
+          </section>
+          <p class="post-text">${post.content}</p>
         </section>
-        <p class="post-text">${post.content}</p>
-      </section>
-    </li>`
+        <button class="delete">Hide</button>
+      </li>`
+  } else {
+    return `
+      <li class="feed-index-item" data-id="${post.id}">
+        <section class="content">
+          <section class="thumbnail-for-post">
+            <img class="avatar-related-to-post" src="${post.creator.avatar}" alt="user-avatar">
+            <h1 class="post-title">${post.title}</h1>
+            <p class="date">${date}</p>
+          </section>
+          <p class="post-text">${post.content}</p>
+        </section>
+        <button class="delete">Delete</button>
+      </li>`
+  }
+  // return `
+  //   <li class="feed-index-item" data-id="${post.id}">
+  //     <section class="content">
+  //       <section class="thumbnail-for-post">
+  //         <img class="avatar-related-to-post" src="${post.creator.avatar}" alt="user-avatar">
+  //         <h1 class="post-title">${post.title}</h1>
+  //         <p class="date">${date}</p>
+  //       </section>
+  //       <p class="post-text">${post.content}</p>
+  //     </section>
+  //     <button class="delete">Delete</button>
+  //   </li>`
 }
 
 function displayError(msg) {
@@ -199,7 +277,7 @@ function displayError(msg) {
 
 function subscribeToUser() {
   $('body').on('click', '#subscribe', event => {
-
+    console.log('clicked subscribe')
     url = `/api/users/username/${currentUsername}`
 
     return fetch(url, {
@@ -212,12 +290,13 @@ function subscribeToUser() {
     })
     .then(response => response.json())
     .then(function(user) {
+      console.log(user)
 
       let data = {
         "followers": currentUser
       }
 
-      if (currentUser == user.id) {
+      if (currentUser === user.id) {
         let msg = 'You cannot subscribe to yourself'
         displayError(msg)
         $("#subscribe").attr('disabled', true);
@@ -234,6 +313,7 @@ function subscribeToUser() {
           body: JSON.stringify(data)
         })
         .then(function(follower) {
+          // console.log(follower)
           $("#subscribe").attr('id', "unsubscribe").html('unsubscribe')
           subscribed = true;
         })
@@ -293,9 +373,10 @@ function displaySubscribedPosts() {
   })
   .then(response => response.json())
   .then(list => {
-    console.log(list)
-    list.following.map(follower => {
-      url = `/api/users/subscribedTo/${follower}`;
+    // console.log(list)
+    // list.following.map(user => console.log(user))
+    list.following.map(user => {
+      url = `/api/users/subscribedTo/${user}`;
 
           return fetch(url, {
               method: "GET",
@@ -307,6 +388,8 @@ function displaySubscribedPosts() {
           })
           .then(response => response.json())
           .then(function(targetUser) {
+            console.log(targetUser)
+            targetUser.posts.map(post => console.log(post))
             targetUser.posts.map(post => {
               url = `/api/posts/${post}`;
 
@@ -322,7 +405,9 @@ function displaySubscribedPosts() {
               .then(function(posts) {
                 const results = []
                 results.push(posts)
-                displayPosts(results);
+                let sub = true;
+                // results.map(post => displayPosts(post))
+                results.map(post => displayPosts(post, sub))
               })
             })
           })
@@ -348,7 +433,6 @@ function findMySchedule() {
 }
 
 function displayMySplit(data) {
-  console.log(data)
  var d = new Date();
  var n = d.getDay();
 
@@ -378,9 +462,9 @@ function displayMySplit(data) {
  }
 
  $('.reveal-split').on('click', event => {
-   console.log($(event.currentTarget))
+   // console.log($(event.currentTarget))
    let split = $(event.currentTarget).find('span').text()
-   console.log(split)
+   // console.log(split)
  })
 }
 
@@ -392,7 +476,7 @@ function getWorkouts(token) {
   url = '/workouts'
 
   return fetch(url, {
-      method: "GET", // *GET, POST, PUT, DELETE, etc.
+      method: "GET",
       mode: "cors", // no-cors, cors, *same-origin
       headers: {
           "Content-Type": "application/json; charset=utf-8",
@@ -449,9 +533,15 @@ function showWorkoutDetails(data) {
 
 function openPostModal() {
   $('.main-index').on('click', 'li', event => {
-    focusPostTitle = event.currentTarget.querySelector(".post-title").textContent;
-    focusPostContent = event.currentTarget.querySelector(".post-text").textContent;
-    displayPostModal(focusPostTitle, focusPostContent);
+    let deleteButton = $(event.target).is(".delete");
+    if(deleteButton) {
+      console.log('Successfully deleted post')
+      event.stopPropagation();
+    } else {
+      focusPostTitle = event.currentTarget.querySelector(".post-title").textContent;
+      focusPostContent = event.currentTarget.querySelector(".post-text").textContent;
+      displayPostModal(focusPostTitle, focusPostContent);
+    }
   })
 }
 
@@ -507,7 +597,7 @@ function findExercises(search) {
   }
 
   return fetch(url, {
-      method: "GET", // *GET, POST, PUT, DELETE, etc.
+      method: "GET",
       mode: "cors", // no-cors, cors, *same-origin
       headers: {
           "Content-Type": "application/json; charset=utf-8",
@@ -525,7 +615,7 @@ function fetchExerciseInfo(id) {
   url = `/exercises/${id}`
 
   return fetch(url, {
-      method: "GET", // *GET, POST, PUT, DELETE, etc.
+      method: "GET",
       mode: "cors", // no-cors, cors, *same-origin
       headers: {
           "Content-Type": "application/json; charset=utf-8",
@@ -680,7 +770,7 @@ function exploreUsers() {
     url = "/api/users"
 
     return fetch(url, {
-        method: "GET", // *GET, POST, PUT, DELETE, etc.
+        method: "GET",
         mode: "cors", // no-cors, cors, *same-origin
         headers: {
             "Content-Type": "application/json; charset=utf-8",
@@ -776,8 +866,6 @@ function createWorkout() {
 
     newWorkout.title = title;
     newWorkout.difficulty = difficulty;
-
-    console.log('creating workout...')
     postNewWorkout(newWorkout)
 
   })
@@ -796,16 +884,16 @@ function postNewWorkout(data) {
       body: JSON.stringify(data)
   })
   .then(response => response.json()) // parses response to JSON
-  .then(function(res) {
-    // renderNewPosts(res, avatar);
-  })
+  // .then(function(res) {
+  //   // renderNewPosts(res, avatar);
+  // })
 }
 
 function preloadExercises() {
   url = `/exercises`
 
   return fetch(url, {
-      method: "GET", // *GET, POST, PUT, DELETE, etc.
+      method: "GET",
       mode: "cors", // no-cors, cors, *same-origin
       headers: {
           "Content-Type": "application/json; charset=utf-8",
@@ -835,24 +923,22 @@ function autoComplete(exercises) {
 function handleDashboard() {
   getToken().then(res => getWorkouts(res));
   displayUserProfile();
-  handleWorkoutModal();
   handlePostCreation();
+  deletePosts();
   openPostModal();
-  displaySubscribedPosts();
-
-  findMySchedule();
-
+  handleWorkoutModal();
   searchExercises();
   revealSearchModal();
+  displaySubscribedPosts();
+  findMySchedule();
   getExerciseInfo();
   subscribeToUser();
   unsubscribeFromUser();
-
   findUsers();
   exploreUsers();
-
   createWorkout();
   preloadExercises();
+  //@WIP
 }
 
 $(handleDashboard);

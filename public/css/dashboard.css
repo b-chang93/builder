@@ -111,6 +111,7 @@ th {
 .flex-wrapper {
   display: flex;
   flex-direction: column-reverse;
+  width: 80%;
 }
 
 #workout-info-container {
@@ -252,7 +253,7 @@ th {
   color: #359aff;
 }
 
-#subscribe {
+#subscribe, #unsubscribe  {
   width: 100%;
   background-color: #359aff;
   border: none;
@@ -920,7 +921,7 @@ th {
   }
 
   .posts-area {
-    width: 100%;
+    width: 98%;
     margin-left: 5px;
   }
 
@@ -1071,7 +1072,7 @@ th {
     top: 75%;
   }
 
-  #subscribe {
+  #subscribe, #unsubscribe {
     width: 100%;
     padding: 12px 32px;
     font-size: 24px;
