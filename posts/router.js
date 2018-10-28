@@ -6,7 +6,6 @@ const User = require('../users/models');
 const Post = require('./models');
 
 router.get('/', (req, res) => {
-  console.log('making get request....')
   Post
     .find()
     .then(posts => {
@@ -31,7 +30,6 @@ router.get('/username/:username', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  console.log('checking if current user is following another user...')
   Post
     .findById(req.params.id)
     .then(posts => {
@@ -53,10 +51,7 @@ router.post('/', (req,res) => {
     }
   });
 
-  console.log(req.user.id)
-
   let postId;
-  console.log('scanning through posts collection...')
   return Post
     .create({
       creator: req.user.id,
@@ -70,7 +65,6 @@ router.post('/', (req,res) => {
       return User
         .findById(req.user.id)
         .then(userPost => {
-          console.log('found user and now retrieving its object...')
           userPost.posts.push(postId);
           return userPost.save().then(u => res.status(201).json(post.serialize()));
         })
@@ -86,13 +80,36 @@ router.post('/', (req,res) => {
 
 router.delete('/:id', (req, res) => {
   Post
-    .findByIdAndRemove(req.params.id)
-    .then(() => {
-      res.status(204).json({message: 'Sucessfully deleted'});
-    })
-    .catch(err => {
-      console.error(err);
-      res.status(500).json({error: 'Something went horribly wrong'})
+    .findById(req.params.id)
+    .then(post => {
+
+      if(post.creator._id == req.user.id) {
+        Post
+          .findByIdAndRemove(req.params.id)
+          .then(() => {
+            console.log('SUCESSFULLY DELETED THE POST...')
+            res.status(204).json({message: 'Sucessfully deleted'});
+          })
+          .then(() => {
+            return User
+              .findById(req.user.id)
+              .then(userPost => {
+                let index = userPost.posts.indexOf(req.params.id);
+                if (index > -1) {
+                  userPost.posts.splice(index, 1);
+                }
+                return userPost.save()
+              })
+          })
+          .catch(err => {
+            console.error(err);
+            res.status(500).json({error: 'Something went horribly wrong'})
+          })
+      } else {
+          res.status(403).json({
+             error: "You do not have authorization to delete another user's post"
+           });
+      }
     })
 })
 
