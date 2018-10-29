@@ -7,7 +7,6 @@
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
   <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
-  <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script> -->
   <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
   <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
@@ -16,14 +15,6 @@
 <body>
   <!-- <header><h1>Buildr</h1></header> -->
   <main id="root">
-    <!-- <div id="main-nav">
-      <nav class="left-nav">
-        <a>
-          <p style="margin:0; font-size:38px; color:white;">Buildr</p>
-        </a>
-      </nav>
-    </div> -->
-
     <div class="navbar">
       <a class="left-nav">Builder</a>
       <a class="right-nav find-users">Explore Users</a>
@@ -72,21 +63,6 @@
         </div>
       </section>
 
-      <!-- <div id="workout-info-container">
-        <div id="my-workouts-list">
-          <h2 style="text-align: center;">My Workouts</h2>
-          <ul class="workout-index">
-          </ul>
-        </div>
-
-        <div class='my-workout-info'>
-          <h2 class="workout-name">
-            </h2>
-          <section class='individual-workout-details'>
-          </section>
-        </div>
-      </div> -->
-
       <div class="flex-wrapper">
         <section class="posts-area">
 
@@ -94,9 +70,8 @@
             <input type="text" class="modal-title" value placeholder="Title">
             <textarea class="modal-workout-content" placeholder="Got a good workout? Share!"></textarea>
             <section class="modal-buttons">
-              <button id="share-workout">Build a Workout</button>
-              <button id="create-post">Post</button>
-              <!-- <button id="cancel-post">Cancel</button> -->
+              <button id="build-workout">Build a Workout</button>
+              <button class="create-post">Post</button>
             </section>
           </div>
 
@@ -149,7 +124,7 @@
 
         <div class="workout-details-container">
           <section class="your-workout-details">
-            <h3 style="margin: 0; width: 70%; border-bottom: 1px solid black;">Name it!</h3>
+            <h3>Name it!</h3>
             <label for="workout-title">Name your Workout: </label>
             <input type="text" class="workout-title" value name="title" placeholder="Title">
             <label for="workout-difficulty">Difficulty: </label>
@@ -157,7 +132,7 @@
           </section>
 
           <section class="set-info">
-            <h3 style="border-bottom: 1px solid black;">Add and Save Exercises!</h3>
+            <h3>Add and Save Exercises!</h3>
             <label for="automplete-1">Name: </label>
             <input type="text" id="automplete-1" class="exercise" value name="name" placeholder="Bench Press">
 
@@ -176,23 +151,14 @@
           <button class="create-new-workout" type="submit">Create</button>
         </div>
 
-        <!-- <div class="workout-draft">
-            <h3>Workout Draft</h3>
-            <ul class="exercise-list">
-            </ul>
-            <button class="create-new-workout" type="submit">Create</button>
-          </div> -->
-
-        <!-- <button class="create-new-workout" type="submit">Create</button> -->
-        <!-- <button type="button">Cancel</button> -->
       </form>
 
-      <!-- <div class="workout-draft">
-        <h3>Workout Draft</h3>
-        <ul class="exercise-list">
-        </ul>
-      </div> -->
-      <!-- <section class='create-workout-content'></section> -->
+      <div class="">
+        Share it!
+        <input type="text" class="workout-modal-title" value="" placeholder="Hardest workout yet!">
+        <textarea class="workout-modal-workout-content" placeholder="Man this workout..."></textarea>
+        <button class="workout-create-post" type="submit">Share</button>
+      </div>
     </div>
   </div>
 
@@ -231,10 +197,6 @@
     <div class="explore-user-modal">
       <span class="close">&times;</span>
       <section class="explore">
-        <!-- <section id="user-modal">
-          <img id="user-modal-my-avatar" src="https://media.tenor.com/images/d8bb62a1bb8af522ea8e26cca2e2d68c/tenor.gif" alt="user-avatar" />
-        </section>
-        <h2>Brandon</h2> -->
       </section>
     </div>
   </div>
