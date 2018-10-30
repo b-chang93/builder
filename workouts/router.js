@@ -28,7 +28,7 @@ router.get('/:id', (req, res) => {
     })
     .catch(err => {
       console.error(err);
-      res.status(500),json({error: 'Something went horribly wrong.'})
+      res.status(500).json({error: 'Something went horribly wrong.'})
     })
 });
 
@@ -49,13 +49,13 @@ router.post('/', jwtAuth, (req, res, next) => {
   let workout = {
     title: req.body.title,
     difficulty: req.body.difficulty,
-    exercises: req.body.exercises,
-    creator: req.user.id
+    exercises: req.body.exercises
+    // creator: req.user.id
   }
 
   for (var key in workout) {
     if(workout[key] == ''  || workout[key] == null) {
-      const message = `Missing input for \`${key}\` in request body. Please add an input.`;
+      const message = `Missing input for \`${key}\` in request body.`;
       console.error(message);
       return res.status(400).json(message);
     }
@@ -94,7 +94,14 @@ router.put('/:id', (req, res) => {
     console.error(message);
     return res.status(400).json(message);
   }
-
+  // const requiredFields = ['title', 'difficulty', 'exercises', 'creator'];
+  // requiredFields.forEach(field => {
+  //   if (!(field in req.body)) {
+  //     const message = `Missing \`${field}\` in request body`;
+  //     console.error(message);
+  //     return res.status(400).json(message);
+  //   }
+  // });
   const updated = {};
   const updateableFields = ['title', 'difficulty', 'exercises'];
   updateableFields.forEach(field => {
@@ -106,7 +113,7 @@ router.put('/:id', (req, res) => {
   Workout
     .findByIdAndUpdate(req.params.id, {$set: updated}, { new: true})
     .then(updatedWorkout => res.json(updatedWorkout.serialize()))
-    .catch(err => res.status(500).json({message: `Something went horribly wrong`}));
+    .catch(err => res.status(404).json({message: `Something went horribly wrong`}));
 });
 
 module.exports = router;

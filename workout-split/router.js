@@ -8,9 +8,6 @@ router.get('/', (req, res) => {
   WorkoutSplit
     .find()
     .then(schedule => {
-      console.log('SCANNING WORKOUTSPLIT DB...')
-      console.log('FINISHED SCANNING WORKOUTSPLIT DB...')
-      // res.json(schedule.map(split => split.serialize()));
       res.json(schedule)
     })
     .catch(err => {
@@ -23,7 +20,6 @@ router.get('/:id', (req, res) => {
   WorkoutSplit
     .findById(req.params.id)
     .then(schedule => {
-      console.log(schedule)
       res.json(schedule);
     })
     .catch(err => {
@@ -42,20 +38,6 @@ router.post('/', (req,res) => {
       return res.status(400).send(message);
     }
   });
-
-  // const nameRequired = ['firstName', 'lastName'];
-  // nameRequired.forEach(field => {
-  //   if(!(field in req.body.creator)) {
-  //     const message = `Missing \`${field}\` in request body`;
-  //     console.error(message);
-  //     return res.status(400).send(message);
-  //   }
-  // })
-  // if (req.body.length < 1) {
-  //   const message = `There must be at least one field in request body`;
-  //   console.error(message);
-  //   return res.status(400).send(message);
-  // }
 
   WorkoutSplit
     .create({

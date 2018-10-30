@@ -14,6 +14,7 @@ const PostSchema = mongoose.Schema({
   },
   likes: {type: Number, default: 0},
   creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  workout: { type: mongoose.Schema.Types.ObjectId, ref: 'Workout' },
   created: String
 });
 
@@ -40,10 +41,11 @@ PostSchema.virtual('fullName').get(function() {
 
 PostSchema.methods.serialize = function() {
   return {
-    id: this._id,
+    _id: this._id,
     title: this.title,
     content: this.content,
     likes: this.likes,
+    workout: this.workout,
     creator: this.creator,
     created: this.createdAt
   };

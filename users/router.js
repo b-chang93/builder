@@ -57,17 +57,17 @@ router.put('/subscribe/:id', jwtAuth, (req, res) => {
   return User
     .findById(req.params.id)
     .then(targetUser => {
-      followerId = req.user.id
+      followerId = req.user._id
+      console.log(followerId)
 
       if (!(targetUser.followers.indexOf(followerId) > -1)) {
         targetUser.followers.push(followerId)
         targetUser.save();
-
         return User
-          .findById(req.user.id)
-          .then(ownUserId => {
-            ownUserId.following.push(targetUser._id);
-            return ownUserId.save().then(u => res.status(201).json(u.serialize()));
+          .findById(req.user._id)
+          .then(reqUser => {
+            reqUser.following.push(targetUser._id);
+            return reqUser.save().then(u => res.status(201).json(u.serialize()));
           })
           .catch(err => {
             console.error(err);
@@ -86,9 +86,9 @@ router.delete('/unsubscribe/:id', jwtAuth, (req, res) => {
   let followerId;
 
   User
-    .findById(req.user.id)
+    .findById(req.user._id)
     .then(targetUser => {
-      followerId = req.user.id
+      followerId = req.user._id
       let followingIndex = targetUser.following.indexOf(req.params.id);
 
       if(followingIndex > -1) {
@@ -99,7 +99,7 @@ router.delete('/unsubscribe/:id', jwtAuth, (req, res) => {
       User
         .findById(req.params.id)
         .then(user => {
-          let followerIndex = user.followers.indexOf(req.user.id);
+          let followerIndex = user.followers.indexOf(req.user._id);
 
           if (followerIndex > -1) {
             user.followers.splice(followerIndex, 1);
@@ -108,7 +108,7 @@ router.delete('/unsubscribe/:id', jwtAuth, (req, res) => {
         })
 
       return User
-        .findById(req.user.id)
+        .findById(req.user._id)
         .then(user => {
           res.status(201).json(user.serialize());
         })

@@ -30,6 +30,7 @@ router.get('/username/:username', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
+  console.log(req.params.id)
   Post
     .findById(req.params.id)
     .then(posts => {
@@ -54,16 +55,16 @@ router.post('/', (req,res) => {
   let postId;
   return Post
     .create({
-      creator: req.user.id,
+      creator: req.user._id,
       title: req.body.title,
-      content: req.body.content
+      content: req.body.content,
+      workout: req.body.workout
     })
     .then(post => {
-      console.log('successfully created a post...')
       postId = post._id;
 
       return User
-        .findById(req.user.id)
+        .findById(req.user._id)
         .then(userPost => {
           userPost.posts.push(postId);
           return userPost.save().then(u => res.status(201).json(post.serialize()));
@@ -83,18 +84,18 @@ router.delete('/:id', (req, res) => {
     .findById(req.params.id)
     .then(post => {
 
-      if(post.creator._id == req.user.id) {
+      // console.log(req.user._id)
+      if(post.creator._id == req.user._id) {
         Post
-          .findByIdAndRemove(req.params.id)
+          .findByIdAndRemove(req.params._id)
           .then(() => {
-            console.log('SUCESSFULLY DELETED THE POST...')
             res.status(204).json({message: 'Sucessfully deleted'});
           })
           .then(() => {
             return User
-              .findById(req.user.id)
+              .findById(req.user._id)
               .then(userPost => {
-                let index = userPost.posts.indexOf(req.params.id);
+                let index = userPost.posts.indexOf(req.params._id);
                 if (index > -1) {
                   userPost.posts.splice(index, 1);
                 }
@@ -130,7 +131,7 @@ router.put('/:id', (req, res) => {
 
   Post
     .findByIdAndUpdate(req.params.id, {$set: updated}, { new: true})
-    .then(updatedWorkout => res.status(204).json(updatedWorkout.serialize()))
+    .then(updatedWorkout => res.status(200).json(updatedWorkout.serialize()))
     .catch(err => res.status(500).json({message: `Something went horribly wrong`}));
 });
 
