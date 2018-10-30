@@ -365,7 +365,7 @@ th {
   height: 50px;
 }
 
-.modal-title {
+.post-title {
   width: 90%;
   height: 10%;
   padding: 14px;
@@ -378,7 +378,7 @@ th {
   padding: 10px;
 }
 
-.modal-workout-content {
+.post-content {
   width: 90%;
   height: 40%;
   padding: 14px;
@@ -392,7 +392,7 @@ th {
   padding: 20px;
 }
 
-.modal-buttons {
+.create-post-buttons {
   display: flex;
   justify-content: flex-end;
   text-align: center;
@@ -912,12 +912,12 @@ th {
     height: 100%;
   }
 
-  .modal-buttons {
+  .create-post-buttons {
     border-top: 1px solid black;
     margin: 10px;
   }
 
-  .modal-workout-content {
+  .post-content {
     padding: 15px;
   }
 
@@ -950,8 +950,8 @@ th {
   }
 
   .exercise-search-modal {
-    margin-left: 8%;
-    width: 70%;
+    margin-left: 6%;
+    width: 85%;
     height: 90%;
   }
 

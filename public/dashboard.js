@@ -1,4 +1,4 @@
-let postTitle, workoutInfo, focusPostTitle, focusPostContent, avatar, currentUsername, subscribed;
+let postTitle, workoutInfo, focusPostTitle, focusPostContent, avatar, currentUsername;
 let currentUser = localStorage.getItem('userId');
 let loginToken = localStorage.getItem('token');
 let isNewUser = localStorage.getItem('isNewUser');
@@ -27,13 +27,19 @@ function getToken() {
   }
 }
 
-function createPost(title, content, callback) {
+function createPost(title, content, workoutId, callback) {
+  // console.log(workoutId)
+  // console.log(title)
+  // console.log(content)
   let url = '/api/posts/';
 
   let data = {
      "title": title,
-    "content": content
+    "content": content,
+    "workout": workoutId
   }
+
+  // console.log(data)
 
   return fetch(url, {
       method: "POST",
@@ -50,23 +56,22 @@ function createPost(title, content, callback) {
   })
 }
 
-function handlePostCreation() {
-  const targetTitle = $('.modal-title')
-  const targetPostContent = $('.modal-workout-content')
-  $('#create-post').attr("disabled", "true");
+function handlePostCreation(workoutId) {
+  const targetTitle = $('.post-title')
+  const targetPostContent = $('.post-content')
+  $('.create-post').attr("disabled", "true");
 
   targetTitle.blur(function() {
     targetPostContent.blur(function() {
       if(targetTitle.val() != "" && targetPostContent.val() != "") {
-        $('#create-post').removeAttr("disabled");
+        $('.create-post').removeAttr("disabled");
       } else {
-        $('#create-post').attr("disabled", "true");
+        $('.create-post').attr("disabled", "true");
       }
     })
   })
 
-  $('#create-post').on('click', event => {
-
+  $('.create-post').on('click', event => {
     postTitle = targetTitle.val();
     postContent = targetPostContent.val();
 
@@ -74,7 +79,44 @@ function handlePostCreation() {
     targetTitle.val('');
     targetPostContent.val('');
 
-    createPost(postTitle, postContent, renderPosts);
+    createPost(postTitle, postContent, workoutId, renderPosts);
+
+    //close modal after creating a post
+    $('#myModal').hide();
+  })
+}
+
+function createPostAndWorkout(workoutId) {
+  const targetTitle = $('.workout-modal-title')
+  const targetPostContent = $('.workout-post-content')
+
+  // console.log(targetTitle)
+  // console.log(targetPostContent)
+  $('.workout-create-post').attr("disabled", "true");
+
+  targetTitle.blur(function() {
+    targetPostContent.blur(function() {
+      if(targetTitle.val() != "" && targetPostContent.val() != "") {
+        $('.create-post').removeAttr("disabled");
+      } else {
+        $('.create-post').attr("disabled", "true");
+      }
+    })
+  })
+
+  $('.workout-create-post').on('click', event => {
+
+    postTitle = targetTitle.val();
+    postContent = targetPostContent.val();
+
+    // console.log(postTitle)
+    // console.log(postContent)
+
+    //clear inputs
+    targetTitle.val('');
+    targetPostContent.val('');
+
+    createPost(postTitle, postContent, workoutId, renderPosts);
 
     //close modal after creating a post
     $('#myModal').hide();
@@ -83,12 +125,9 @@ function handlePostCreation() {
 
 function deletePosts() {
   $('.main-index').on('click', '.delete', event => {
-    // console.log('clicked on a post')
     let target = $(event.currentTarget).parent('.feed-index-item').attr('data-id');
+    console.log(target)
     $(event.currentTarget).parent('.feed-index-item').remove();
-    // console.log(target)
-    // console.log(currentUser)
-    // console.log(currentUser === currentUsername)
 
     url = `/api/posts/${target}`
 
@@ -104,10 +143,14 @@ function deletePosts() {
   })
 }
 
-function displayUserProfile() {
+function displayUserProfile(username) {
   currentUsername = window.location.href.split('/').pop()
   url = `/api/users/username/${currentUsername}`
-  if(currentUsername === "" || currentUsername === undefined) {
+
+  if(username) {
+    url = `/api/users/username/${username}`
+    window.location.replace(`/dashboard/username/${username}`);
+  } else if(currentUsername === "" || currentUsername === undefined) {
     window.location.replace(`/dashboard/username/${userLoggedIn}`);
   } else {
     url = `/api/users/username/${currentUsername}`.replace(/\/$/, "")
@@ -121,7 +164,6 @@ function displayUserProfile() {
         "Authorization": "Bearer " + loginToken
     }
   })
-
   .then(function(response) {
     if(response.status === 200) {
       return response.json();
@@ -130,22 +172,28 @@ function displayUserProfile() {
     }
   })
   .then(function(user) {
+    const amFollowing = user.followers.indexOf(currentUser)
     avatar = user.avatar;
 
-    $('.feed-identity').html(
-      `<section id="user-thumbnail">
-        <img id="my-avatar" src="${avatar}" alt="workout-bear" />
-        <p class="name">${user.firstName} ${user.lastName}</p>
-        <button id="subscribe">follow</button>
-      </section>`
-    )
-
-    if (subscribed === true) {
-      $("#subscribe").attr('id', "unsubscribe").html('unsubscribe')
+    if(amFollowing > -1) {
+        $('.feed-identity').html(
+          `<section id="user-thumbnail">
+            <img id="my-avatar" src="${avatar}" alt="workout-bear" />
+            <p class="name">${user.firstName} ${user.lastName}</p>
+            <button id="unsubscribe">unsubscribe</button>
+          </section>`
+        )
+    } else {
+      $('.feed-identity').html(
+        `<section id="user-thumbnail">
+          <img id="my-avatar" src="${avatar}" alt="workout-bear" />
+          <p class="name">${user.firstName} ${user.lastName}</p>
+          <button id="subscribe">follow</button>
+        </section>`
+      )
     }
 
     let posts = user.posts;
-
     fetchPosts(posts);
   })
 }
@@ -166,51 +214,26 @@ function fetchPosts(posts) {
     .then(response => response.json())
     .then(function(singlePost) {
       let sub = false;
-      // displayPosts(singlePost);
+      // console.log(singlePost)
       displayPosts(singlePost, sub);
     })
   })
 }
 
 function displayPosts(data, sub) {
-  console.log(data)
-  console.log(sub)
+  if(data.workout) {
+    let stuff = fetchWorkoutPost=(data)
+    console.log(stuff)
+  }
   const results = renderPosts(data, sub);
   $('.main-index').append(results);
 }
 
-// function displaySubscribedUserPosts(data) {
-//   const results = data.map((post) => renderPosts(post));
-//
-//   $('.main-index').html(results);
-// }
-
-function deletePostHelper() {
-  url = `/api/posts/${target}`
-
-  return fetch(url, {
-    method: "GET",
-    mode: "cors",
-    headers: {
-        "Content-Type": "application/json; charset=utf-8",
-        "Authorization": "Bearer " + loginToken
-    }
-  })
-  .then(response => response.json())
-  .then(post => {
-    console.log(post)
-    console.log(post.creator._id)
-    console.log(post.creator._id === currentUser)
-    if(!(post.creator._id === currentUser)) {
-      $('.delete').remove();
-    }
-  })
-}
-
 function renderNewPosts(post) {
+  console.log(post)
   let date = post.created.slice(0,10).replace(/-/g,'/');
   $('.main-index').append(`
-      <li class="feed-index-item" data-id="${post.id}">
+      <li class="feed-index-item" data-id="${post._id}">
         <section class="content">
           <section class="thumbnail-for-post">
             <img class="avatar-related-to-post" src="${avatar}" alt="user-avatar">
@@ -223,13 +246,37 @@ function renderNewPosts(post) {
       </li>`)
 }
 
-function renderPosts(post, sub) {
-  console.log(sub)
-  let date = post.created.slice(0,10).replace(/-/g,'/');
+function fetchWorkoutPost(post) {
+  console.log(post)
+  url = `/workouts/${post.workout}`
 
+  return fetch(url, {
+      method: "GET",
+      mode: "cors",
+      headers: {
+          "Content-Type": "application/json; charset=utf-8",
+          "Authorization": "Bearer " + loginToken
+      }
+  })
+  .then(response => response.json())
+  .then(function(workout) {
+    console.log(workout)
+    // return workout
+    renderWorkoutsToPost(workout)
+  })
+}
+
+function renderWorkoutsToPost(workout) {
+  console.log(workout)
+  $('.feed-index-item').append(`<p>${workout.difficulty}</p>`)
+}
+
+function renderPosts(post, sub) {
+  console.log(post._id)
+  let date = post.created.slice(0,10).replace(/-/g,'/');
   if(sub) {
     return `
-      <li class="feed-index-item" data-id="${post.id}">
+      <li class="feed-index-item" data-id="${post._id}">
         <section class="content">
           <section class="thumbnail-for-post">
             <img class="avatar-related-to-post" src="${post.creator.avatar}" alt="user-avatar">
@@ -238,11 +285,10 @@ function renderPosts(post, sub) {
           </section>
           <p class="post-text">${post.content}</p>
         </section>
-        <button class="delete">Hide</button>
       </li>`
   } else {
     return `
-      <li class="feed-index-item" data-id="${post.id}">
+      <li class="feed-index-item" data-id="${post._id}">
         <section class="content">
           <section class="thumbnail-for-post">
             <img class="avatar-related-to-post" src="${post.creator.avatar}" alt="user-avatar">
@@ -254,18 +300,6 @@ function renderPosts(post, sub) {
         <button class="delete">Delete</button>
       </li>`
   }
-  // return `
-  //   <li class="feed-index-item" data-id="${post.id}">
-  //     <section class="content">
-  //       <section class="thumbnail-for-post">
-  //         <img class="avatar-related-to-post" src="${post.creator.avatar}" alt="user-avatar">
-  //         <h1 class="post-title">${post.title}</h1>
-  //         <p class="date">${date}</p>
-  //       </section>
-  //       <p class="post-text">${post.content}</p>
-  //     </section>
-  //     <button class="delete">Delete</button>
-  //   </li>`
 }
 
 function displayError(msg) {
@@ -277,7 +311,6 @@ function displayError(msg) {
 
 function subscribeToUser() {
   $('body').on('click', '#subscribe', event => {
-    console.log('clicked subscribe')
     url = `/api/users/username/${currentUsername}`
 
     return fetch(url, {
@@ -290,7 +323,6 @@ function subscribeToUser() {
     })
     .then(response => response.json())
     .then(function(user) {
-      console.log(user)
 
       let data = {
         "followers": currentUser
@@ -301,7 +333,7 @@ function subscribeToUser() {
         displayError(msg)
         $("#subscribe").attr('disabled', true);
       } else {
-        subscribeUrl = `/api/users/subscribe/${user.id}`
+        subscribeUrl = `/api/users/subscribe/${user._id}`
 
         return fetch(subscribeUrl, {
           method: "PUT",
@@ -312,10 +344,8 @@ function subscribeToUser() {
           },
           body: JSON.stringify(data)
         })
-        .then(function(follower) {
-          // console.log(follower)
+        .then(function() {
           $("#subscribe").attr('id', "unsubscribe").html('unsubscribe')
-          subscribed = true;
         })
       }
     })
@@ -337,11 +367,11 @@ function unsubscribeFromUser() {
     })
     .then(response => response.json())
     .then(function(user) {
+      console.log(user)
       let data = {
         "followers": currentUser
       }
-
-      unsubscribeUrl = `/api/users/unsubscribe/${user.id}`
+      unsubscribeUrl = `/api/users/unsubscribe/${user._id}`
 
       return fetch(unsubscribeUrl, {
         method: "DELETE",
@@ -352,15 +382,16 @@ function unsubscribeFromUser() {
         },
         body: JSON.stringify(data)
       })
-      .then(function(follower) {
-        subscribed = false;
+      .then(function(user) {
+        console.log(user)
+        $("#unsubscribe").attr('id', "subscribe").html('subscribe')
       })
     })
   })
 }
 
 function displaySubscribedPosts() {
-  currentUser = currentUser.split('"').join('');
+  console.log(currentUser)
   let url = `/api/users/subscribedTo/${currentUser}`;
 
   return fetch(url, {
@@ -372,10 +403,8 @@ function displaySubscribedPosts() {
       }
   })
   .then(response => response.json())
-  .then(list => {
-    // console.log(list)
-    // list.following.map(user => console.log(user))
-    list.following.map(user => {
+  .then(users => {
+    users.following.map(user => {
       url = `/api/users/subscribedTo/${user}`;
 
           return fetch(url, {
@@ -387,10 +416,8 @@ function displaySubscribedPosts() {
               }
           })
           .then(response => response.json())
-          .then(function(targetUser) {
-            console.log(targetUser)
-            targetUser.posts.map(post => console.log(post))
-            targetUser.posts.map(post => {
+          .then(function(followingThisUser) {
+            followingThisUser.posts.map(post => {
               url = `/api/posts/${post}`;
 
               return fetch(url, {
@@ -406,7 +433,6 @@ function displaySubscribedPosts() {
                 const results = []
                 results.push(posts)
                 let sub = true;
-                // results.map(post => displayPosts(post))
                 results.map(post => displayPosts(post, sub))
               })
             })
@@ -565,7 +591,7 @@ function displayPostModal(title, content) {
 }
 
 function handleWorkoutModal() {
-  $('#share-workout').on('click', event =>{
+  $('#build-workout').on('click', event =>{
     $('#create-a-workout-modal').show();
   })
 
@@ -778,12 +804,12 @@ function exploreUsers() {
     })
     .then(response => response.json()) // parses response to JSON
     .then(function(users) {
-      renderUsers(users)
+      displayOtherUsers(users)
     })
   })
 }
 
-function renderUsers(users) {
+function displayOtherUsers(users) {
   const result = users.map(user => renderUser(user));
   $('.explore').html(result)
 }
@@ -794,6 +820,15 @@ function renderUser(user) {
       <img id="my-avatar" src="${user.avatar}" alt="default-user-image">
       <p class="explore-usernames">${user.username}</p>
     </div`
+}
+
+function clickToAnotherProfile() {
+  $('.explore').on('click', '.user-card', event => {
+    console.log('clicked')
+    let username = $(event.currentTarget).find('.explore-usernames').text();
+
+    displayUserProfile(username);
+  })
 }
 
 function workoutDraft(workout) {
@@ -866,8 +901,8 @@ function createWorkout() {
 
     newWorkout.title = title;
     newWorkout.difficulty = difficulty;
-    postNewWorkout(newWorkout)
-
+    console.log(newWorkout)
+    postNewWorkout(newWorkout);
   })
 }
 
@@ -884,9 +919,12 @@ function postNewWorkout(data) {
       body: JSON.stringify(data)
   })
   .then(response => response.json()) // parses response to JSON
-  // .then(function(res) {
-  //   // renderNewPosts(res, avatar);
-  // })
+  .then(function(workout) {
+    console.log(workout.id)
+
+    let createdWorkout = workout.id
+    createPostAndWorkout(createdWorkout)
+  })
 }
 
 function preloadExercises() {
@@ -924,6 +962,7 @@ function handleDashboard() {
   getToken().then(res => getWorkouts(res));
   displayUserProfile();
   handlePostCreation();
+  // renderWorkoutsToPost();
   deletePosts();
   openPostModal();
   handleWorkoutModal();
@@ -938,6 +977,7 @@ function handleDashboard() {
   exploreUsers();
   createWorkout();
   preloadExercises();
+  clickToAnotherProfile();
   //@WIP
 }
 

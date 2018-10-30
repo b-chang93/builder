@@ -38,8 +38,8 @@ function userLogIn(username, password) {
     .then(function(userObject) {
       console.log('logging user object info...')
       console.log(userObject)
-      console.log(`User id: ${userObject.id}`)
-      localStorage.setItem('userId', userObject.id);
+      console.log(`User id: ${userObject._id}`)
+      localStorage.setItem('userId', userObject._id);
       localStorage.setItem('isNewUser', false);
       localStorage.setItem('loggedIn', data.username);
       console.log(data.username)
