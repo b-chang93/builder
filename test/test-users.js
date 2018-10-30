@@ -7,7 +7,6 @@ const jwt = require('jsonwebtoken');
 
 const { app, runServer, closeServer } = require('../server');
 const {User} = require('../users');
-// const User = require('../users/models');
 const { TEST_BUILDR_DATABASE } = require('../config');
 const {JWT_SECRET} = require('../config');
 const userData = require('../seed-data/users-seed-data.json');
@@ -25,17 +24,6 @@ function seedUserData() {
     token = jwt.sign({ user }, JWT_SECRET, { subject: user.username});
   })
 };
-
-  // beforeEach(function() {
-  //   return Promise.all([
-  //     User.insertMany(userData),
-  //     Workout.insertMany(workoutData),
-  //   ])
-  //   .then(([users])=> {
-  //     user = users[0];
-  //     token = jwt.sign({ user }, JWT_SECRET, { subject: user.username});
-  //   });
-  // });
 
 function tearDownDb() {
   console.log('Deleting database...');
@@ -55,7 +43,6 @@ describe('API resource /api/user', function () {
   const avatar = '';
   const followers = [];
   const following = [];
-  // // let id = '';
   const posts = [];
   let user = {};
   let userTwo = {};
@@ -70,9 +57,6 @@ describe('API resource /api/user', function () {
     return closeServer();
   });
 
-  // beforeEach(function() {
-  //   return seedUserData();
-  // })
   beforeEach(function() {
     return Promise.all([
       User.insertMany(userData)
@@ -85,31 +69,30 @@ describe('API resource /api/user', function () {
   });
 
   afterEach(function () {
-    // return User.remove({});
     return tearDownDb();
   });
+
   describe('/api/users', function () {
     describe('GET', function () {
       it('Should return all users in db', function () {
         return chai.request(app)
           .get(`/api/users/`)
           .then(res => {
-          console.log(res.body)
           expect(res).to.have.status(200);
+          expect(res).to.be.a.json;
           expect(res.body).to.be.an('array');
           expect(res.body.length).to.be.at.least(1);
-          const expectedUserKeys = ['id', 'username', 'firstName', 'lastName', 'avatar', 'posts', 'followers', 'following'];
+          const expectedUserKeys = ['_id', 'username', 'firstName', 'lastName', 'avatar', 'posts', 'followers', 'following'];
           expect(res.body[0]).to.include.keys(expectedUserKeys)
         });
       });
 
       it('Should return a single user when using id', function () {
-        console.log(user._id)
         return chai.request(app)
           .get(`/api/users/${user._id}`)
           .then(res => {
-          console.log(res.body)
           expect(res).to.have.status(200);
+          expect(res).to.be.a.json;
           expect(res.body).to.be.an('object');
           expect(res.body._id).to.include(user._id);
         });
@@ -133,27 +116,66 @@ describe('API resource /api/user', function () {
     });
 
     // @WIP still needs to be fixed
-    // describe('PUT and DELETE /subscribe', function () {
-    //   it('should add a user id to user following field', function () {
-    //
-    //     return User
-    //       // .findOne()
-    //       .find(user._id)
-    //       .then(user => {
-    //         console.log('FOUND A USER')
-    //         console.log(userTwo._id)
-    //         console.log(user)
-    //         return chai
-    //           .request(app)
-    //           .put(`/api/users/subscribe/${userTwo._id}`)
-    //           .set("Authorization", `Bearer ${token}`)
-    //           .then(res => {
-    //             console.log(res.body)
-    //             expect(res).to.have.status(204);
-    //           })
-    //       })
-    //   });
-    // });
+    describe('PUT and DELETE /subscribe', function () {
+      it('should add a user id to user following field', function () {
+        return User
+          .find(user._id)
+          .then(user => {
+            return chai
+              .request(app)
+              .put(`/api/users/subscribe/${userTwo._id}`)
+              .set("Authorization", `Bearer ${token}`)
+              .then(res => {
+                expect(res).to.have.status(201);
+                expect(res).to.be.a.json;
+                expect(res.body.following[0]).to.include(userTwo._id)
+              })
+          })
+      });
+
+      it('should remove the user id following field', function () {
+        return User
+          .findOne(user._id)
+          .then(user => {
+            return chai
+              .request(app)
+              .put(`/api/users/subscribe/${userTwo._id}`)
+              .set("Authorization", `Bearer ${token}`)
+              .then(res => {
+                return User
+                  .findOne(user._id)
+                  .then(user => {
+                    console.log('logging')
+                    console.log(user)
+                    return chai
+                      .request(app)
+                      .delete(`/api/users/unsubscribe/${userTwo._id}`)
+                      .set("Authorization", `Bearer ${token}`)
+                      .then(res => {
+                        console.log(res.body)
+                        expect(res).to.have.status(201);
+                        expect(res).to.be.a.json;
+                        expect(res.body.following).to.be.empty;
+                        // console.log(res.body)
+                      })
+                  })
+              })
+            })
+        // return User
+        //   .find(user._id)
+        //   .then(user => {
+        //     return chai
+        //       .request(app)
+        //       .delete(`/api/users//unsubscribe/${userTwo._id}`)
+        //       .set("Authorization", `Bearer ${token}`)
+        //       .then(res => {
+        //         console.log(res.body.following[0])
+        //         expect(res).to.have.status(201);
+        //         expect(res.body.following[0]).to.include(userTwo._id)
+        //       })
+        //   })
+      });
+    });
 
   describe('/api/users/signup', function () {
     describe('POST', function () {
@@ -407,7 +429,7 @@ describe('API resource /api/user', function () {
               'followers',
               'following',
               'posts',
-              'id'
+              '_id'
             );
             expect(res.body.username).to.equal(username);
             expect(res.body.firstName).to.equal(firstName);
@@ -447,7 +469,7 @@ describe('API resource /api/user', function () {
               'followers',
               'following',
               'posts',
-              'id'
+              '_id'
             );
             expect(res.body.username).to.equal(username);
             expect(res.body.firstName).to.equal(firstName);

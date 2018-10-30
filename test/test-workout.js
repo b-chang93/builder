@@ -5,13 +5,12 @@ const chaiHttp = require('chai-http');
 const jwt = require('jsonwebtoken');
 
 const mongoose = require('mongoose');
-const {Workout} = require('../workouts/models');
-const {User} = require('../users/models');
+const {Workout} = require('../workouts');
+const User = require('../users/models');
 const {TEST_BUILDR_DATABASE} = require('../config');
 const {JWT_SECRET} = require('../config');
 const {app, runServer, closeServer} = require('../server');
 const expect = chai.expect;
-const faker = require('faker');
 const workoutData = require('../seed-data/workout-seed-data.json');
 const userData = require('../seed-data/users-seed-data.json');
 
@@ -104,6 +103,7 @@ describe('API resource', function() {
 
     it("should create and return a new workout", function () {
       const newWorkout = {
+          "creator": user._id,
           "title":"Test Workout",
           "difficulty":"Difficult",
           "exercises":[
@@ -111,51 +111,41 @@ describe('API resource', function() {
               "name":"Bench Press: Barbell",
               "sets":[
                 {
-                  "_id":"5bc4de6f7e72a8692a462233",
                   "weight":185,
                   "reps":8},
                 {
-                  "_id":"5bc4de6f7e72a8692a462232",
                   "weight":200,
                   "reps":5
                 },
                 {
-                  "_id":"5bc4de6f7e72a8692a462231",
                   "weight":225,
                   "reps":5
                 },
                 {
-                  "_id":"5bc4de6f7e72a8692a462230",
                   "weight":225,
                   "reps":5}
                 ]
             },
             {
-              "_id":"5bc4de6f7e72a8692a46222b",
               "name":"Bench Press: Barbell (Incline)",
               "sets":[
                 {
-                  "_id":"5bc4de6f7e72a8692a46222e",
                   "weight":185,
                   "reps":5
                 },
                 {
-                  "_id":"5bc4de6f7e72a8692a46222d",
                   "weight":190,
                   "reps":5
                 },
                 {
-                  "_id":"5bc4de6f7e72a8692a46222c",
                   "weight":200,
                   "reps":5
                 }
               ]
             }
-          ],
-          "creator": user._id
+          ]
         }
       let res;
-
       return chai.request(app)
         .post("/workouts")
         .set("Authorization", `Bearer ${token}`)
@@ -193,7 +183,6 @@ describe('API resource', function() {
         .send(newWorkout)
         .then(function (_res) {
           res = _res;
-          console.log(`ERROR MESSAGE: ${res.body}`)
           expect(res).to.have.status(400);
           expect(res).to.be.json;
           expect(res.body).to.equal("Missing `title` in request body");
@@ -266,75 +255,37 @@ describe('API resource', function() {
         .set("Authorization", `Bearer ${token}`)
         .send(updateItem)
         .then(res => {
-          console.log(res.body)
           expect(res).to.have.status(400);
           expect(res.body).to.eq("The 'id' is not valid");
         });
     });
 
-    // it("should respond with a 404 for an non existent id", function () {
-    //   // "DOESNOTEXIST" is 12 byte string which is a valid Mongo ObjectId()
-    //   const updateItem = {
-    //     "title": "update my workout #2",
-    //     "difficulty": "intermediate",
-    //     "exercises": [
-    //       {
-    //         "name":"Test Exercise",
-    //         "sets": [
-    //             {
-    //                 "weight": 185,
-    //                 "reps": 8
-    //             }
-    //           ]
-    //       }
-    //     ],
-    //     "creator": user._id
-    //   };
-    //
-    //   return chai.request(app)
-    //     .put("/workouts/DOESNOTEXIST")
-    //     .set("Authorization", `Bearer ${token}`)
-    //     .send(updateItem)
-    //     .then(res => {
-    //       expect(res).to.have.status(404);
-    //     });
-    // });
+    it("should respond with a 404 for an non existent id", function () {
+      const updateItem = {
+        "title": "update my workout #2",
+        "difficulty": "intermediate",
+        "exercises": [
+          {
+            "name":"Test Exercise",
+            "sets": [
+                {
+                    "weight": 185,
+                    "reps": 8
+                }
+              ]
+          }
+        ],
+        "creator": user._id
+      };
 
-    // it('should return an error when missing "title" field', function () {
-    //   const updateItem = {
-    //     "difficulty": "intermediate",
-    //     "exercises": [
-    //       {
-    //         "name":"Test Exercise",
-    //         "sets": [
-    //             {
-    //                 "weight": 185,
-    //                 "reps": 8
-    //             }
-    //           ]
-    //       }
-    //     ],
-    //     "creator": user._id
-    //   };
-    //   let data;
-    //
-    //   return Workout.findOne()
-    //     .then(_data => {
-    //       data = _data;
-    //
-    //       return chai.request(app)
-    //         .put(`/workouts/${data.id}`)
-    //         .send(updateItem)
-    //         .set("Authorization", `Bearer ${token}`);
-    //     })
-    //     .then(res => {
-    //       expect(res).to.have.status(400);
-    //       expect(res).to.be.json;
-    //       expect(res.body).to.be.a("object");
-    //       expect(res.body.message).to.equal("Missing `title` in request body");
-    //     });
-    // });
-
+      return chai.request(app)
+        .put("/workouts/DOESNOTEXIST")
+        .set("Authorization", `Bearer ${token}`)
+        .send(updateItem)
+        .then(res => {
+          expect(res).to.have.status(404);
+        });
+    });
   });
 
   describe("DELETE  /workouts/:id", function () {
