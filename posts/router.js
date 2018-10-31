@@ -83,8 +83,6 @@ router.delete('/:id', (req, res) => {
   Post
     .findById(req.params.id)
     .then(post => {
-
-      // console.log(req.user._id)
       if(post.creator._id == req.user._id) {
         Post
           .findByIdAndRemove(req.params._id)
@@ -95,7 +93,7 @@ router.delete('/:id', (req, res) => {
             return User
               .findById(req.user._id)
               .then(userPost => {
-                let index = userPost.posts.indexOf(req.params._id);
+                let index = userPost.posts.indexOf(req.params.id);
                 if (index > -1) {
                   userPost.posts.splice(index, 1);
                 }
