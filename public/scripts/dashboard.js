@@ -9,18 +9,9 @@ function getToken() {
     console.error(401);
     window.location.replace('/login');
   } else {
-    url = "/api/auth/refresh";
-
-    return fetch(url, {
-        method: "POST",
-        mode: "cors", // no-cors, cors, *same-origin
-        headers: {
-            "Content-Type": "application/json; charset=utf-8",
-            "Authorization": "Bearer " + loginToken
-        }
-    })
-    .then(response => response.json()) // parses response to JSON
-    .then(function(access) {
+    authToken = loginToken
+    api.create('/api/auth/refresh')
+    .then(access => {
       token = access.authToken;
       return token;
     })
@@ -31,28 +22,17 @@ function createPost(title, content, workoutId, callback) {
   // console.log(workoutId)
   // console.log(title)
   // console.log(content)
-  let url = '/api/posts/';
-
+  // let url = '/api/posts/';
   let data = {
-     "title": title,
+    "title": title,
     "content": content,
     "workout": workoutId
   }
 
-  // console.log(data)
-
-  return fetch(url, {
-      method: "POST",
-      mode: "cors", // no-cors, cors, *same-origin
-      headers: {
-          "Content-Type": "application/json; charset=utf-8",
-          "Authorization": "Bearer " + loginToken
-      },
-      body: JSON.stringify(data),
-  })
-  .then(response => response.json()) // parses response to JSON
-  .then(function(res) {
-    renderNewPosts(res, avatar);
+  api.create('/api/posts/', data)
+  .then(post => {
+    console.log(post)
+    renderNewPosts(post, avatar);
   })
 }
 
@@ -123,23 +103,19 @@ function createPostAndWorkout(workoutId) {
   })
 }
 
+//@WIP not fully deleting anymore
 function deletePosts() {
   $('.main-index').on('click', '.delete', event => {
     let target = $(event.currentTarget).parent('.feed-index-item').attr('data-id');
     console.log(target)
     $(event.currentTarget).parent('.feed-index-item').remove();
 
-    url = `/api/posts/${target}`
-
-    return fetch(url, {
-        method: "DELETE",
-        mode: "cors",
-        headers: {
-            "Content-Type": "application/json; charset=utf-8",
-            "Authorization": "Bearer " + loginToken
-        }
-    })
-    .then(response => response.json())
+    api.remove(`/api/posts/${target}`)
+      .then(response => {
+        // response.json()
+        console.log(response)
+        // displayError('Successfully deleted post')
+      });
   })
 }
 
@@ -155,6 +131,7 @@ function displayUserProfile(username) {
   } else {
     url = `/api/users/username/${currentUsername}`.replace(/\/$/, "")
   }
+
 
   return fetch(url, {
     method: "GET",
@@ -203,26 +180,17 @@ function fetchPosts(posts) {
   let post = posts.map(post => {
   let url = `/api/posts/${post}`;
 
-    return fetch(url, {
-        method: "GET",
-        mode: "cors",
-        headers: {
-            "Content-Type": "application/json; charset=utf-8",
-            "Authorization": "Bearer " + loginToken
-        }
-    })
-    .then(response => response.json())
-    .then(function(singlePost) {
-      let sub = false;
-      // console.log(singlePost)
-      displayPosts(singlePost, sub);
-    })
+    api.details(`/api/posts/${post}`)
+      .then(singlePost => {
+        let sub = false;
+        displayPosts(singlePost, sub);
+      })
   })
 }
 
 function displayPosts(data, sub) {
   if(data.workout) {
-    let stuff = fetchWorkoutPost=(data)
+    let stuff = fetchWorkoutPost(data)
     console.log(stuff)
   }
   const results = renderPosts(data, sub);
@@ -230,7 +198,6 @@ function displayPosts(data, sub) {
 }
 
 function renderNewPosts(post) {
-  console.log(post)
   let date = post.created.slice(0,10).replace(/-/g,'/');
   $('.main-index').append(`
       <li class="feed-index-item" data-id="${post._id}">
@@ -247,32 +214,21 @@ function renderNewPosts(post) {
 }
 
 function fetchWorkoutPost(post) {
-  console.log(post)
-  url = `/workouts/${post.workout}`
-
-  return fetch(url, {
-      method: "GET",
-      mode: "cors",
-      headers: {
-          "Content-Type": "application/json; charset=utf-8",
-          "Authorization": "Bearer " + loginToken
-      }
-  })
-  .then(response => response.json())
-  .then(function(workout) {
-    console.log(workout)
-    // return workout
-    renderWorkoutsToPost(workout)
-  })
+  // console.log(post)
+  api.details(`/workouts/${post.workout}`)
+    .then(workout => {
+      console.log(workout)
+      renderWorkoutsToPost(workout)
+    })
 }
 
 function renderWorkoutsToPost(workout) {
-  console.log(workout)
+  // console.log(workout)
   $('.feed-index-item').append(`<p>${workout.difficulty}</p>`)
 }
 
 function renderPosts(post, sub) {
-  console.log(post._id)
+  // console.log(post._id)
   let date = post.created.slice(0,10).replace(/-/g,'/');
   if(sub) {
     return `
@@ -311,18 +267,8 @@ function displayError(msg) {
 
 function subscribeToUser() {
   $('body').on('click', '#subscribe', event => {
-    url = `/api/users/username/${currentUsername}`
-
-    return fetch(url, {
-      method: "GET",
-      mode: "cors",
-      headers: {
-          "Content-Type": "application/json; charset=utf-8",
-          "Authorization": "Bearer " + loginToken
-      }
-    })
-    .then(response => response.json())
-    .then(function(user) {
+    api.details(`/api/users/username/${currentUsername}`)
+    .then(user => {
 
       let data = {
         "followers": currentUser
@@ -333,129 +279,60 @@ function subscribeToUser() {
         displayError(msg)
         $("#subscribe").attr('disabled', true);
       } else {
-        subscribeUrl = `/api/users/subscribe/${user._id}`
-
-        return fetch(subscribeUrl, {
-          method: "PUT",
-          mode: "cors",
-          headers: {
-              "Content-Type": "application/json; charset=utf-8",
-              "Authorization": "Bearer " + loginToken
-          },
-          body: JSON.stringify(data)
-        })
-        .then(function() {
-          $("#subscribe").attr('id', "unsubscribe").html('unsubscribe')
-        })
+        api.update(`/api/users/subscribe/${user._id}`)
+          .then(() => {
+            $("#subscribe").attr('id', "unsubscribe").html('unsubscribe')
+          })
       }
     })
   })
 }
-
 function unsubscribeFromUser() {
   $('body').on('click', '#unsubscribe', event => {
 
     url = `/api/users/username/${currentUsername}`
 
-    return fetch(url, {
-      method: "GET",
-      mode: "cors",
-      headers: {
-          "Content-Type": "application/json; charset=utf-8",
-          "Authorization": "Bearer " + loginToken
-      }
-    })
-    .then(response => response.json())
-    .then(function(user) {
-      console.log(user)
-      let data = {
-        "followers": currentUser
-      }
-      unsubscribeUrl = `/api/users/unsubscribe/${user._id}`
+    api.details(`/api/users/username/${currentUsername}`)
+      .then(user => {
+        let data = {
+          "followers": currentUser
+        }
 
-      return fetch(unsubscribeUrl, {
-        method: "DELETE",
-        mode: "cors",
-        headers: {
-            "Content-Type": "application/json; charset=utf-8",
-            "Authorization": "Bearer " + loginToken
-        },
-        body: JSON.stringify(data)
+        api.remove(`/api/users/unsubscribe/${user._id}`)
+          .then(user => {
+            $("#unsubscribe").attr('id', "subscribe").html('subscribe')
+          })
       })
-      .then(function(user) {
-        console.log(user)
-        $("#unsubscribe").attr('id', "subscribe").html('subscribe')
-      })
-    })
   })
 }
 
 function displaySubscribedPosts() {
   console.log(currentUser)
-  let url = `/api/users/subscribedTo/${currentUser}`;
+  api.details(`/api/users/subscribedTo/${currentUser}`)
+    .then(users => {
+      users.following.map(user => {
+          api.details(`/api/users/subscribedTo/${user}`)
+            .then(followingUser => {
+              followingUser.posts.map(post => {
+                url = `/api/posts/${post}`;
 
-  return fetch(url, {
-      method: "GET",
-      mode: "cors",
-      headers: {
-          "Content-Type": "application/json; charset=utf-8",
-          "Authorization": "Bearer " + loginToken
-      }
-  })
-  .then(response => response.json())
-  .then(users => {
-    users.following.map(user => {
-      url = `/api/users/subscribedTo/${user}`;
-
-          return fetch(url, {
-              method: "GET",
-              mode: "cors",
-              headers: {
-                  "Content-Type": "application/json; charset=utf-8",
-                  "Authorization": "Bearer " + loginToken
-              }
-          })
-          .then(response => response.json())
-          .then(function(followingThisUser) {
-            followingThisUser.posts.map(post => {
-              url = `/api/posts/${post}`;
-
-              return fetch(url, {
-                  method: "GET",
-                  mode: "cors",
-                  headers: {
-                      "Content-Type": "application/json; charset=utf-8",
-                      "Authorization": "Bearer " + loginToken
-                  }
-              })
-              .then(response => response.json())
-              .then(function(posts) {
-                const results = []
-                results.push(posts)
-                let sub = true;
-                results.map(post => displayPosts(post, sub))
-              })
+                api.details(`/api/posts/${post}`)
+                  .then(posts => {
+                    const results = []
+                    results.push(posts)
+                    let sub = true;
+                    results.map(post => displayPosts(post, sub))
+                  })
             })
-          })
+        })
     })
   })
 }
-
 function findMySchedule() {
-  url = `/workoutsplit`
-
-  return fetch(url, {
-    method: "GET",
-    mode: "cors",
-    headers: {
-        "Content-Type": "application/json; charset=utf-8",
-        "Authorization": "Bearer " + loginToken
-    }
-  })
-  .then(response => response.json())
-  .then(function(schedule) {
-    displayMySplit(schedule)
-  })
+  api.details(`/workoutsplit`)
+    .then(schedule => {
+      displayMySplit(schedule)
+    })
 }
 
 function displayMySplit(data) {
@@ -488,9 +365,7 @@ function displayMySplit(data) {
  }
 
  $('.reveal-split').on('click', event => {
-   // console.log($(event.currentTarget))
    let split = $(event.currentTarget).find('span').text()
-   // console.log(split)
  })
 }
 
@@ -499,21 +374,11 @@ function renderExercise(exercise) {
 }
 
 function getWorkouts(token) {
-  url = '/workouts'
-
-  return fetch(url, {
-      method: "GET",
-      mode: "cors", // no-cors, cors, *same-origin
-      headers: {
-          "Content-Type": "application/json; charset=utf-8",
-          "Authorization": "Bearer " + loginToken
-      }
-  })
-  .then(response => response.json()) // parses response to JSON
-  .then(function(workouts) {
-    showMyWorkouts(workouts)
-    showWorkoutDetails(workouts)
-  })
+  api.details('/workouts')
+    .then(workouts => {
+      showMyWorkouts(workouts)
+      showWorkoutDetails(workouts)
+    })
 }
 
 function showMyWorkouts(workouts) {
@@ -622,42 +487,24 @@ function findExercises(search) {
     url = `/exercises/bodypart/${search}`
   }
 
-  return fetch(url, {
-      method: "GET",
-      mode: "cors", // no-cors, cors, *same-origin
-      headers: {
-          "Content-Type": "application/json; charset=utf-8",
-          "Authorization": "Bearer "
-      }
-  })
-  .then(response => response.json()) // parses response to JSON
-  .then(function(exercises) {
-    displayExercises(exercises);
-  })
+  api.details(url)
+    .then(exercises => {
+      displayExercises(exercises);
+    })
 }
 
 function fetchExerciseInfo(id) {
 
-  url = `/exercises/${id}`
-
-  return fetch(url, {
-      method: "GET",
-      mode: "cors", // no-cors, cors, *same-origin
-      headers: {
-          "Content-Type": "application/json; charset=utf-8",
-          "Authorization": "Bearer "
-      }
-  })
-  .then(response => response.json()) // parses response to JSON
-  .then(function(exercise) {
-    displayTargetExercise(exercise);
-  })
+  api.details(`/exercises/${id}`)
+    .then(exercise => {
+      displayTargetExercise(exercise);
+    })
 }
 
 function displayTargetExercise(exercise) {
 
   $('.list-exercises').toggle();
-  $('.individual-exercise-details').toggle();
+  $('.individual-exercise-details').toggle().attr({"aria-hidden":"false", "aria-live":"assertive"});
 
   let details = showTargetExerciseDetails(exercise)
 
@@ -691,7 +538,7 @@ function showTargetExerciseDetails(exercise) {
     return `
     <h2 id="name-of-exercise">${exercise.title}</h2>
     <p>${exercise.primer}</p>
-    <div>
+    <div class="general-info">
       <h3>General</h3>
       <ul>
       <li>${exercise.type}</li>
@@ -788,24 +635,16 @@ function findUsers() {
       $('#explore-users').hide();
     }
   })
-
 }
 
 function exploreUsers() {
   $('.find-users').on('click', event => {
     url = "/api/users"
 
-    return fetch(url, {
-        method: "GET",
-        mode: "cors", // no-cors, cors, *same-origin
-        headers: {
-            "Content-Type": "application/json; charset=utf-8",
-        }
-    })
-    .then(response => response.json()) // parses response to JSON
-    .then(function(users) {
-      displayOtherUsers(users)
-    })
+    api.details('/api/users')
+      .then(users => {
+        displayOtherUsers(users)
+      })
   })
 }
 
@@ -909,38 +748,18 @@ function createWorkout() {
 function postNewWorkout(data) {
   let url = '/workouts';
 
-  return fetch(url, {
-      method: "POST",
-      mode: "cors",
-      headers: {
-          "Content-Type": "application/json; charset=utf-8",
-          "Authorization": "Bearer " + loginToken
-      },
-      body: JSON.stringify(data)
-  })
-  .then(response => response.json()) // parses response to JSON
-  .then(function(workout) {
-    console.log(workout.id)
-
-    let createdWorkout = workout.id
-    createPostAndWorkout(createdWorkout)
-  })
+  api.details('/workouts')
+    .then(workout => {
+      let createdWorkout = workout.id
+      createPostAndWorkout(createdWorkout)
+    })
 }
 
 function preloadExercises() {
-  url = `/exercises`
-
-  return fetch(url, {
-      method: "GET",
-      mode: "cors", // no-cors, cors, *same-origin
-      headers: {
-          "Content-Type": "application/json; charset=utf-8",
-      }
-  })
-  .then(response => response.json()) // parses response to JSON
-  .then(function(exercises) {
-    autoComplete(exercises)
-  })
+  api.details('/exercises')
+    .then(exercises => {
+      autoComplete(exercises)
+    })
 }
 
 function autoComplete(exercises) {
@@ -959,7 +778,9 @@ function autoComplete(exercises) {
 }
 
 function handleDashboard() {
-  getToken().then(res => getWorkouts(res));
+  // getToken().then(res => getWorkouts(res));
+  getToken();
+  getWorkouts();
   displayUserProfile();
   handlePostCreation();
   // renderWorkoutsToPost();
