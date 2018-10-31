@@ -14,13 +14,12 @@
 
 <body>
   <!-- <header><h1>Buildr</h1></header> -->
-  <main id="root">
-    <div class="navbar">
+  <main id="root" role="main" aria-live="assertive">
+    <section class="navbar">
       <a class="left-nav">Builder</a>
       <a class="right-nav find-users">Explore Users</a>
       <a class="right-nav enable-search-modal">Exercises</a>
-    </div>
-
+    </section>
     <section id="workout-split-nav">
       <div class="flex-container">
         <table>
@@ -53,58 +52,45 @@
         </div>
       </div>
     </section>
-
     <section class="main-container">
-
       <section class="current-user left-column">
         <div class="feed-identity"></div>
         <div class="search-users">
           <button class="find-users" type="button">Explore Users</button>
         </div>
       </section>
-
       <div class="flex-wrapper">
         <section class="posts-area">
-
           <div class="share-a-post">
-            <input type="text" class="post-title" value placeholder="Title">
-            <textarea class="post-content" placeholder="Got a good workout? Share!"></textarea>
+            <input type="text" class="post-title" value placeholder="Title" aria-labelledby="title your post">
+            <textarea class="post-content" placeholder="Got a good workout? Share!" aria-labelledby="content of your post"></textarea>
             <section class="create-post-buttons">
               <button id="build-workout">Build a Workout</button>
               <button class="create-post">Post</button>
             </section>
           </div>
-
           <div id="posts-container">
             <ul class="main-index">
             </ul>
           </div>
-
         </section>
-
-        <div id="workout-info-container">
+        <section id="workout-info-container">
           <div id="my-workouts-list">
             <h2 style="text-align: center;">My Workouts</h2>
             <ul class="workout-index">
             </ul>
           </div>
-
           <div class='my-workout-info'>
             <h2 class="workout-name">
               </h2>
             <section class='individual-workout-details'>
             </section>
           </div>
-        </div>
+        </section>
       </div>
-
-
     </section>
-
     </section>
-
   </main>
-
   <div id="post-from-stream" class="modal">
     <div class="stream-modal-content">
       <span class="close">&times;</span>
@@ -112,87 +98,82 @@
       <section class='post-from-stream-content'></section>
     </div>
   </div>
-
   <div id="create-a-workout-modal" class="modal">
     <div class="workout-modal-content">
       <span class="close">&times;</span>
       <header class='create-workout-title'>
         <h1 style="text-align: center;">Build & Share your workout!</h1>
       </header>
-
-      <form class="create-workout-form">
-
-        <div class="workout-details-container">
-          <section class="your-workout-details">
-            <h3>Name it!</h3>
-            <label for="workout-title">Name your Workout: </label>
-            <input type="text" class="workout-title" value name="title" placeholder="Title">
-            <label for="workout-difficulty">Difficulty: </label>
-            <input type="text" class="workout-difficulty" value name="difficulty" placeholder="Difficulty">
-          </section>
-
-          <section class="set-info">
-            <h3>Add and Save Exercises!</h3>
-            <label for="automplete-1">Name: </label>
-            <input type="text" id="automplete-1" class="exercise" value name="name" placeholder="Bench Press">
-
-            <label for="sets">Weight: </label>
-            <input type="text" class="weight" value name="weight" placeholder="225">
-
-            <label for="reps">Reps: </label>
-            <input type="text" class="reps" value name="reps" placeholder="12">
-            <button class="save-set" type="button">Save</button>
-          </section>
-        </div>
-        <div class="workout-draft">
-          <h3>Workout Draft</h3>
-          <ul class="exercise-list">
-          </ul>
-          <button class="create-new-workout" type="submit">Create</button>
-        </div>
-
+      <form class="create-workout-form" aria-live="assertive">
+        <fieldset>
+          <legend><span class="accessibility">Create your Workout</span></legend>
+          <div class="workout-details-container">
+            <section class="your-workout-details">
+              <h3>Name it!</h3>
+              <label for="workout-title">Name your Workout: </label>
+              <input type="text" class="workout-title" value name="title" placeholder="Title" aria-labelledby="title workout">
+              <label for="workout-difficulty">Difficulty: </label>
+              <input type="text" class="workout-difficulty" value name="difficulty" placeholder="Difficulty" aria-labelledby="workout difficulty">
+            </section>
+            <section class="set-info">
+              <h3>Add and Save Exercises!</h3>
+              <label for="automplete-1">Name: </label>
+              <input type="text" id="automplete-1" class="exercise" value name="name" placeholder="Bench Press" aria-labelledby="number sets">
+              <label for="sets">Weight: </label>
+              <input type="text" class="weight" value name="weight" placeholder="225" aria-labelledby="weight used">
+              <label for="reps">Reps: </label>
+              <input type="text" class="reps" value name="reps" placeholder="12" aria-labelledby="number reps">
+              <button class="save-set" type="button">Save</button>
+            </section>
+          </div>
+          <div class="workout-draft">
+            <h3>Workout Draft</h3>
+            <ul class="exercise-list">
+            </ul>
+            <button class="create-new-workout" type="submit">Create</button>
+          </div>
+        </fieldset>
       </form>
-
       <div class="">
         Share it!
-        <input type="text" class="workout-modal-title" value="" placeholder="Hardest workout yet!">
-        <textarea class="workout-post-content" placeholder="Man this workout..."></textarea>
+        <input type="text" class="workout-modal-title" value="" placeholder="Hardest workout yet!" aria-labelledby="title post with workout">
+        <textarea class="workout-post-content" placeholder="Man this workout..." aria-labelledby="post content with workout"></textarea>
         <button class="workout-create-post" type="submit">Share</button>
       </div>
     </div>
   </div>
-
-
   <div id="exercise-search-area" class="modal">
     <div class="exercise-search-modal">
       <span class="close">&times;</span>
       <div class="list-exercises">
         <p>Search for different exercises here!</p>
-        <form class="search-for-exercise" action="exercises/bodypart/triceps brachii" method="GET">
-          <select class="exercise-search-query">
-            <option value="">all</option>
-            <option value="triceps brachii">triceps</option>
-            <option value="pectoralis major">pecs</option>
-            <option value="deltoid">deltoid</option>
-            <option value="trapezius">traps</option>
-            <option value="biceps brachii">biceps</option>
-            <option value="latissimus dorsi">lats</option>
-            <option value="abdominals">abs</option>
-            <option value="glutaeus maximus">butt</option>
-            <option value="obliquus">obliquus</option>
-            <option value="ischiocrural muscles">hamstrings</option>
-            <option value="quadriceps">quads</option>
-          </select>
-          <input type="submit" name="" value="Search">
+        <form class="search-for-exercise" action="exercises/bodypart/triceps brachii" method="GET" aria-live="assertive">
+          <fieldset>
+            <legend><span class="accessibility">Search Exercises</span></legend>
+            <select class="exercise-search-query">
+              <option value="">all</option>
+              <option value="triceps brachii">triceps</option>
+              <option value="pectoralis major">pecs</option>
+              <option value="deltoid">deltoid</option>
+              <option value="trapezius">traps</option>
+              <option value="biceps brachii">biceps</option>
+              <option value="latissimus dorsi">lats</option>
+              <option value="abdominals">abs</option>
+              <option value="glutaeus maximus">butt</option>
+              <option value="obliquus">obliquus</option>
+              <option value="ischiocrural muscles">hamstrings</option>
+              <option value="quadriceps">quads</option>
+            </select>
+            <input type="submit" name="exercise-search" aria-labelledby="search exercises">
+          </fieldset>
         </form>
         <div class="content-container">
         </div>
       </div>
-      <div class="individual-exercise-details" style="display: none;">
+      <div class="individual-exercise-details" style="display: none;" aria-hidden="true">
       </div>
     </div>
   </div>
-
   <div id="explore-users" class="modal">
     <div class="explore-user-modal">
       <span class="close">&times;</span>
@@ -200,9 +181,9 @@
       </section>
     </div>
   </div>
-
   <div id="warning-message"></div>
   </main>
+  <script type="text/javascript" src="/api.js"></script>
   <script src="/dashboard.js"></script>
 </body>
 
