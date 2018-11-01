@@ -135,9 +135,7 @@ function demoUsername() {
       }());
 
       demoPwd();
-      $('.login-button').submit();
     })
-          // $('.login-button').click();
 }
 
 function demoPwd() {
@@ -161,63 +159,15 @@ function demoPwd() {
 
       }, humanize);
   }());
+  setTimeout(function(){
+    userLogIn("brandon.chang", "password123")
+  },2000);
 }
-
-// function watchSubmit() {
-//
-//   $('.js-search-form').submit(event => {
-//     event.preventDefault();
-//
-//     // $('#landing-page').hide();
-//
-//     const queryUsername = $(event.currentTarget).find('#username');
-//     const queryPassword = $(event.currentTarget).find('#user-password');
-//     const queryFirstName = $(event.currentTarget).find('#user-first-name');
-//     const queryLastName = $(event.currentTarget).find('#user-last-name');
-//
-//     username = queryUsername.val();
-//     password = queryPassword.val();
-//     firstname = queryFirstName.val();
-//     lastname = queryLastName.val();
-//
-//     api.create("/api/login", loginUser)
-//       .then(response => {
-//         authToken = response.authToken;
-//         // authorized = true;
-//         loginForm[0].reset();
-//
-//         return Promise.all([
-//           api.details("/workouts"),
-//           api.details("/api/posts")
-//           // api.details("/api/tags")
-//         ]);
-//       })
-//       .then(([notes, folders, tags]) => {
-//         store.notes = notes;
-//         store.folders = folders;
-//         store.tags = tags;
-//         render();
-//       })
-//       .catch(handleErrors);
-//
-//     // clear out the input
-//     // queryUsername.val("");
-//     // queryPassword.val("");
-//
-//     if($('.login-button').length > 0) {
-//       userLogIn(username, password);
-//     } else {
-//       signUpUser(firstname, lastname, username, password);
-//     }
-//   });
-// }
 
 function watchSubmit() {
 
   $('.js-search-form').submit(event => {
     event.preventDefault();
-
-    // $('#landing-page').hide();
 
     const queryUsername = $(event.currentTarget).find('#username');
     const queryPassword = $(event.currentTarget).find('#user-password');
@@ -278,7 +228,6 @@ function handleUser() {
   watchSubmit();
   showLogIn();
   showSignUp();
-  // handleLoginSubmit();
   demoUsername();
 }
 
