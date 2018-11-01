@@ -123,6 +123,11 @@ function displayUserProfile(username) {
   currentUsername = window.location.href.split('/').pop()
   url = `/api/users/username/${currentUsername}`
 
+  api.details(`/api/users/username/${currentUsername}`)
+    .then(user => {
+      console.log(user)
+    })
+
   if(username) {
     url = `/api/users/username/${username}`
     window.location.replace(`/dashboard/username/${username}`);
@@ -151,31 +156,33 @@ function displayUserProfile(username) {
   .then(function(user) {
     const amFollowing = user.followers.indexOf(currentUser)
     avatar = user.avatar;
+    displaySubscribedToUser(user, avatar, amFollowing);
+    let posts = user.posts;
+    fetchUserPosts(posts);
+  })
+}
 
-    if(amFollowing > -1) {
-        $('.feed-identity').html(
-          `<section id="user-thumbnail">
-            <img id="my-avatar" src="${avatar}" alt="workout-bear" />
-            <p class="name">${user.firstName} ${user.lastName}</p>
-            <button id="unsubscribe">unsubscribe</button>
-          </section>`
-        )
-    } else {
+function displaySubscribedToUser(user, avatar, amFollowing) {
+  if(amFollowing > -1) {
       $('.feed-identity').html(
         `<section id="user-thumbnail">
           <img id="my-avatar" src="${avatar}" alt="workout-bear" />
           <p class="name">${user.firstName} ${user.lastName}</p>
-          <button id="subscribe">follow</button>
+          <button id="unsubscribe">unsubscribe</button>
         </section>`
       )
-    }
-
-    let posts = user.posts;
-    fetchPosts(posts);
-  })
+  } else {
+    $('.feed-identity').html(
+      `<section id="user-thumbnail">
+        <img id="my-avatar" src="${avatar}" alt="workout-bear" />
+        <p class="name">${user.firstName} ${user.lastName}</p>
+        <button id="subscribe">follow</button>
+      </section>`
+    )
+  }
 }
 
-function fetchPosts(posts) {
+function fetchUserPosts(posts) {
 
   let post = posts.map(post => {
   let url = `/api/posts/${post}`;
@@ -265,7 +272,7 @@ function displayError(msg) {
   setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 }
 
-function subscribeToUser() {
+function handleSubscribeToUser() {
   $('body').on('click', '#subscribe', event => {
     api.details(`/api/users/username/${currentUsername}`)
     .then(user => {
@@ -286,8 +293,7 @@ function subscribeToUser() {
       }
     })
   })
-}
-function unsubscribeFromUser() {
+
   $('body').on('click', '#unsubscribe', event => {
 
     url = `/api/users/username/${currentUsername}`
@@ -455,22 +461,6 @@ function displayPostModal(title, content) {
   })
 }
 
-function handleWorkoutModal() {
-  $('#build-workout').on('click', event =>{
-    $('#create-a-workout-modal').show();
-  })
-
-  $('.close').on('click', event => {
-    $('#create-a-workout-modal').hide();
-  })
-
-  $(window).click(event => {
-    if (event.target.id === "create-a-workout-modal") {
-      $('#create-a-workout-modal').hide();
-    }
-  })
-}
-
 function searchExercises() {
   $('.search-for-exercise').on('submit', event => {
     event.preventDefault();
@@ -512,19 +502,6 @@ function displayTargetExercise(exercise) {
 
   exercise.steps.forEach(function(step, index) {
     $('.exercise-steps').append(`${index + 1}. ${step}<br>`)
-  })
-
-  $('.close').on('click', event => {
-    $('.individual-exercise-details').toggle();
-    $('.list-exercises').toggle();
-  })
-
-  $(window).click(event => {
-    if (event.target.id === "exercise-search-area") {
-      $('#exercise-search-area').hide();
-      $('.individual-exercise-details').toggle();
-      $('.list-exercises').toggle();
-    }
   })
 
   $('#back-button').on('click', event => {
@@ -605,20 +582,43 @@ function getExerciseInfo() {
   })
 }
 
-function revealSearchModal() {
-  $('.enable-search-modal').on('click', event => {
-    $('#exercise-search-area').show();
-  })
+function handleModals() {
+  let exerciseModal = 'enable-search-modal';
+  let usersModal = 'find-users';
+  let workoutModal = 'build-workout'
 
-  $('.close').on('click', event => {
-    $('#exercise-search-area').hide();
-  })
+  $('.enable-search-modal').add('.find-users').add('.build-workout').on('click', event => {
+    let target = $(event.currentTarget).attr('class');
 
-  $(window).click(event => {
-    if (event.target.id === "exercise-search-area") {
-      $('#exercise-search-area').hide();
+    switch(target) {
+      case exerciseModal:
+          $('#exercise-search-area').show();
+          $('.close').on('click', event => {
+            $('#exercise-search-area').hide();
+          })
+          break;
+      case usersModal:
+          $('#explore-users').show();
+          $('.close').on('click', event => {
+            $('#explore-users').hide();
+          })
+          break;
+      case workoutModal:
+          $('#create-a-workout').show();
+          $('.close').on('click', event => {
+            $('#create-a-workout').hide();
+          })
+          break;
     }
-  })
+
+      $(window).click(event => {
+        if (event.target.id === "exercise-search-area" || event.target.id === "explore-users" || event.target.id === "create-workout-modal") {
+          $('#exercise-search-area').hide();
+          $('#explore-users').hide();
+          $('#create-a-workout').hide();
+        }
+      })
+  });
 }
 
 function findUsers() {
@@ -786,19 +786,17 @@ function handleDashboard() {
   // renderWorkoutsToPost();
   deletePosts();
   openPostModal();
-  handleWorkoutModal();
   searchExercises();
-  revealSearchModal();
   displaySubscribedPosts();
   findMySchedule();
   getExerciseInfo();
-  subscribeToUser();
-  unsubscribeFromUser();
+  handleSubscribeToUser();
   findUsers();
   exploreUsers();
   createWorkout();
   preloadExercises();
   clickToAnotherProfile();
+  handleModals();
   //@WIP
 }
 
