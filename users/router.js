@@ -43,6 +43,21 @@ router.get('/subscribedTo/:id', (req, res) => {
     })
 });
 
+router.put('/:id', (req, res) => {
+  const updatedUser = {};
+  const updateableFields = ['avatar', 'firstName', 'lastName'];
+  updateableFields.forEach(field => {
+    if (field in req.body) {
+      updatedUser[field] = req.body[field];
+    }
+  });
+
+  User
+    .findByIdAndUpdate(req.params.id, {$set: updatedUser}, { new: true})
+    .then(updatedWorkout => res.status(200).json(updatedWorkout.serialize()))
+    .catch(err => res.status(500).json({message: `Something went horribly wrong`}));
+});
+
 router.put('/subscribe/:id', jwtAuth, (req, res) => {
   const updatedFollower = {};
   const updateableField = ['followers'];
@@ -125,7 +140,6 @@ router.delete('/unsubscribe/:id', jwtAuth, (req, res) => {
     })
 });
 
-// Post to register a new user
 router.post('/signup', jsonParser, (req, res) => {
   const requiredFields = ['username', 'password', 'firstName', 'lastName'];
   const missingField = requiredFields.find(field => !(field in req.body));
@@ -175,8 +189,6 @@ router.post('/signup', jsonParser, (req, res) => {
     },
     password: {
       min: 10,
-      // bcrypt truncates after 72 characters, so let's not give the illusion
-      // of security by storing extra (unused) info
       max: 72
     }
   };
@@ -205,8 +217,6 @@ router.post('/signup', jsonParser, (req, res) => {
   }
 
   let {username, password, firstName = '', lastName = ''} = req.body;
-  // Username and password come in pre-trimmed, otherwise we throw an error
-  // before this
   firstName = firstName.trim();
   lastName = lastName.trim();
 
@@ -239,8 +249,6 @@ router.post('/signup', jsonParser, (req, res) => {
       return res.status(201).json(user.serialize());
     })
     .catch(err => {
-      // Forward validation errors on to the client, otherwise give a 500
-      // error because something unexpected has happened
       if (err.reason === 'ValidationError') {
         return res.status(err.code).json(err);
       }
