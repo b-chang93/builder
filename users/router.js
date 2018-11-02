@@ -53,14 +53,14 @@ router.put('/subscribe/:id', jwtAuth, (req, res) => {
   });
 
   let followerId;
-
   return User
-    .findById(req.params.id)
+    .findOne({username: req.params.id})
     .then(targetUser => {
       followerId = req.user._id
-      console.log(followerId)
 
-      if (!(targetUser.followers.indexOf(followerId) > -1)) {
+      if(req.user._id == targetUser._id) {
+        return res.status(400).json({message: 'Cannot subscribe to yourself'});
+      } else if (!(targetUser.followers.indexOf(followerId) > -1)) {
         targetUser.followers.push(followerId)
         targetUser.save();
         return User
@@ -84,25 +84,28 @@ router.put('/subscribe/:id', jwtAuth, (req, res) => {
 
 router.delete('/unsubscribe/:id', jwtAuth, (req, res) => {
   let followerId;
+  let followingId;
 
   User
-    .findById(req.user._id)
+    .findOne({username: req.params.id})
     .then(targetUser => {
-      followerId = req.user._id
-      let followingIndex = targetUser.following.indexOf(req.params.id);
+      followerId = req.user._id;
+      followingId = targetUser._id;
+
+      let followingIndex = targetUser.followers.indexOf(followerId);
 
       if(followingIndex > -1) {
-        targetUser.following.splice(followingIndex, 1);
+        targetUser.followers.splice(followingIndex, 1);
         targetUser.save();
       }
 
       User
-        .findById(req.params.id)
+        .findById(req.user._id)
         .then(user => {
-          let followerIndex = user.followers.indexOf(req.user._id);
+          let followingIndex = user.following.indexOf(followingId);
 
-          if (followerIndex > -1) {
-            user.followers.splice(followerIndex, 1);
+          if (followingIndex > -1) {
+            user.following.splice(followingIndex, 1);
             user.save();
           }
         })

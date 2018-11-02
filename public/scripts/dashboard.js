@@ -114,7 +114,7 @@ function deletePosts() {
       .then(response => {
         // response.json()
         console.log(response)
-        // displayError('Successfully deleted post')
+        // notifyUserMsg('Successfully deleted post')
       });
   })
 }
@@ -265,7 +265,7 @@ function renderPosts(post, sub) {
   }
 }
 
-function displayError(msg) {
+function notifyUserMsg(msg) {
   $('#warning-message').html(msg);
   var x = document.getElementById("warning-message");
   x.className = "show";
@@ -274,46 +274,36 @@ function displayError(msg) {
 
 function handleSubscribeToUser() {
   $('body').on('click', '#subscribe', event => {
-    api.details(`/api/users/username/${currentUsername}`)
-    .then(user => {
 
-      let data = {
-        "followers": currentUser
-      }
+    let data = {
+      "followers": currentUser
+    }
 
-      if (currentUser === user.id) {
-        let msg = 'You cannot subscribe to yourself'
-        displayError(msg)
-        $("#subscribe").attr('disabled', true);
-      } else {
-        api.update(`/api/users/subscribe/${user._id}`)
-          .then(() => {
-            $("#subscribe").attr('id', "unsubscribe").html('unsubscribe')
-          })
-      }
-    })
+    if (userLoggedIn === currentUsername) {
+      let msg = 'You cannot subscribe to yourself'
+      notifyUserMsg(msg)
+      $("#subscribe").attr('disabled', true);
+    } else {
+      api.update(`/api/users/subscribe/${currentUsername}`, data)
+      .then(user => {
+        let msg = `Successfully subscribed to ${user.username}`
+        notifyUserMsg(msg)
+        $("#subscribe").attr('id', "unsubscribe").html('unsubscribe')
+      });
+    }
   })
 
   $('body').on('click', '#unsubscribe', event => {
-
-    url = `/api/users/username/${currentUsername}`
-
-    api.details(`/api/users/username/${currentUsername}`)
+    api.remove(`/api/users/unsubscribe/${currentUsername}`)
       .then(user => {
-        let data = {
-          "followers": currentUser
-        }
-
-        api.remove(`/api/users/unsubscribe/${user._id}`)
-          .then(user => {
-            $("#unsubscribe").attr('id', "subscribe").html('subscribe')
-          })
+        let msg = `Successfully unsubscribed from ${user.username}`
+        notifyUserMsg(msg)
+        $("#unsubscribe").attr('id', "subscribe").html('subscribe')
       })
   })
 }
 
 function displaySubscribedPosts() {
-  console.log(currentUser)
   api.details(`/api/users/subscribedTo/${currentUser}`)
     .then(users => {
       users.following.map(user => {
@@ -379,54 +369,54 @@ function renderExercise(exercise) {
   return `<img src="${exercise.svg[0]}"/>`
 }
 
-function getWorkouts(token) {
-  api.details('/workouts')
-    .then(workouts => {
-      showMyWorkouts(workouts)
-      showWorkoutDetails(workouts)
-    })
-}
+// function getWorkouts(token) {
+//   api.details('/workouts')
+//     .then(workouts => {
+//       showMyWorkouts(workouts)
+//       showWorkoutDetails(workouts)
+//     })
+// }
 
-function showMyWorkouts(workouts) {
-  const list = workouts.map(workout => renderWorkouts(workout))
-  $('.workout-index').html(list);
-}
+// function showMyWorkouts(workouts) {
+//   const list = workouts.map(workout => renderWorkouts(workout))
+//   $('.workout-index').html(list);
+// }
 
-function renderWorkouts(workout) {
-  if (workout.creator._id === currentUser) {
-    return `<li>${workout.title}</li>`
-  }
-}
+// function renderWorkouts(workout) {
+//   if (workout.creator._id === currentUser) {
+//     return `<li>${workout.title}</li>`
+//   }
+// }
 
-function workoutDraft(workout) {
-  $('.exercise-list').empty();
-  workout.exercises.forEach((exercise, index) => {
-    $('.exercise-list').append(`<li><ul class="draft exercise-${index+1}">${exercise.name}</ul></li>`)
-    exercise.sets.forEach(set => {
-      $(`.exercise-${index+1}`).append(`<li>set: ${set.weight}lb for ${set.reps} reps</li>`)
-    })
-  })
-}
+// function workoutDraft(workout) {
+//   $('.exercise-list').empty();
+//   workout.exercises.forEach((exercise, index) => {
+//     $('.exercise-list').append(`<li><ul class="draft exercise-${index+1}">${exercise.name}</ul></li>`)
+//     exercise.sets.forEach(set => {
+//       $(`.exercise-${index+1}`).append(`<li>set: ${set.weight}lb for ${set.reps} reps</li>`)
+//     })
+//   })
+// }
 
-function showWorkoutDetails(data) {
-  $('.workout-index').on('click', 'li', event => {
-    $('.my-workout-info').toggle();
-    for(let i = 0; i < data.length; i++) {
-      if ($(event.currentTarget).text() === data[i].title) {
-        $('.workout-name').html(data[i].title);
-        $('.individual-workout-details').empty();
-        let workout = data[i].exercises
-
-        workout.forEach((exercise, index) => {
-          $(`.individual-workout-details`).append(`<ul class="exercise-name-${index}">${exercise.name}</ul>`)
-          exercise.sets.forEach(set => {
-            $(`.exercise-name-${index}`).append(`<li>${set.weight}lb for ${set.reps}</li>`);
-          })
-        })
-      }
-    }
-  })
-}
+// function showWorkoutDetails(data) {
+//   $('.workout-index').on('click', 'li', event => {
+//     $('.my-workout-info').toggle();
+//     for(let i = 0; i < data.length; i++) {
+//       if ($(event.currentTarget).text() === data[i].title) {
+//         $('.workout-name').html(data[i].title);
+//         $('.individual-workout-details').empty();
+//         let workout = data[i].exercises
+//
+//         workout.forEach((exercise, index) => {
+//           $(`.individual-workout-details`).append(`<ul class="exercise-name-${index}">${exercise.name}</ul>`)
+//           exercise.sets.forEach(set => {
+//             $(`.exercise-name-${index}`).append(`<li>${set.weight}lb for ${set.reps}</li>`);
+//           })
+//         })
+//       }
+//     }
+//   })
+// }
 
 function openPostModal() {
   $('.main-index').on('click', 'li', event => {
@@ -680,6 +670,52 @@ function workoutDraft(workout) {
   })
 }
 
+function getWorkouts() {
+ api.details(`/workouts`)
+   .then(workouts => {
+     console.log(workouts)
+     showMyWorkouts(workouts)
+     showWorkoutDetails(workouts)
+   })
+}
+
+function showMyWorkouts(workouts) {
+ console.log(workouts)
+ // console.log(`finding my workouts`)
+ const list = workouts.map(workout => renderWorkouts(workout))
+ // console.log(list)
+ $(`.workout-index`).html(list);
+}
+
+function renderWorkouts(workout) {
+ console.log(workout)
+ // console.log(workout.creator._id)
+ if (workout.creator._id === currentUser) {
+   return `<li>${workout.title}</li>`
+ }
+ // return `<li>${workout.title}</li>`
+}
+
+function showWorkoutDetails(data) {
+ $(`.workout-index`).on(`click`, `li`, event => {
+   $(`.my-workout-info`).toggle();
+   for(let i = 0; i < data.length; i++) {
+     if ($(event.currentTarget).text() === data[i].title) {
+       $(`.workout-name`).html(data[i].title);
+       $(`.individual-workout-details`).empty();
+       let workout = data[i].exercises
+
+       workout.forEach((exercise, index) => {
+         $(`.individual-workout-details`).append(`<ul class="exercise-name-${index}">${exercise.name}</ul>`)
+         exercise.sets.forEach(set => {
+           $(`.exercise-name-${index}`).append(`<li>${set.weight}lb for ${set.reps}</li>`);
+         })
+       })
+     }
+   }
+ })
+}
+
 function createWorkout() {
   let newWorkout = {
     title: '',
@@ -713,7 +749,7 @@ function createWorkout() {
     if (index < 0) {
       if (reps.val() === '') {
         let msg = 'Cannot add set information without an input.'
-        displayError(msg)
+        notifyUserMsg(msg)
       } else {
         singleExercise.name = exercise.val();
         singleExercise.sets.push(singleSet)
@@ -748,10 +784,11 @@ function createWorkout() {
 function postNewWorkout(data) {
   let url = '/workouts';
 
-  api.details('/workouts')
+  api.create('/workouts', data)
     .then(workout => {
       let createdWorkout = workout.id
-      createPostAndWorkout(createdWorkout)
+      notifyUserMsg('Successfully created workout')
+      // createPostAndWorkout(createdWorkout)
     })
 }
 
