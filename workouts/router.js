@@ -50,7 +50,6 @@ router.post('/', jwtAuth, (req, res, next) => {
     title: req.body.title,
     difficulty: req.body.difficulty,
     exercises: req.body.exercises
-    // creator: req.user.id
   }
 
   for (var key in workout) {
@@ -68,11 +67,7 @@ router.post('/', jwtAuth, (req, res, next) => {
       exercises: req.body.exercises,
       creator: req.body.creator
     })
-    // .then(workout => res.status(201).json(workout.serialize()))
-    .then(workout => {
-      console.log(workout)
-      res.status(201).json(workout.serialize())
-    })
+    .then(workout => res.status(201).json(workout.serialize()))
     .catch(err => {
       console.error(err);
       res.status(500).json({error: 'Something went horribly wrong'})
@@ -98,14 +93,7 @@ router.put('/:id', (req, res) => {
     console.error(message);
     return res.status(400).json(message);
   }
-  // const requiredFields = ['title', 'difficulty', 'exercises', 'creator'];
-  // requiredFields.forEach(field => {
-  //   if (!(field in req.body)) {
-  //     const message = `Missing \`${field}\` in request body`;
-  //     console.error(message);
-  //     return res.status(400).json(message);
-  //   }
-  // });
+
   const updated = {};
   const updateableFields = ['title', 'difficulty', 'exercises'];
   updateableFields.forEach(field => {
