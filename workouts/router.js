@@ -66,9 +66,13 @@ router.post('/', jwtAuth, (req, res, next) => {
       title: req.body.title,
       difficulty: req.body.difficulty,
       exercises: req.body.exercises,
-      creator: req.user.id
+      creator: req.body.creator
     })
-    .then(workout => res.status(201).json(workout.serialize()))
+    // .then(workout => res.status(201).json(workout.serialize()))
+    .then(workout => {
+      console.log(workout)
+      res.status(201).json(workout.serialize())
+    })
     .catch(err => {
       console.error(err);
       res.status(500).json({error: 'Something went horribly wrong'})
