@@ -1,7 +1,9 @@
-# {
+* {
   box-sizing: border-box;
 }
+
 body, html {
+  font-family: 'Roboto';
   margin: 0;
   padding: 0;
   height: 100%;
@@ -167,7 +169,7 @@ th {
   position: absolute;
   top: 80%;
 }
-.explore-user-modal {
+.explore-user-modal, .user-profile-modal {
   display: flex;
   flex-direction: column;
   background-color: #fefefe;
@@ -180,6 +182,12 @@ th {
   box-shadow: 2px 1px 5px 1px rgba(0,0,0,0.6);
   overflow: auto;
 }
+
+.user-profile-modal {
+  width: 100%;
+  height: 90%;
+}
+
 .enable-search-modal {
   margin-left: 5px;
   color: white;
@@ -191,6 +199,24 @@ th {
   height: 100%;
   margin: 5px;
 }
+
+.user-profile-info {
+  width: 100%;
+  height: 40%;
+  margin: auto;
+}
+
+#profile-user-thumbnail{
+  width: 90%;
+  box-shadow: 2px 1px 5px 1px rgba(0,0,0,0.6);
+}
+
+#profile-my-avatar {
+  display: block;
+  margin: auto;
+  width: 100%;
+}
+
 #user-thumbnail {
   width: 50%;
   height: 60%;
@@ -202,6 +228,17 @@ th {
   height: 100%;
   border-radius: 10px;
 }
+
+#profile-user-thumbnail > input {
+  display: block;
+  font-size: 14px;
+  text-align: left;
+  padding: 18px;
+  border: 3px solid #e7e7e7;
+  background: #fcfcfc;
+  margin: 5px auto;
+}
+
 .name {
   margin: 0;
   text-align: center;
@@ -209,7 +246,7 @@ th {
   font-weight: bold;
   color: #359aff;
 }
-#subscribe, #unsubscribe  {
+#subscribe, #unsubscribe, #edit  {
   width: 100%;
   background-color: #359aff;
   border: none;
@@ -312,11 +349,6 @@ th {
 .content {
   width: 100%;
 }
-.post-title {
-  width: 65%;
-  height: 50px;
-  font-size: 12px;
-}
 .post-text {
   padding: 10px;
   font-size: 12px;
@@ -324,18 +356,24 @@ th {
   height: 50px;
 }
 .post-title {
-  width: 90%;
+  width: 100%;
   height: 10%;
-  padding: 14px;
+  padding: 30px 10px;
   border: none;
 }
+
+h1.post-title {
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
 .name-of-split, .day-of-week {
   width: 7%;
   height: 10%;
   padding: 10px;
 }
 .post-content {
-  width: 90%;
+  width: 100%;
   height: 40%;
   padding: 14px;
   border: none;
@@ -461,21 +499,7 @@ th {
     from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
 }
-/* warning message css */
-/* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
-/* @media screen and (max-width: 600px) {
-    .topnav a, .topnav input[type=text] {
-        float: none;
-        display: block;
-        text-align: left;
-        width: 100%;
-        margin: 0;
-        padding: 14px;
-    }
-    .topnav input[type=text] {
-        border: 1px solid #ccc;
-    }
-} */
+
 /* The Modal (background) */
 .modal, .update-workout-modal, .user-modal {
   display: none;
@@ -617,7 +641,32 @@ th {
   text-decoration: none;
   cursor: pointer;
 }
-/* START OF MEDIA QUERY */
+
+@media only screen and (min-width: 300px) and (max-width: 375px) {
+  .navbar {
+    height: 6%;
+  }
+}
+
+@media only screen and (min-width: 375px) and (max-width: 400px) {
+  .navbar {
+    height: 5.5%;
+  }
+}
+
+@media only screen and (min-width: 400px) and (max-width: 450px) {
+  #workout-split-nav {
+    margin-top: 45px;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .workout-draft {
+    height: 300px;
+    width: 92%;
+  }
+}
+
 @media only screen and (min-width: 850px) {
   body {
     width: 99%;
@@ -633,11 +682,59 @@ th {
   .exercise-search-section {
     display: block;
     width: 100%;
-    /* height: 70px; */
     height: 30%;
   }
   #user-thumbnail {
     width: 80%;
+  }
+
+  h1.post-title {
+    padding: 5px 10px;
+    font-size: 24px;
+  }
+
+  .user-profile-modal {
+    width: 60%;
+    margin: 6.5% 2.5%;
+  }
+
+  .user-profile-info {
+    height: 30%;
+    width: 50%;
+    margin: auto;
+  }
+
+  #profile-user-thumbnail{
+    width: 100%;
+    box-shadow: 2px 1px 5px 1px rgba(0,0,0,0.6);
+  }
+
+  #profile-my-avatar {
+    display: block;
+    margin: auto;
+    width: 100%;
+  }
+
+  #user-thumbnail {
+    width: 65%;
+    height: 60%;
+    margin: auto;
+    padding-top: 10px;
+  }
+  #my-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+  }
+
+  #profile-user-thumbnail > input {
+    display: block;
+    font-size: 18px;
+    text-align: left;
+    padding: 18px;
+    border: 3px solid #e7e7e7;
+    background: #fcfcfc;
+    margin: 5px auto;
   }
 }
 @media only screen and (min-width: 850px){
@@ -650,13 +747,13 @@ th {
     width: 100%;
   }
   .feed-identity {
-    width: 100%;
-    height: 51%;
+    width: 95%;
+    height: 60%;
     margin: 10px 0;
   }
   .left-column {
     height: 100%;
-    width: 20%;
+    width: 25%;
   }
   .delete {
     left: 80%;
@@ -675,10 +772,8 @@ th {
     display: flex;
   }
   .workout-modal-content {
-    /* width: 960px; */
-    width: 1120px;
-    max-width: 1160px;
-    height: 75%;
+    width: 94%;
+    height: 85%;
     margin: 5% auto;
   }
   .create-workout-form {
@@ -704,7 +799,6 @@ th {
   }
   .workout-draft {
     width: 50%;
-    /* height: 65%; */
     height: 350px;
     margin-left: 45%;
   }
@@ -724,7 +818,7 @@ th {
   }
   .share-a-post {
     height: 53%;
-    width: 100%;
+    width: 98%;
     margin-left: 10px;
     margin-top: 10px;
     box-shadow: 0 1.5px 5px 1px rgba(0,0,0,0.5);
@@ -762,7 +856,7 @@ th {
     background: rgb(0, 51, 102);
   }
   #posts-container {
-    width: 100%;
+    width: 98%;
     margin-left: 10px;
   }
   #right-column {
@@ -799,12 +893,13 @@ th {
   }
   .post-content {
     padding: 15px;
+    height: 50%;
   }
   .search-users {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 95%;
     height: 100px;
     margin: 14px 0px 10px;
     box-shadow: 0 1.5px 5px 0px rgba(0,0,0,0.5);
@@ -826,8 +921,8 @@ th {
     position: relative;
   }
   .exercise-search-modal {
-    margin-left: 6%;
-    width: 85%;
+    margin: 90px auto 0;
+    width: 92%;
     height: 90%;
   }
   .card {
@@ -884,21 +979,83 @@ th {
   }
   .my-workout-info {
     position: fixed;
-    width: 230px;
-    margin-left: 20px;
+    width: 210px;
+    height: 350px;
+    margin-left: 4px;
     margin-top: 210px;
   }
 }
+
+@media only screen and (min-width: 700px) and (max-width: 950px){
+  html {
+    width: 90%;
+    margin: auto;
+  }
+  .navbar {
+    width: 90%;
+  }
+  .flex-container {
+    margin-top: 50px;
+  }
+}
+
+@media only screen and (min-width: 750px) and (max-width: 800px){
+  #workout-split-nav {
+    margin-top: 55px;
+  }
+}
+
+@media only screen and (min-width: 800px) and (max-width: 850px){
+  .current-user {
+    height: 60%;
+  }
+}
+
+@media only screen and (min-width: 800px) and (max-width: 950px){
+  html {
+    width: 85%;
+    margin: auto;
+  }
+
+  .navbar {
+    width: 85%;
+  }
+
+  #workout-split-nav {
+    margin-top: 50px;
+  }
+
+  #my-workouts-list {
+    height: 200px;
+  }
+
+  .my-workout-info {
+    margin: 10px auto;
+  }
+
+  .content {
+    height: 250px;
+  }
+}
+
 @media only screen and (min-width: 850px) and (max-width: 950px){
   table {
     width: 90%;
     height: 70px;
+    margin-top: 10px;
+  }
+  .navbar {
+    width: 90%;
   }
   .left-column {
     width: 30%;
   }
   .posts-area {
     width: 92%;
+  }
+
+  .enable-search-modal {
+    margin-top: 10px;
   }
 }
 @media only screen and (min-width: 900px) {
@@ -924,12 +1081,31 @@ th {
     margin-left: 5px;
   }
   #my-workouts-list {
-    margin-left: 15px;
+    margin-left: 5px;
   }
   .delete {
     left: 85%;
   }
 }
+
+@media only screen and (min-width: 1100px) {
+  .workout-modal-content {
+    width: 95%;
+  }
+}
+
+@media only screen and (min-width: 1050px) and (max-width: 1150px) {
+  .navbar {
+    height: 70px;
+  }
+}
+
+@media only screen and (min-width: 1150px) and (max-width: 1200px) {
+  .navbar {
+    height: 75px;
+  }
+}
+
 @media only screen and (min-width: 1200px) {
   body {
     width: 1200px;
@@ -944,12 +1120,32 @@ th {
     left: 74%;
   }
   #my-workouts-list {
-    margin-left: 20px;
+    margin-left: 5px;
+  }
+  .my-workout-info {
+    width: 230px;
   }
   .enable-search-modal {
     margin-left: 5px;
   }
   .exercise-search-section {
     margin: 0;
+  }
+
+  .workout-modal-content {
+    max-width: 1160px;
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  .workout-modal-content {
+    width: 81%;
+    max-width: 1160px;
+  }
+
+  .exercise-search-modal {
+    margin: auto;
+    margin-top: 90px;
+    max-width: 1150px;
   }
 }

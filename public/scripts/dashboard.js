@@ -119,7 +119,56 @@ function deletePosts() {
   })
 }
 
-function displayUserProfile(username) {
+function loggedInUserInfo() {
+  api.details(`/api/users/username/${currentUsername}`)
+    .then(user => {
+      console.log(user)
+      renderUserProfile(user);
+    })
+}
+
+function renderUserProfile(user) {
+  $('.profile').html(`
+    <div class="user-profile-info">
+      <section id="profile-user-thumbnail">
+        <img id="profile-my-avatar" src="${user.avatar}" alt="user-avatar">
+        <p class="name" value="${user.username}">${user.firstName} ${user.lastName}</p>
+        <input type="text" class="user-first-name" value="${user.firstName}" name="first name" placeholder="${user.firstName}" aria-labelledby="first name" required>
+        <input type="text" class="user-last-name" value="${user.lastName}" name="last name" placeholder="${user.lastName}" aria-labelledby="first last" required>
+        <input type="text" class="user-avatar" value name="avatar" placeholder="url-to-your-img" aria-labelledby="user avatar" required>
+        <button id="edit">Edit</button>
+      </section>
+     </div>
+  `)
+}
+
+function showEditProfileOptions() {
+  $('.profile').on('click', '#edit', event => {
+    let fname = $('.user-first-name');
+    let lname = $('.user-last-name');
+    let avatar = $('.user-avatar');
+
+    console.log(fname.val() === '')
+
+    let userData = {
+      firstName: fname.val(),
+      lastName: lname.val(),
+      avatar: avatar.val()
+    }
+
+    if(fname.val() === '' || lname.val() === '' || avatar.val() === '') {
+      let msg = 'Missing input field. Please Fill before continuing';
+      notifyUserMsg(msg);
+    } else {
+      api.update(`/api/users/${currentUser}`, userData)
+        .then(() => {
+          location.reload();
+        })
+    }
+  });
+}
+
+function displayUserDashboard(username) {
   currentUsername = window.location.href.split('/').pop()
   url = `/api/users/username/${currentUsername}`
 
@@ -166,16 +215,16 @@ function displaySubscribedToUser(user, avatar, amFollowing) {
   if(amFollowing > -1) {
       $('.feed-identity').html(
         `<section id="user-thumbnail">
-          <img id="my-avatar" src="${avatar}" alt="workout-bear" />
-          <p class="name">${user.firstName} ${user.lastName}</p>
+          <img id="my-avatar" src="${avatar}" alt="user-avatar" />
+          <p class="name" value="${user.username}">${user.firstName} ${user.lastName}</p>
           <button id="unsubscribe">unsubscribe</button>
         </section>`
       )
   } else {
     $('.feed-identity').html(
       `<section id="user-thumbnail">
-        <img id="my-avatar" src="${avatar}" alt="workout-bear" />
-        <p class="name">${user.firstName} ${user.lastName}</p>
+        <img id="my-avatar" src="${avatar}" alt="user-avatar" />
+        <p class="name" value="${user.username}">${user.firstName} ${user.lastName}</p>
         <button id="subscribe">follow</button>
       </section>`
     )
@@ -369,55 +418,6 @@ function renderExercise(exercise) {
   return `<img src="${exercise.svg[0]}"/>`
 }
 
-// function getWorkouts(token) {
-//   api.details('/workouts')
-//     .then(workouts => {
-//       showMyWorkouts(workouts)
-//       showWorkoutDetails(workouts)
-//     })
-// }
-
-// function showMyWorkouts(workouts) {
-//   const list = workouts.map(workout => renderWorkouts(workout))
-//   $('.workout-index').html(list);
-// }
-
-// function renderWorkouts(workout) {
-//   if (workout.creator._id === currentUser) {
-//     return `<li>${workout.title}</li>`
-//   }
-// }
-
-// function workoutDraft(workout) {
-//   $('.exercise-list').empty();
-//   workout.exercises.forEach((exercise, index) => {
-//     $('.exercise-list').append(`<li><ul class="draft exercise-${index+1}">${exercise.name}</ul></li>`)
-//     exercise.sets.forEach(set => {
-//       $(`.exercise-${index+1}`).append(`<li>set: ${set.weight}lb for ${set.reps} reps</li>`)
-//     })
-//   })
-// }
-
-// function showWorkoutDetails(data) {
-//   $('.workout-index').on('click', 'li', event => {
-//     $('.my-workout-info').toggle();
-//     for(let i = 0; i < data.length; i++) {
-//       if ($(event.currentTarget).text() === data[i].title) {
-//         $('.workout-name').html(data[i].title);
-//         $('.individual-workout-details').empty();
-//         let workout = data[i].exercises
-//
-//         workout.forEach((exercise, index) => {
-//           $(`.individual-workout-details`).append(`<ul class="exercise-name-${index}">${exercise.name}</ul>`)
-//           exercise.sets.forEach(set => {
-//             $(`.exercise-name-${index}`).append(`<li>${set.weight}lb for ${set.reps}</li>`);
-//           })
-//         })
-//       }
-//     }
-//   })
-// }
-
 function openPostModal() {
   $('.main-index').on('click', 'li', event => {
     let deleteButton = $(event.target).is(".delete");
@@ -572,13 +572,19 @@ function getExerciseInfo() {
   })
 }
 
+function updateUserProfile() {
+  api.create(`/api/users/${username}`)
+}
+
 function handleModals() {
   let exerciseModal = 'enable-search-modal';
   let usersModal = 'find-users';
   let workoutModal = 'build-workout'
+  let userProfile = 'feed-identity';
 
-  $('.enable-search-modal').add('.find-users').add('.build-workout').on('click', event => {
+  $('.enable-search-modal').add('.find-users').add('.build-workout').add('.feed-identity').on('click', event => {
     let target = $(event.currentTarget).attr('class');
+    console.log(target);
 
     switch(target) {
       case exerciseModal:
@@ -597,6 +603,11 @@ function handleModals() {
           $('#create-a-workout').show();
           $('.close').on('click', event => {
             $('#create-a-workout').hide();
+          })
+      case userProfile:
+          $('#user-profile').show();
+          $('.close').on('click', event => {
+            $('#user-profile').hide();
           })
           break;
     }
@@ -656,7 +667,7 @@ function clickToAnotherProfile() {
     console.log('clicked')
     let username = $(event.currentTarget).find('.explore-usernames').text();
 
-    displayUserProfile(username);
+    displayUserDashboard(username);
   })
 }
 
@@ -673,27 +684,20 @@ function workoutDraft(workout) {
 function getWorkouts() {
  api.details(`/workouts`)
    .then(workouts => {
-     console.log(workouts)
      showMyWorkouts(workouts)
      showWorkoutDetails(workouts)
    })
 }
 
 function showMyWorkouts(workouts) {
- console.log(workouts)
- // console.log(`finding my workouts`)
  const list = workouts.map(workout => renderWorkouts(workout))
- // console.log(list)
  $(`.workout-index`).html(list);
 }
 
 function renderWorkouts(workout) {
- console.log(workout)
- // console.log(workout.creator._id)
  if (workout.creator._id === currentUser) {
    return `<li>${workout.title}</li>`
  }
- // return `<li>${workout.title}</li>`
 }
 
 function showWorkoutDetails(data) {
@@ -818,7 +822,7 @@ function handleDashboard() {
   // getToken().then(res => getWorkouts(res));
   getToken();
   getWorkouts();
-  displayUserProfile();
+  displayUserDashboard();
   handlePostCreation();
   // renderWorkoutsToPost();
   deletePosts();
@@ -834,7 +838,9 @@ function handleDashboard() {
   preloadExercises();
   clickToAnotherProfile();
   handleModals();
-  //@WIP
+
+  loggedInUserInfo();
+  showEditProfileOptions();
 }
 
 $(handleDashboard);
