@@ -51,53 +51,6 @@ function signUpUser(fname, lname, username, password) {
     // .catch(error => displayError(`Username or password is incorrect.`));
 };
 
-function handleUserAppRequest() {
-  showSignUp();
-  showLogIn();
-}
-
-function showSignUp() {
-  $('#signup-button').on('click', event=> {
-    console.log('clicked sign up button')
-    event.preventDefault();
-    // window.location.replace("/signup");
-    $("footer").html(`<p>Got an account? <a href="#" id="login-button">Sign In!</a></p>`)
-    $('fieldset').html(renderSignup());
-  })
-}
-
-function showLogIn() {
-  $('#login-button').on('click', event=> {
-    console.log('clicked sign in button')
-    event.preventDefault();
-    // window.location.replace("/login");
-    $("footer").html(`<p>Don't have an account? <a href="#" id="signup-button">Sign up!</a></p>`)
-    $('fieldset').html(renderLogin());
-  })
-}
-
-
-function renderSignup() {
-  return `
-  <legend style="display:none">Sign Up</legend>
-  <h1>Sign Up</h1>
-  <input type="text" placeholder="first name" value name="first-name" id="user-first-name" required/>
-  <input type="text" placeholder="last name" value name="last-name" id="user-last-name" required/>
-  <input type="text" placeholder="username" value name="username" id="username" required/>
-  <input type="password" placeholder="password" value name="password" id="user-password" required/>
-  <button class="signup-button" type="submit">Sign Up</button>`
-}
-
-function renderLogin() {
-  return `
-  <legend style="display:none">Log In</legend>
-  <h1>Log In</h1>
-  <input type="text" placeholder="username" value name="username" id="username" required/>
-  <input type="password" placeholder="password" value name="password" id="user-password" required/>
-  <button class="login-button" type="submit">Log In</button>
-  `
-}
-
 function displayError(msg) {
   $('#warning-message').html(msg);
   var x = document.getElementById("warning-message");
@@ -111,12 +64,12 @@ function handleErrors(response) {
 }
 
 function demoUsername() {
-    $('.demo').on('click', event => {
+    $('fieldset').on('click', '.demo', event => {
       var txt = "brandon.chang";
       var timeOut;
       var txtLen = txt.length;
       var char = 0;
-      var tb = $("#username").attr("value", "|");
+      var tb = $(".username").attr("value", "|");
       (function typeIt() {
           var humanize = Math.round(Math.random() * (200 - 30)) + 30;
           timeOut = setTimeout(function () {
@@ -142,7 +95,7 @@ function demoPwd() {
   var timeOut;
   var txtLen = txt.length;
   var char = 0;
-  var tb = $("#user-password").attr("value", "|");
+  var tb = $(".user-password").attr("value", "|");
   (function typeIt() {
       var humanize = Math.round(Math.random() * (200 - 30)) + 30;
       timeOut = setTimeout(function () {
@@ -163,15 +116,34 @@ function demoPwd() {
   },2000);
 }
 
-function watchSubmit() {
+function submitLogin() {
 
   $('.login-form').submit(event => {
     event.preventDefault();
 
-    const queryUsername = $(event.currentTarget).find('#username');
-    const queryPassword = $(event.currentTarget).find('#user-password');
-    const queryFirstName = $(event.currentTarget).find('#user-first-name');
-    const queryLastName = $(event.currentTarget).find('#user-last-name');
+    const queryUsername = $(event.currentTarget).find('.username');
+    const queryPassword = $(event.currentTarget).find('.user-password');
+
+    username = queryUsername.val();
+    password = queryPassword.val();
+    // clear out the input
+    // queryUsername.val("");
+    // queryPassword.val("");
+    userLogIn(username, password);
+
+  });
+}
+
+function submitSignup() {
+
+  $('.signup-form').submit(event => {
+    console.log('signing up....')
+    event.preventDefault();
+
+    const queryUsername = $(event.currentTarget).find('.signup-username');
+    const queryPassword = $(event.currentTarget).find('.signup-user-password');
+    const queryFirstName = $(event.currentTarget).find('.user-first-name');
+    const queryLastName = $(event.currentTarget).find('.user-last-name');
 
     username = queryUsername.val();
     password = queryPassword.val();
@@ -181,20 +153,14 @@ function watchSubmit() {
     // clear out the input
     // queryUsername.val("");
     // queryPassword.val("");
-
-    if($('.login-button').length > 0) {
-      userLogIn(username, password);
-    } else {
-      signUpUser(firstname, lastname, username, password);
-    }
+    signUpUser(firstname, lastname, username, password);
   });
 }
 
 
 function handleUser() {
-  watchSubmit();
-  showLogIn();
-  showSignUp();
+  submitLogin();
+  submitSignup();
   demoUsername();
 }
 
