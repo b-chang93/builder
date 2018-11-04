@@ -1,0 +1,209 @@
+body {
+  height: 1000px;
+  background: #298eea;
+  font-family: 'Roboto';
+  font-size: 18px;
+}
+
+.welcome-message {
+  font-size: 120px;
+  color: #298eea;
+  text-align: center;
+  width: 35%;
+  margin: auto;
+  background: #d3d3d3;
+  border-radius: 5px;
+}
+
+#user-login {
+  margin: auto;
+}
+
+#user-signup {
+  margin: auto;
+}
+
+#landing-page {
+  display: flex;
+  width: 100%;
+  height: 450px;
+  background-image: url('https://yorkbarbell.com/wp-content/uploads/2017/02/Plates-bw.jpg');
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.landing-page-details {
+  display: flex;
+  flex-direction: column;
+  float: left;
+  height: 100%;
+  width: 50%;
+}
+
+.welcome-info, .welcome-info-1, .welcome-info-2 {
+  display: flex;
+  width: 100%;
+  height: 350px;
+  text-align: center;
+}
+
+.welcome-info {
+  flex-direction: column;
+  color: #298eea;
+  background-color: #e4e4e4;
+}
+
+.welcome-info > h2 {
+  margin: 5px;
+  font-size: 32px;
+}
+
+.welcome-info > p {
+  width: 100%;
+  margin: 0;
+  font-size: 24px;
+}
+
+.welcome-info-1 {
+  background-color: #00264d;
+  color: #e4e4e4;
+}
+
+.welcome-info-1 > p {
+  width: 45%;
+  margin: 5px;
+  height: 215px;
+  margin: auto;
+  font-size: 32px;
+}
+
+.welcome-info > img, .welcome-info-1 > img, .welcome-info-2 > img {
+  width: 50%;
+  height: 75%;
+  margin: auto;
+}
+
+.welcome-info-2 {
+  background-color: #004d99;
+  color: #e4e4e4;
+}
+
+.welcome-info-2 > p {
+  width: 45%;
+  margin: 5px;
+  height: 215px;
+  margin: auto;
+  font-size: 32px;
+}
+
+.logo {
+  display: block;
+  height: 35px;
+  margin: 0 auto 30px;
+}
+
+.container {
+  height: 85%;
+}
+
+h1 {
+  text-align: center;
+  color: rgb(0, 51, 102);
+}
+
+fieldset {
+  border: none;
+  width: 450px;
+  padding-left: 40px;
+  padding-right: 40px;
+  background-color: #298eea;.
+  background: white;
+}
+
+footer {
+  text-align: center;
+  width: 70%;
+  margin: auto;
+  color: rgb(0, 51, 102);
+}
+
+.passwordReset {
+  margin: 20px;
+}
+
+label {
+  display: none;
+}
+
+input[type="text"],
+input[type="password"] {
+  display: block;
+  width: 70%;
+  height: 35px;
+  font-size: 18px;
+  text-align: left;
+  padding: 18px;
+  border: 3px solid #e7e7e7;
+  background: #fcfcfc;
+  margin: auto;
+  transition: opacity 0.4s;
+  border: 0;
+  background: transparent;
+  background-color: white;
+}
+
+input[type="text"] {
+  border-bottom: 1px solid #d3d3d3;
+}
+
+.login-button, .demo, .signup {
+  display: block;
+  width: 78%;
+  margin: auto;
+  padding: 20px;
+  border: 2px solid #e7e7e7;
+  border-radius: 3px;
+  height: auto;
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+  color: white;
+  background: #00264d;
+  border: 0;
+  cursor: pointer;
+  margin-bottom: 0;
+}
+
+.login-button {
+  margin-top: 10px;
+}
+
+.signup {
+  width: 79%;
+  margin-top: 10px;
+}
+
+.demo {
+  margin-top: 5px;
+}
+
+#warning-message {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 100px;
+    font-size: 17px;
+}
+
+#warning-message.show {
+    visibility: visible;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
