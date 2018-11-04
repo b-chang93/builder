@@ -1,7 +1,7 @@
 'use strict';
 const express = require('express');
 const bodyParser = require('body-parser');
-
+const { DEFAULT_AVATAR } = require('../config')
 const User = require('./models');
 
 const router = express.Router();
@@ -58,7 +58,7 @@ router.put('/:id', (req, res) => {
     .catch(err => res.status(500).json({message: `Something went horribly wrong`}));
 });
 
-router.put('/subscribe/:id', jwtAuth, (req, res) => {
+router.put('/subscribe/:username', jwtAuth, (req, res) => {
   const updatedFollower = {};
   const updateableField = ['followers'];
   updateableField.forEach(field => {
@@ -69,7 +69,7 @@ router.put('/subscribe/:id', jwtAuth, (req, res) => {
 
   let followerId;
   return User
-    .findOne({username: req.params.id})
+    .findOne({username: req.params.username})
     .then(targetUser => {
       followerId = req.user._id
 
@@ -97,24 +97,23 @@ router.put('/subscribe/:id', jwtAuth, (req, res) => {
     })
 });
 
-router.delete('/unsubscribe/:id', jwtAuth, (req, res) => {
+router.put('/unsubscribe/:username', jwtAuth, (req, res) => {
   let followerId;
   let followingId;
 
   User
-    .findOne({username: req.params.id})
+    .findOne({username: req.params.username})
     .then(targetUser => {
       followerId = req.user._id;
       followingId = targetUser._id;
 
-      let followingIndex = targetUser.followers.indexOf(followerId);
-
-      if(followingIndex > -1) {
-        targetUser.followers.splice(followingIndex, 1);
+      let followerIndex = targetUser.followers.indexOf(followerId);
+      if(followerIndex > -1) {
+        targetUser.followers.splice(followerIndex, 1);
         targetUser.save();
       }
 
-      User
+      return User
         .findById(req.user._id)
         .then(user => {
           let followingIndex = user.following.indexOf(followingId);
@@ -122,13 +121,8 @@ router.delete('/unsubscribe/:id', jwtAuth, (req, res) => {
           if (followingIndex > -1) {
             user.following.splice(followingIndex, 1);
             user.save();
+            res.status(201).json(user.serialize());
           }
-        })
-
-      return User
-        .findById(req.user._id)
-        .then(user => {
-          res.status(201).json(user.serialize());
         })
         .catch(err => {
           console.error(err);
@@ -143,7 +137,6 @@ router.delete('/unsubscribe/:id', jwtAuth, (req, res) => {
 router.post('/signup', jsonParser, (req, res) => {
   const requiredFields = ['username', 'password', 'firstName', 'lastName'];
   const missingField = requiredFields.find(field => !(field in req.body));
-  const defaultAvatar = "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX5964486.jpg";
   const defaultPost = "5bce680cbb797912f84e8103";
 
   if (missingField) {
@@ -241,7 +234,7 @@ router.post('/signup', jsonParser, (req, res) => {
         password: hash,
         firstName,
         lastName,
-        avatar: defaultAvatar,
+        avatar: DEFAULT_AVATAR,
         posts:[defaultPost]
       });
     })

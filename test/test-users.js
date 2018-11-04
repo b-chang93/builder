@@ -115,65 +115,47 @@ describe('API resource /api/user', function () {
       });
     });
 
-    // @WIP still needs to be fixed
-    describe('PUT and DELETE /subscribe', function () {
-      it('should add a user id to user following field', function () {
-        return User
-          .find(user._id)
-          .then(user => {
+    describe('PUT /subscribe and /unsubscribe', function () {
+      it('PUT - should add a user id to user following field', function () {
+          return chai
+            .request(app)
+            .put(`/api/users/subscribe/${userTwo.username}`)
+            .set("Authorization", `Bearer ${token}`)
+            .then(res => {
+              expect(res).to.have.status(201);
+              expect(res).to.be.a.json;
+              expect(res.body.following[0]).to.include(userTwo._id)
+
+              User.find({username: userTwo.username})
+                .then(user => {
+                  console.log(user)
+                  expect(res.body.followers[0]).to.include(user._id)
+                })
+            })
+      });
+
+      it('should remove the user id following field', function () {
+
+        return chai
+          .request(app)
+          .put(`/api/users/subscribe/${userTwo.username}`)
+          .set("Authorization", `Bearer ${token}`)
+          .then(res => {
             return chai
               .request(app)
-              .put(`/api/users/subscribe/${userTwo._id}`)
+              .put(`/api/users/unsubscribe/${userTwo.username}`)
               .set("Authorization", `Bearer ${token}`)
               .then(res => {
                 expect(res).to.have.status(201);
                 expect(res).to.be.a.json;
-                expect(res.body.following[0]).to.include(userTwo._id)
-              })
-          })
-      });
+                expect(res.body.following).to.be.empty;
 
-      it('should remove the user id following field', function () {
-        return User
-          .findOne(user._id)
-          .then(user => {
-            return chai
-              .request(app)
-              .put(`/api/users/subscribe/${userTwo._id}`)
-              .set("Authorization", `Bearer ${token}`)
-              .then(res => {
-                return User
-                  .findOne(user._id)
+                User.find({username: userTwo.username})
                   .then(user => {
-                    console.log('logging')
-                    console.log(user)
-                    return chai
-                      .request(app)
-                      .delete(`/api/users/unsubscribe/${userTwo._id}`)
-                      .set("Authorization", `Bearer ${token}`)
-                      .then(res => {
-                        console.log(res.body)
-                        expect(res).to.have.status(201);
-                        expect(res).to.be.a.json;
-                        expect(res.body.following).to.be.empty;
-                        // console.log(res.body)
-                      })
+                    expect(res.body.followers[0]).to.be.empty;
                   })
-              })
             })
-        // return User
-        //   .find(user._id)
-        //   .then(user => {
-        //     return chai
-        //       .request(app)
-        //       .delete(`/api/users//unsubscribe/${userTwo._id}`)
-        //       .set("Authorization", `Bearer ${token}`)
-        //       .then(res => {
-        //         console.log(res.body.following[0])
-        //         expect(res).to.have.status(201);
-        //         expect(res.body.following[0]).to.include(userTwo._id)
-        //       })
-        //   })
+          })
       });
     });
 
