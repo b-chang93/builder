@@ -56,7 +56,6 @@ workoutSchema.virtual('readWorkout').get(function() {
       set.reps = s.reps
       fullWorkout.sets.push(`${set.weight} lb for ${set.reps} reps`);
     })
-    console.log(fullWorkout)
     return fullWorkout;
   })
 });

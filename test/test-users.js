@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 
 const { app, runServer, closeServer } = require('../server');
 const {User} = require('../users');
-const { TEST_BUILDR_DATABASE } = require('../config');
+const { TEST_BUILDER_DATABASE } = require('../config');
 const {JWT_SECRET} = require('../config');
 const userData = require('../seed-data/users-seed-data.json');
 
@@ -50,7 +50,7 @@ describe('API resource /api/user', function () {
 
 
   before(function () {
-    return runServer(TEST_BUILDR_DATABASE);
+    return runServer(TEST_BUILDER_DATABASE);
   });
 
   after(function () {
@@ -128,7 +128,6 @@ describe('API resource /api/user', function () {
 
               User.find({username: userTwo.username})
                 .then(user => {
-                  console.log(user)
                   expect(res.body.followers[0]).to.include(user._id)
                 })
             })

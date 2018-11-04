@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "test": "mocha --exit",
+    "test": "mocha --timeout 5000 --exit",
     "start": "node server.js"
   },
   "author": "",

@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const Post = require('../posts/models');
 const User = require('../users/models');
-const {TEST_BUILDR_DATABASE} = require('../config');
+const {TEST_BUILDER_DATABASE} = require('../config');
 const {JWT_SECRET} = require('../config');
 const {app, runServer, closeServer} = require('../server');
 const expect = chai.expect;
@@ -27,7 +27,7 @@ describe('API resource', function() {
   let token;
 
   before(function () {
-    return runServer(TEST_BUILDR_DATABASE);
+    return runServer(TEST_BUILDER_DATABASE);
   });
 
   after(function () {
@@ -35,6 +35,7 @@ describe('API resource', function() {
   });
 
   beforeEach(function() {
+    console.log(JWT_SECRET)
     return Promise.all([
       User.insertMany(userData),
       Post.insertMany(postsData),
@@ -167,15 +168,7 @@ describe('API resource', function() {
         .then(res => {
           expect(res).to.have.status(204);
           expect(res.body).to.be.empty;
-          //
-          // return Post.findById(data._id)
         })
-        // .then((item) => {
-        //   // console.log('CHECKING....')
-        //   console.log(item._id)
-        //   console.log(item)
-        //   expect(item).to.be.null;
-        // });
     });
   });
 });

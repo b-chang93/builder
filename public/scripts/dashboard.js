@@ -297,7 +297,7 @@ function handleSubscribeToUser() {
     } else {
       api.update(`/api/users/subscribe/${currentUsername}`, data)
       .then(user => {
-        let msg = `Successfully subscribed to ${currentUsername}`
+        let msg = `Subscribed to ${currentUsername}`
         notifyUserMsg(msg)
         $("#subscribe").attr('id', "unsubscribe").html('unsubscribe')
       });
@@ -307,7 +307,7 @@ function handleSubscribeToUser() {
   $('body').on('click', '#unsubscribe', event => {
     api.update(`/api/users/unsubscribe/${currentUsername}`)
       .then(user => {
-        let msg = `Successfully unsubscribed from ${currentUsername}`
+        let msg = `Unsubscribed from ${currentUsername}`
         notifyUserMsg(msg)
         $("#unsubscribe").attr('id', "subscribe").html('subscribe')
       })
@@ -683,7 +683,6 @@ function createWorkout() {
   let exercise, set, reps;
 
   $('.set-info').on('click', '.save-set', event => {
-
     let singleExercise = {
       name: '',
       sets: []
@@ -709,6 +708,7 @@ function createWorkout() {
         singleExercise.name = exercise.val();
         singleExercise.sets.push(singleSet)
         newWorkout.exercises.push(singleExercise)
+        $('.clear').removeClass('hidden')
       }
     } else {
       newWorkout.exercises[index].sets.push(singleSet)
@@ -716,8 +716,10 @@ function createWorkout() {
 
    workoutDraft(newWorkout)
 
-   //clearing inputs
-    exercise.val('');
+    $('.clear').on('click', event => {
+      exercise.val('');
+      event.preventDefault();
+    })
     weight.val('');
     reps.val('');
 
@@ -732,6 +734,7 @@ function createWorkout() {
     newWorkout.title = title;
     newWorkout.difficulty = difficulty;
     postNewWorkout(newWorkout);
+    location.reload();
   })
 }
 

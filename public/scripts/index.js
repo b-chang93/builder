@@ -40,15 +40,12 @@ function signUpUser(fname, lname, username, password) {
   api.create('/api/users/signup', data)
     .then(_user => {
       let user = _user;
-      console.log(user)
       if(user.code === 422) {
         return displayError(user.message)
       }
       localStorage.setItem('isNewUser', true);
       userLogIn(data.username, data.password);
     })
-    // .then(handleErrors)
-    // .catch(error => displayError(`Username or password is incorrect.`));
 };
 
 function displayError(msg) {
@@ -126,9 +123,7 @@ function submitLogin() {
 
     username = queryUsername.val();
     password = queryPassword.val();
-    // clear out the input
-    // queryUsername.val("");
-    // queryPassword.val("");
+
     userLogIn(username, password);
 
   });
@@ -137,7 +132,6 @@ function submitLogin() {
 function submitSignup() {
 
   $('.signup-form').submit(event => {
-    console.log('signing up....')
     event.preventDefault();
 
     const queryUsername = $(event.currentTarget).find('.signup-username');
@@ -150,9 +144,6 @@ function submitSignup() {
     firstname = queryFirstName.val();
     lastname = queryLastName.val();
 
-    // clear out the input
-    // queryUsername.val("");
-    // queryPassword.val("");
     signUpUser(firstname, lastname, username, password);
   });
 }

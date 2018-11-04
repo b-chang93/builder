@@ -55,7 +55,7 @@ app.get('/api/protected', jwtAuth, (req, res) => {
   })
 });
 
-app.use('/exercises', exerciseRouter);
+app.use('/exercises', jwtAuth, exerciseRouter);
 app.use('/workouts', workoutRouter);
 app.use('/workoutsplit', jwtAuth, workoutSplitRouter);
 

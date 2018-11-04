@@ -16,7 +16,7 @@
   <main id="root" role="main" aria-live="assertive">
 
     <header class="navbar">
-      <a class="left-nav">Builder</a>
+      <a class="left-nav" onclick='window.scrollTo(0, 0);'>Builder</a>
       <a class="right-nav find-users">Explore Users</a>
       <a class="right-nav enable-search-modal">Exercises</a>
     </header>
@@ -26,25 +26,25 @@
         <table>
           <tr>
             <th class="reveal-split">Mon
-              <span class="tooltiptext" value="Monday"></span>
+              <span value="Monday"></span>
             </th>
             <th class="reveal-split">Tu
-              <span class="tooltiptext" value="Tuesday"></span>
+              <span value="Tuesday"></span>
             </th>
             <th class="reveal-split">Wed
-              <span class="tooltiptext" value="Wednesday"></span>
+              <span value="Wednesday"></span>
             </th>
             <th class="reveal-split">Thu
-              <span class="tooltiptext" value="Thursday"></span>
+              <span value="Thursday"></span>
             </th>
             <th class="reveal-split">Fri
-              <span class="tooltiptext" value="Friday"></span>
+              <span value="Friday"></span>
             </th>
             <th class="reveal-split">Sat
-              <span class="tooltiptext" value="Saturday"></span>
+              <span value="Saturday"></span>
             </th>
             <th class="reveal-split">Sun
-              <span class="tooltiptext" value="Sunday"></span>
+              <span value="Sunday"></span>
             </th>
           </tr>
         </table>
@@ -129,7 +129,7 @@
             <section class="set-info">
               <h3 class="steps-description">Add Exercises!</h3>
               <label for="automplete-1">Name: </label>
-              <input type="text" id="automplete-1" class="exercise" value name="name" placeholder="Bench Press" aria-labelledby="exercise name">
+              <input type="text" id="automplete-1" class="exercise" value name="name" placeholder="Bench Press" aria-labelledby="exercise name"><button class="clear" type="button">x</button>
               <label for="sets">Weight: </label>
               <input type="text" class="weight" value name="weight" placeholder="225" aria-labelledby="weight used">
               <label for="reps">Reps: </label>
@@ -173,7 +173,7 @@
               <option value="ischiocrural muscles">hamstrings</option>
               <option value="quadriceps">quads</option>
             </select>
-            <input type="submit" name="exercise-search" aria-labelledby="search exercises">
+            <input type="submit" class="exercises-search" aria-labelledby="exercises search">
           </fieldset>
         </form>
         <div class="content-container">

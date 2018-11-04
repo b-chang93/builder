@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const {Workout} = require('../workouts');
 const User = require('../users/models');
-const {TEST_BUILDR_DATABASE} = require('../config');
+const {TEST_BUILDER_DATABASE} = require('../config');
 const {JWT_SECRET} = require('../config');
 const {app, runServer, closeServer} = require('../server');
 const expect = chai.expect;
@@ -27,7 +27,7 @@ describe('API resource', function() {
   let token;
 
   before(function () {
-    return runServer(TEST_BUILDR_DATABASE);
+    return runServer(TEST_BUILDER_DATABASE);
   });
 
   after(function () {
