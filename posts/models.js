@@ -30,6 +30,16 @@ PostSchema.pre('findOne', function(next) {
   next();
 })
 
+PostSchema.pre('findOne', function(next) {
+  this.populate('workout');
+  next();
+})
+
+PostSchema.pre('save', function(next) {
+  this.populate('workout');
+  next();
+})
+
 PostSchema.pre('save', function(next) {
   this.populate('creator');
   next();
