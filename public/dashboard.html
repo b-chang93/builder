@@ -2,24 +2,25 @@
 <html lang="en">
 
 <head>
-  <title>Buildr</title>
+  <title>Builder</title>
   <meta name="description" content="Dashboard Workout App">
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
-  <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
+  <link rel="stylesheet" type="text/css" href="/style/dashboard.css">
   <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
   <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 </head>
 
 <body>
-  <!-- <header><h1>Buildr</h1></header> -->
   <main id="root" role="main" aria-live="assertive">
-    <section class="navbar">
+
+    <header class="navbar">
       <a class="left-nav">Builder</a>
       <a class="right-nav find-users">Explore Users</a>
       <a class="right-nav enable-search-modal">Exercises</a>
-    </section>
+    </header>
+
     <section id="workout-split-nav">
       <div class="flex-container">
         <table>
@@ -52,6 +53,7 @@
         </div>
       </div>
     </section>
+
     <section class="main-container">
       <section class="current-user left-column">
         <div class="feed-identity"></div>
@@ -89,15 +91,8 @@
         </section>
       </div>
     </section>
-    </section>
   </main>
-  <div id="post-from-stream" class="modal">
-    <div class="stream-modal-content">
-      <span class="close">&times;</span>
-      <header class='post-from-stream-title'></header>
-      <section class='post-from-stream-content'></section>
-    </div>
-  </div>
+
   <div id="user-profile" class="modal">
     <div class="user-profile-modal">
       <span class="close">&times;</span>
@@ -114,39 +109,46 @@
       <form class="create-workout-form" aria-live="assertive">
         <fieldset>
           <legend><span class="accessibility">Create your Workout</span></legend>
+
           <div class="workout-details-container">
+
+            <h3 class="steps-description">1. Name your workout and give it a difficulty. We'll store it so you can look back on it and see how much you've improved!</h2>
+
             <section class="your-workout-details">
-              <h3>Name it!</h3>
-              <label for="workout-title">Name your Workout: </label>
-              <input type="text" class="workout-title" value name="title" placeholder="Title" aria-labelledby="title workout">
-              <label for="workout-difficulty">Difficulty: </label>
-              <input type="text" class="workout-difficulty" value name="difficulty" placeholder="Difficulty" aria-labelledby="workout difficulty">
+
+            <h3 class="steps-description">Name it!</h3>
+
+            <label for="workout-title">Name your Workout: </label>
+            <input type="text" class="workout-title" value name="title" placeholder="Title" aria-labelledby="title workout">
+            <label for="workout-difficulty">Difficulty: </label>
+            <input type="text" class="workout-difficulty" value name="difficulty" placeholder="Difficulty" aria-labelledby="workout difficulty">
             </section>
+
+            <h3 class="steps-description">2. Write out your sets ahead of time or in real time. You'll see a draft of your workout to the right!</h3>
+
             <section class="set-info">
-              <h3>Add and Save Exercises!</h3>
+              <h3 class="steps-description">Add Exercises!</h3>
               <label for="automplete-1">Name: </label>
-              <input type="text" id="automplete-1" class="exercise" value name="name" placeholder="Bench Press" aria-labelledby="number sets">
+              <input type="text" id="automplete-1" class="exercise" value name="name" placeholder="Bench Press" aria-labelledby="exercise name">
               <label for="sets">Weight: </label>
               <input type="text" class="weight" value name="weight" placeholder="225" aria-labelledby="weight used">
               <label for="reps">Reps: </label>
               <input type="text" class="reps" value name="reps" placeholder="12" aria-labelledby="number reps">
-              <button class="save-set" type="button">Save</button>
+              <button class="save-set" type="button">Add</button>
             </section>
           </div>
-          <div class="workout-draft">
-            <h3>Workout Draft</h3>
-            <ul class="exercise-list">
-            </ul>
-            <button class="create-new-workout" type="submit">Create</button>
-          </div>
+
+          <section class="workout-container">
+            <h3 class="steps-description">3. Once you're satisfied with your workout, save it!</h3>
+            <div class="workout-draft">
+              <h3>Workout Draft</h3>
+              <ul class="exercise-list"></ul>
+              <button class="create-new-workout" type="submit">Save Workout</button>
+            </div>
+          </section>
+
         </fieldset>
       </form>
-      <div class="share-workout-in-post">
-        <h3>Don't forget to share your workout with everyone!</h3>
-        <input type="text" class="workout-modal-title" value="" placeholder="Hardest workout yet!" aria-labelledby="title post with workout">
-        <textarea class="workout-post-content" placeholder="Man this workout..." aria-labelledby="post content with workout"></textarea>
-        <button class="workout-create-post" type="submit">Share</button>
-      </div>
     </div>
   </div>
   <div id="exercise-search-area" class="modal">
@@ -189,7 +191,6 @@
     </div>
   </div>
   <div id="warning-message"></div>
-  </main>
   <script type="text/javascript" src="/scripts/api.js"></script>
   <script src="/scripts/dashboard.js"></script>
 </body>

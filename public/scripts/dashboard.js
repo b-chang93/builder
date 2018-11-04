@@ -19,10 +19,6 @@ function getToken() {
 }
 
 function createPost(title, content, workoutId, callback) {
-  // console.log(workoutId)
-  // console.log(title)
-  // console.log(content)
-  // let url = '/api/posts/';
   let data = {
     "title": title,
     "content": content,
@@ -31,7 +27,6 @@ function createPost(title, content, workoutId, callback) {
 
   api.create('/api/posts/', data)
   .then(post => {
-    console.log(post)
     renderNewPosts(post, avatar);
   })
 }
@@ -69,9 +64,6 @@ function handlePostCreation(workoutId) {
 function createPostAndWorkout(workoutId) {
   const targetTitle = $('.workout-modal-title')
   const targetPostContent = $('.workout-post-content')
-
-  // console.log(targetTitle)
-  // console.log(targetPostContent)
   $('.workout-create-post').attr("disabled", "true");
 
   targetTitle.blur(function() {
@@ -89,9 +81,6 @@ function createPostAndWorkout(workoutId) {
     postTitle = targetTitle.val();
     postContent = targetPostContent.val();
 
-    // console.log(postTitle)
-    // console.log(postContent)
-
     //clear inputs
     targetTitle.val('');
     targetPostContent.val('');
@@ -103,18 +92,14 @@ function createPostAndWorkout(workoutId) {
   })
 }
 
-//@WIP not fully deleting anymore
 function deletePosts() {
   $('.main-index').on('click', '.delete', event => {
     let target = $(event.currentTarget).parent('.feed-index-item').attr('data-id');
-    console.log(target)
     $(event.currentTarget).parent('.feed-index-item').remove();
 
     api.remove(`/api/posts/${target}`)
-      .then(response => {
-        // response.json()
-        console.log(response)
-        // notifyUserMsg('Successfully deleted post')
+      .then(() => {
+        notifyUserMsg('Successfully deleted post')
       });
   })
 }
@@ -122,7 +107,6 @@ function deletePosts() {
 function loggedInUserInfo() {
   api.details(`/api/users/username/${currentUsername}`)
     .then(user => {
-      console.log(user)
       renderUserProfile(user);
     })
 }
@@ -148,8 +132,6 @@ function showEditProfileOptions() {
     let lname = $('.user-last-name');
     let avatar = $('.user-avatar');
 
-    console.log(fname.val() === '')
-
     let userData = {
       firstName: fname.val(),
       lastName: lname.val(),
@@ -174,7 +156,6 @@ function displayUserDashboard(username) {
 
   api.details(`/api/users/username/${currentUsername}`)
     .then(user => {
-      console.log(user)
     })
 
   if(username) {
@@ -245,10 +226,6 @@ function fetchUserPosts(posts) {
 }
 
 function displayPosts(data, sub) {
-  if(data.workout) {
-    let stuff = fetchWorkoutPost(data)
-    console.log(stuff)
-  }
   const results = renderPosts(data, sub);
   $('.main-index').append(results);
 }
@@ -269,22 +246,7 @@ function renderNewPosts(post) {
       </li>`)
 }
 
-function fetchWorkoutPost(post) {
-  // console.log(post)
-  api.details(`/workouts/${post.workout}`)
-    .then(workout => {
-      console.log(workout)
-      renderWorkoutsToPost(workout)
-    })
-}
-
-function renderWorkoutsToPost(workout) {
-  // console.log(workout)
-  $('.feed-index-item').append(`<p>${workout.difficulty}</p>`)
-}
-
 function renderPosts(post, sub) {
-  // console.log(post._id)
   let date = post.created.slice(0,10).replace(/-/g,'/');
   if(sub) {
     return `
@@ -335,7 +297,7 @@ function handleSubscribeToUser() {
     } else {
       api.update(`/api/users/subscribe/${currentUsername}`, data)
       .then(user => {
-        let msg = `Successfully subscribed to ${user.username}`
+        let msg = `Successfully subscribed to ${currentUsername}`
         notifyUserMsg(msg)
         $("#subscribe").attr('id', "unsubscribe").html('unsubscribe')
       });
@@ -343,9 +305,9 @@ function handleSubscribeToUser() {
   })
 
   $('body').on('click', '#unsubscribe', event => {
-    api.remove(`/api/users/unsubscribe/${currentUsername}`)
+    api.update(`/api/users/unsubscribe/${currentUsername}`)
       .then(user => {
-        let msg = `Successfully unsubscribed from ${user.username}`
+        let msg = `Successfully unsubscribed from ${currentUsername}`
         notifyUserMsg(msg)
         $("#unsubscribe").attr('id', "subscribe").html('subscribe')
       })
@@ -418,39 +380,6 @@ function renderExercise(exercise) {
   return `<img src="${exercise.svg[0]}"/>`
 }
 
-function openPostModal() {
-  $('.main-index').on('click', 'li', event => {
-    let deleteButton = $(event.target).is(".delete");
-    if(deleteButton) {
-      console.log('Successfully deleted post')
-      event.stopPropagation();
-    } else {
-      focusPostTitle = event.currentTarget.querySelector(".post-title").textContent;
-      focusPostContent = event.currentTarget.querySelector(".post-text").textContent;
-      displayPostModal(focusPostTitle, focusPostContent);
-    }
-  })
-}
-
-function displayPostModal(title, content) {
-  $('.main-index').on('click', 'li', event => {
-    $('.post-from-stream-title').html(focusPostTitle);
-    $('.post-from-stream-content').html(focusPostContent);
-
-    $('#post-from-stream').show();
-  })
-
-  $('.close').on('click', event => {
-    $('#post-from-stream').hide();
-  })
-
-  $(window).click(event => {
-    if (event.target.id === "post-from-stream") {
-      $('#post-from-stream').hide();
-    }
-  })
-}
-
 function searchExercises() {
   $('.search-for-exercise').on('submit', event => {
     event.preventDefault();
@@ -515,8 +444,8 @@ function showTargetExerciseDetails(exercise) {
       </ul>
     </div>
     <div class="exercise-image-container">
-      <img class="focused-exercise-image" data-id="${exercise.id}" name="${exercise.name}" src="/no-image.png"/>
-      <img class="focused-exercise-image" data-id="${exercise.id}" name="${exercise.name}" src="/no-image.png"/>
+      <img class="focused-exercise-image" data-id="${exercise.id}" name="${exercise.name}" src="/images/no-image.png"/>
+      <img class="focused-exercise-image" data-id="${exercise.id}" name="${exercise.name}" src="/images/no-image.png"/>
     </div>
     <p class="exercise-steps"></p>
     <button id="back-button">Back</button>
@@ -553,7 +482,7 @@ function renderExercises(exercise) {
   if(exercise.svg[0] == undefined) {
     return `
       <div class="card">
-        <img class="exercise-image" data-id="${exercise.id}" name="${exercise.name}" src="/no-available-image.png"/>
+        <img class="exercise-image" data-id="${exercise.id}" name="${exercise.name}" src="/images/no-available-image.png"/>
         <h3 class="exercise-name">${exercise.title}</h3>
       </div>`
   }
@@ -576,66 +505,89 @@ function updateUserProfile() {
   api.create(`/api/users/${username}`)
 }
 
-function handleModals() {
-  let exerciseModal = 'enable-search-modal';
-  let usersModal = 'find-users';
-  let workoutModal = 'build-workout'
-  let userProfile = 'feed-identity';
 
-  $('.enable-search-modal').add('.find-users').add('.build-workout').add('.feed-identity').on('click', event => {
-    let target = $(event.currentTarget).attr('class');
-    console.log(target);
+function createWorkoutModal() {
+  $('.build-workout').on('click', event => {
+    $('#create-a-workout').show();
+    $('body').addClass('backdrop')
+  })
 
-    switch(target) {
-      case exerciseModal:
-          $('#exercise-search-area').show();
-          $('.close').on('click', event => {
-            $('#exercise-search-area').hide();
-          })
-          break;
-      case usersModal:
-          $('#explore-users').show();
-          $('.close').on('click', event => {
-            $('#explore-users').hide();
-          })
-          break;
-      case workoutModal:
-          $('#create-a-workout').show();
-          $('.close').on('click', event => {
-            $('#create-a-workout').hide();
-          })
-      case userProfile:
-          $('#user-profile').show();
-          $('.close').on('click', event => {
-            $('#user-profile').hide();
-          })
-          break;
+  $('.close').on('click', event => {
+    $('#create-a-workout').hide();
+    $('body').removeClass('backdrop')
+  })
+
+  $(window).click(event => {
+    if (event.target.id === "create-a-workout") {
+      $('#create-a-workout').hide();
+      $('body').removeClass('backdrop')
     }
-
-      $(window).click(event => {
-        if (event.target.id === "exercise-search-area" || event.target.id === "explore-users" || event.target.id === "create-workout-modal") {
-          $('#exercise-search-area').hide();
-          $('#explore-users').hide();
-          $('#create-a-workout').hide();
-        }
-      })
-  });
+  })
 }
+
 
 function findUsers() {
   $('.find-users').on('click', event => {
     $('#explore-users').show();
+    $('body').addClass('backdrop')
   })
 
   $('.close').on('click', event => {
     $('#explore-users').hide();
+    $('body').removeClass('backdrop')
   })
 
   $(window).click(event => {
     if (event.target.id === "explore-users") {
       $('#explore-users').hide();
+      $('body').removeClass('backdrop')
     }
   })
+}
+
+function searchExerciseModal() {
+  $('.enable-search-modal').on('click', event => {
+    $('#exercise-search-area').show();
+    $('body').addClass('backdrop')
+  })
+
+  $('.close').on('click', event => {
+    $('#exercise-search-area').hide();
+    $('body').removeClass('backdrop')
+  })
+
+  $(window).click(event => {
+    if (event.target.id === "exercise-search-area") {
+      $('#exercise-search-area').hide();
+      $('body').removeClass('backdrop')
+    }
+  })
+}
+
+function userProfileModal() {
+  $(document).on('click', '#my-avatar', '.enable-search-modal', event => {
+    $('#user-profile').show();
+    $('body').addClass('backdrop')
+  })
+
+  $('.close').on('click', event => {
+    $('#user-profile').hide();
+    $('body').removeClass('backdrop')
+  })
+
+  $(window).click(event => {
+    if (event.target.id === 'user-profile') {
+      $('#user-profile').hide();
+      $('body').removeClass('backdrop')
+    }
+  })
+}
+
+function handleModals() {
+  createWorkoutModal();
+  findUsers();
+  searchExerciseModal();
+  userProfileModal();
 }
 
 function exploreUsers() {
@@ -664,7 +616,6 @@ function renderUser(user) {
 
 function clickToAnotherProfile() {
   $('.explore').on('click', '.user-card', event => {
-    console.log('clicked')
     let username = $(event.currentTarget).find('.explore-usernames').text();
 
     displayUserDashboard(username);
@@ -712,7 +663,7 @@ function showWorkoutDetails(data) {
        workout.forEach((exercise, index) => {
          $(`.individual-workout-details`).append(`<ul class="exercise-name-${index}">${exercise.name}</ul>`)
          exercise.sets.forEach(set => {
-           $(`.exercise-name-${index}`).append(`<li>${set.weight}lb for ${set.reps}</li>`);
+           $(`.exercise-name-${index}`).append(`<li>${set.weight}lb for ${set.reps} reps</li>`);
          })
        })
      }
@@ -780,7 +731,6 @@ function createWorkout() {
 
     newWorkout.title = title;
     newWorkout.difficulty = difficulty;
-    console.log(newWorkout)
     postNewWorkout(newWorkout);
   })
 }
@@ -792,7 +742,7 @@ function postNewWorkout(data) {
     .then(workout => {
       let createdWorkout = workout.id
       notifyUserMsg('Successfully created workout')
-      // createPostAndWorkout(createdWorkout)
+      createPostAndWorkout(createdWorkout)
     })
 }
 
@@ -805,7 +755,6 @@ function preloadExercises() {
 
 function autoComplete(exercises) {
   let exerciseList = []
-
   exercises.map(e => exerciseList.push(e.title))
   $( "#automplete-1" ).autocomplete({
      source: exerciseList,
@@ -819,26 +768,21 @@ function autoComplete(exercises) {
 }
 
 function handleDashboard() {
-  // getToken().then(res => getWorkouts(res));
   getToken();
   getWorkouts();
   displayUserDashboard();
   handlePostCreation();
-  // renderWorkoutsToPost();
   deletePosts();
-  openPostModal();
   searchExercises();
   displaySubscribedPosts();
   findMySchedule();
   getExerciseInfo();
   handleSubscribeToUser();
-  findUsers();
   exploreUsers();
   createWorkout();
   preloadExercises();
   clickToAnotherProfile();
   handleModals();
-
   loggedInUserInfo();
   showEditProfileOptions();
 }
