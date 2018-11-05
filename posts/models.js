@@ -44,8 +44,8 @@ PostSchema.methods.serialize = function() {
     title: this.title,
     content: this.content,
     likes: this.likes,
-    workout: this.workout,
-    creator: this.creator
+    creator: this.creator,
+    created: this.createdAt
   };
 };
 
