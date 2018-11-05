@@ -35,7 +35,6 @@ describe('API resource', function() {
   });
 
   beforeEach(function() {
-    console.log(JWT_SECRET)
     return Promise.all([
       User.insertMany(userData),
       Post.insertMany(postsData),

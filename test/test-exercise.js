@@ -42,7 +42,6 @@ describe('API resource', function() {
       Exercise.insertMany(exerciseData)
     ])
     .then(([users])=> {
-      console.log([users])
       user = users[0];
       token = jwt.sign({ user }, JWT_SECRET, { subject: user.username});
     });
