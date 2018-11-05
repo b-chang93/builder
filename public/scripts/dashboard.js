@@ -28,67 +28,32 @@ function createPost(title, content, workoutId, callback) {
   api.create('/api/posts/', data)
   .then(post => {
     renderNewPosts(post, avatar);
+    if(userLoggedIn !== currentUsername) {
+      notifyUserMsg('Successfully created post. Go to your profile to see!')
+    } else {
+      notifyUserMsg('Successfully created post!')
+    }
   })
 }
 
 function handlePostCreation(workoutId) {
   const targetTitle = $('.post-title')
   const targetPostContent = $('.post-content')
-  $('.create-post').attr("disabled", "true");
-
-  targetTitle.blur(function() {
-    targetPostContent.blur(function() {
-      if(targetTitle.val() != "" && targetPostContent.val() != "") {
-        $('.create-post').removeAttr("disabled");
-      } else {
-        $('.create-post').attr("disabled", "true");
-      }
-    })
-  })
 
   $('.create-post').on('click', event => {
-    postTitle = targetTitle.val();
-    postContent = targetPostContent.val();
 
-    //clear inputs
-    targetTitle.val('');
-    targetPostContent.val('');
+    if(targetTitle.val() == "" || targetPostContent.val() == "") {
+      notifyUserMsg('Please add add inputs before posting')
+    } else {
+      postTitle = targetTitle.val();
+      postContent = targetPostContent.val();
 
-    createPost(postTitle, postContent, workoutId, renderPosts);
+      //clear inputs
+      targetTitle.val('');
+      targetPostContent.val('');
 
-    //close modal after creating a post
-    $('#myModal').hide();
-  })
-}
-
-function createPostAndWorkout(workoutId) {
-  const targetTitle = $('.workout-modal-title')
-  const targetPostContent = $('.workout-post-content')
-  $('.workout-create-post').attr("disabled", "true");
-
-  targetTitle.blur(function() {
-    targetPostContent.blur(function() {
-      if(targetTitle.val() != "" && targetPostContent.val() != "") {
-        $('.create-post').removeAttr("disabled");
-      } else {
-        $('.create-post').attr("disabled", "true");
-      }
-    })
-  })
-
-  $('.workout-create-post').on('click', event => {
-
-    postTitle = targetTitle.val();
-    postContent = targetPostContent.val();
-
-    //clear inputs
-    targetTitle.val('');
-    targetPostContent.val('');
-
-    createPost(postTitle, postContent, workoutId, renderPosts);
-
-    //close modal after creating a post
-    $('#myModal').hide();
+      createPost(postTitle, postContent, workoutId, renderPosts);
+    }
   })
 }
 
@@ -127,7 +92,7 @@ function renderUserProfile(user) {
 }
 
 function showEditProfileOptions() {
-  $('.profile').on('click', '#edit', event => {
+  $('.profile').on('click', '.edit', event => {
     let fname = $('.user-first-name');
     let lname = $('.user-last-name');
     let avatar = $('.user-avatar');
@@ -231,19 +196,21 @@ function displayPosts(data, sub) {
 }
 
 function renderNewPosts(post) {
-  let date = post.created.slice(0,10).replace(/-/g,'/');
-  $('.main-index').append(`
-      <li class="feed-index-item" data-id="${post._id}">
-        <section class="content">
-          <section class="thumbnail-for-post">
-            <img class="avatar-related-to-post" src="${avatar}" alt="user-avatar">
-            <h1 class="post-title">${post.title}</h1>
-            <p class="date">${date}</p>
+  if(userLoggedIn === currentUsername) {
+    let date = post.created.slice(0,10).replace(/-/g,'/');
+    $('.main-index').append(`
+        <li class="feed-index-item" data-id="${post._id}">
+          <section class="content">
+            <section class="thumbnail-for-post">
+              <img class="avatar-related-to-post" src="${avatar}" alt="user-avatar">
+              <h1 class="post-title">${post.title}</h1>
+              <p class="date">${date}</p>
+            </section>
+            <p class="post-text">${post.content}</p>
           </section>
-          <p class="post-text">${post.content}</p>
-        </section>
-        <button class="delete">Delete</button>
-      </li>`)
+          <button class="delete">Delete</button>
+        </li>`)
+  }
 }
 
 function renderPosts(post, sub) {
@@ -640,6 +607,24 @@ function getWorkouts() {
    })
 }
 
+function removeWorkouts() {
+  $('.edit-workout').on('click', event => {
+    $('.workout-index').find('button').toggle();
+  })
+}
+
+function deleteWorkout() {
+  $('#my-workouts-list').on('click', '.delete-workout', event => {
+    let targetWorkout = $(event.currentTarget).parent().attr('data-id');
+    api.remove(`/workouts/${targetWorkout}`)
+    .then(() => {
+      let msg = 'successfully deleted workout';
+      notifyUserMsg(msg);
+      location.reload();
+    })
+  })
+}
+
 function showMyWorkouts(workouts) {
  const list = workouts.map(workout => renderWorkouts(workout))
  $(`.workout-index`).html(list);
@@ -647,7 +632,7 @@ function showMyWorkouts(workouts) {
 
 function renderWorkouts(workout) {
  if (workout.creator._id === currentUser) {
-   return `<li>${workout.title}</li>`
+   return `<div class="workout-id" data-id="${workout.id}"><li>${workout.title}</li><button class="hidden delete-workout">x</button></div>`
  }
 }
 
@@ -745,7 +730,6 @@ function postNewWorkout(data) {
     .then(workout => {
       let createdWorkout = workout.id
       notifyUserMsg('Successfully created workout')
-      createPostAndWorkout(createdWorkout)
     })
 }
 
@@ -788,6 +772,8 @@ function handleDashboard() {
   handleModals();
   loggedInUserInfo();
   showEditProfileOptions();
+  removeWorkouts();
+  deleteWorkout();
 }
 
 $(handleDashboard);

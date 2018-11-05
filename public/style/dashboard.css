@@ -117,15 +117,19 @@ th {
 #workout-info-container {
   width: 100%;
   margin-top: 5px;
-}
-#my-workouts-list {
-  width: 100%;
-  height: 150px;
   cursor: pointer;
   background: white;
   color: #359aff;
   box-shadow: 0 1.5px 5px 0px rgba(0,0,0,0.5);
 }
+
+#my-workouts-list {
+  width: 100%;
+  height: 150px;
+  overflow: auto;
+  margin: auto;
+}
+
 #my-workouts-list > h2 {
   margin: 0;
 }
@@ -254,7 +258,6 @@ th {
 
 #profile-user-thumbnail{
   width: 90%;
-  /* height: 100%; */
   height: 100%;
   box-shadow: 2px 1px 5px 1px rgba(0,0,0,0.6);
 }
@@ -295,7 +298,7 @@ th {
   font-weight: bold;
   color: #359aff;
 }
-#subscribe, #unsubscribe, #edit  {
+#subscribe, #unsubscribe, .edit  {
   width: 100%;
   background-color: #359aff;
   border: none;
@@ -304,6 +307,18 @@ th {
   text-align: center;
   font-size: 24px;
   margin-top: 15px;
+}
+
+.edit-workout {
+  width: 25%;
+  background-color: #359aff;
+  border: none;
+  color: white;
+  padding: 6px;
+  text-align: center;
+  font-size: 16px;
+  margin-top: 15px;
+  padding: 5px;
 }
 .search-exercise {
   color: #359aff;
@@ -435,7 +450,7 @@ h1.post-title {
   font-family: Helvetica;
   margin-bottom: 10px;
 }
-.create-post, .build-workout, .create-new-workout, .save-set, .workout-create-post, .clear {
+.create-post, .build-workout, .create-new-workout, .save-set, .workout-create-post, .clear, .delete-workout {
   width: 75px;
   height: 30px;
   box-shadow: 0 1px 3px 0 rgba(0,0,0,0.5);
@@ -447,6 +462,19 @@ h1.post-title {
   padding: 5px;
   display: inline-block;
   font-size: 16px;
+}
+
+.workout-id > li {
+  float: left;
+}
+
+.delete-workout {
+  width: 30px;
+  padding 0;
+  float: left;
+  position: relative;
+  top: -10px;
+  left: 5px;
 }
 
 .clear {
@@ -682,15 +710,7 @@ h1.post-title {
 .workout-post-content {
   height: 90px;
 }
-/* width: 100%;
-    background-color: #359aff;
-    border: none;
-    color: white;
-    padding: 6px;
-    text-align: center;
-    font-size: 24px;
-    margin-top: 15px;
-} */
+
 .exercise-search-modal {
   display: flex;
   flex-direction: column;
@@ -752,6 +772,9 @@ h1.post-title {
   .navbar {
     height: 6%;
   }
+  .user-profile-modal {
+    height: 400px;
+  }
 }
 
 @media only screen and (min-width: 375px) and (max-width: 400px) {
@@ -762,11 +785,62 @@ h1.post-title {
   #workout-split-nav {
     margin-top: 50px;
   }
+
+  .user-profile-modal {
+    height: 450px;
+  }
+
+  #profile-user-thumbnail {
+    height: 93%;
+  }
 }
 
 @media only screen and (min-width: 400px) and (max-width: 450px) {
   #workout-split-nav {
     margin-top: 45px;
+  }
+
+  .user-profile-modal {
+    height: 450px;
+  }
+
+  #profile-user-thumbnail {
+    height: 96%;
+  }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  .user-profile-modal {
+    width: 64%;
+    height: 52%;
+    margin: 10% auto;
+  }
+
+  .current-user {
+    height: 55%;
+  }
+
+  #my-workouts-list {
+    width: 50%;
+  }
+
+  .delete {
+    left: 85%;
+  }
+  .content {
+    height: 250px;
+  }
+  h1.post-title {
+    font-size: 28px;
+  }
+  .post-text {
+    font-size: 20px;
+  }
+
+  .workout-title-container {
+    font-size: 20px;
+    width: 90%;
+    margin: 10px auto 20px;
   }
 }
 
@@ -821,7 +895,7 @@ h1.post-title {
     box-shadow: 2px 1px 5px 1px rgba(0,0,0,0.6);
   }
 
-  #edit {
+  .edit {
     padding: 10px;
   }
 
@@ -1120,7 +1194,13 @@ h1.post-title {
   #workout-info-container {
     width: 34%;
     margin-top: 10px;
+    height: 200px;
   }
+
+  .workout-title-container {
+    margin: 20px auto;
+  }
+
   #my-workouts-list {
     position: fixed;
     width: 19%;
@@ -1330,5 +1410,23 @@ h1.post-title {
     margin: auto;
     margin-top: 90px;
     max-width: 1150px;
+  }
+}
+
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) {
+  #workout-info-container {
+    height: 200px;
+  }
+  .workout-title-container {
+    width: 100%;
+  }
+
+  .workout-title-container > h2 {
+    font-size: 20px;
+  }
+
+  .my-workout-info {
+    width: 195px;
+    height: 250px;
   }
 }
