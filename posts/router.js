@@ -56,8 +56,7 @@ router.post('/', (req,res) => {
     .create({
       creator: req.user._id,
       title: req.body.title,
-      content: req.body.content,
-      workout: req.body.workout
+      content: req.body.content
     })
     .then(post => {
       postId = post._id;

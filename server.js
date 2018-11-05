@@ -22,12 +22,10 @@ app.get('/login', function (req, res) {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 
-//for redirect into dashboard page
 app.get('/dashboard/*', function (req, res) {
   res.sendFile(path.join(__dirname + '/public/dashboard.html'));
 });
 
-//logging using middleware function
 app.use(morgan('common'));
 app.use(express.json());
 app.use(function (req, res, next) {
@@ -41,10 +39,10 @@ app.use(function (req, res, next) {
 });
 passport.use(localStrategy);
 passport.use(jwtStrategy);
-app.use('/api/users/', usersRouter);//check if it is best practice to protect with JWT
+app.use('/api/users/', usersRouter);
 app.use('/api/auth/', authRouter);
 app.use('/api/posts/', jwtAuth, postsRouter);
-// A protected endpoint which needs a valid JWT to access it
+
 app.get('/api/protected', jwtAuth, (req, res) => {
   return res.json({
     data: 'You have successfully signed in!'

@@ -14,7 +14,6 @@ const PostSchema = mongoose.Schema({
   },
   likes: {type: Number, default: 0},
   creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  workout: { type: mongoose.Schema.Types.ObjectId, ref: 'Workout' },
   created: String
 });
 
@@ -27,16 +26,6 @@ PostSchema.pre('find', function(next) {
 
 PostSchema.pre('findOne', function(next) {
   this.populate('creator');
-  next();
-})
-
-PostSchema.pre('findOne', function(next) {
-  this.populate('workout');
-  next();
-})
-
-PostSchema.pre('save', function(next) {
-  this.populate('workout');
   next();
 })
 
@@ -56,8 +45,7 @@ PostSchema.methods.serialize = function() {
     content: this.content,
     likes: this.likes,
     workout: this.workout,
-    creator: this.creator,
-    created: this.createdAt
+    creator: this.creator
   };
 };
 
