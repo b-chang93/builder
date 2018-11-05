@@ -312,6 +312,7 @@ function findMySchedule() {
 function displayMySplit(data) {
  var d = new Date();
  var n = d.getDay();
+ console.log(n)
 
  const map = {
      1: 'Monday',
@@ -320,10 +321,11 @@ function displayMySplit(data) {
      4: 'Thursday',
      5: 'Friday',
      6: 'Saturday',
-     7: 'Sunday'
+     0: 'Sunday'
  }
 
  $(`.reveal-split > span[value="${map[n]}"]`).parent().css("background", "#003366")
+ console.log($(`.reveal-split > span[value="${map[n]}"]`))
 
  const userSchedules = data.filter(routine => routine.creator === currentUser)
  let schedule = userSchedules[0]
