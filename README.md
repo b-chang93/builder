@@ -4,6 +4,7 @@ reps you complete per exercise. The application even includes over 200 exercises
 # Technology
 HTML/CSS/Javascript/Jquery/Express/NodeJs
 # Screenshots
+![Screenshot](public/images/builder-dashboard.png) 
 # Live Repo
 https://buildr-workout.herokuapp.com/login
 # Features
