@@ -312,7 +312,6 @@ function findMySchedule() {
 function displayMySplit(data) {
  var d = new Date();
  var n = d.getDay();
- console.log(n)
 
  const map = {
      1: 'Monday',
