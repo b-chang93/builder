@@ -9,10 +9,21 @@ body {
   font-size: 120px;
   color: #298eea;
   text-align: center;
-  width: 35%;
+  width: 45%;
   margin: auto;
   background: #d3d3d3;
   border-radius: 5px;
+}
+
+.login-form {
+  float: left;
+  width: 50%
+}
+
+.signup-form {
+  float: left;
+  width: 50%;
+  background: #298eea;
 }
 
 #user-login {
@@ -21,6 +32,11 @@ body {
 
 #user-signup {
   margin: auto;
+  padding: 18px;
+}
+
+#user-signup > h1 {
+  margin: 10px 0 10px;
 }
 
 #landing-page {
@@ -114,8 +130,8 @@ h1 {
 fieldset {
   border: none;
   width: 450px;
-  padding-left: 40px;
-  padding-right: 40px;
+  /* padding-left: 40px;
+  padding-right: 40px; */
   background-color: #298eea;.
   background: white;
 }
@@ -206,4 +222,12 @@ input[type="text"] {
 #warning-message.show {
     visibility: visible;
     animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@media only screen and (min-width: 1400px) {
+  html {
+    width: 1200px;
+    margin: auto;
+    background: #e9e9e9
+  }
 }
